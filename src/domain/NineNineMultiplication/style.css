@@ -1,0 +1,51 @@
+.question {
+    margin: 10%;
+    font-size: calc(10px + 20vmin);
+}
+
+.selections {
+    padding: 0;
+}
+
+.selections li {
+    cursor: pointer;
+    font-size: calc(10px + 5vmin);
+    display: inline-block;
+    margin: 10px;
+    padding: 30px;
+    width: 20%;
+    border-radius: 10%;
+    transition-duration: 0.4s;
+    background-color: #ccc;
+    color: black;
+    border: 2px solid #048CBA;
+}
+
+.selections li:hover {
+    background-color: #048CBA;
+    color: white;
+}
+
+.selections li.correct {
+    transform: scale(1.4);
+    -ms-transform: scale(1.4);
+    -webkit-transform: scale(1.4);
+    background-color: green;
+}
+
+progress {
+    height: 20px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 2px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+    display: block;
+}
+
+progress::-webkit-progress-value {
+    background: #048CBA;
+}
