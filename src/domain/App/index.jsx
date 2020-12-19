@@ -13,7 +13,7 @@ export default class App extends Component {
       <div className="app">
         { this.state.isStart
           ? <NineNineMultiplication onClose={() => this.setState({ isStart: false })}/>
-          : <span className="start" onClick={() => this.setState({ isStart: true })}>Start</span>
+          : <span className="btn-start" onClick={() => this.setState({ isStart: true })}>開始</span>
         }
       </div>
     );

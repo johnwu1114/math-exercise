@@ -23,7 +23,6 @@
 
 .selections li:hover {
     background-color: #048CBA;
-    color: white;
 }
 
 .selections li.correct {
@@ -37,7 +36,7 @@ progress {
     height: 20px;
     width: 100%;
     position: absolute;
-    bottom: 0;
+    top: 0;
     left: 0;
     -webkit-appearance: none;
     appearance: none;
@@ -50,34 +49,31 @@ progress::-webkit-progress-value {
     background: #048CBA;
 }
 
-
 .modal {
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    position: fixed;
+    z-index: 1;
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
 }
 
 .modal-content {
     background-color: #282c34;
-    margin: 15% auto; /* 15% from the top and centered */
+    margin: 10% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
+    width: 80%;
 }
 
 .modal-content table {
     width: 100%;
-    margin: 10px;
     margin-bottom: 30px;
 }
 
-.modal-content .close {
+.modal-content .btn-close {
     cursor: pointer;
     padding: 10px 30px 10px 30px;
     border-radius: 10%;
@@ -85,15 +81,29 @@ progress::-webkit-progress-value {
     background-color: #888;
 }
 
-.modal-content .close:hover {
+.modal-content .btn-close:hover {
     border: 2px solid #ccc;
     background-color: #ccc;
 }
 
 .pass {
     color: greenyellow;
+    float: right;
 }
 
 .fail {
     color: red;
+    float: right;
+}
+
+.close {
+    float: right;
+    margin: -10px;
+    border: 1px solid #ccc;
+    padding: 0px 8px 5px 8px;
+    cursor: pointer;
+}
+
+.close:hover {
+    background-color: #888;
 }
