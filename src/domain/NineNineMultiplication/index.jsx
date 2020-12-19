@@ -102,6 +102,9 @@ export default class NineNineMultiplication extends Component {
   render() {
     return (
       <div>
+        <div className="header">
+          <span className="close" onClick={() => this.onClose()}>x</span>
+        </div>
         <div className="question">
           {this.state.question}
         </div>

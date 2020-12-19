@@ -21,7 +21,8 @@ export default class ResultReport extends Component {
       incorrect: incorrect,
       timeout: timeout,
       avgDuration: duration / this.props.results.length,
-      duration: duration
+      duration: duration,
+      score: Math.floor(correct / this.props.results.length * 100),
     };
   }
 
@@ -32,7 +33,7 @@ export default class ResultReport extends Component {
           <span className="close" onClick={() => this.props.onClose()}>x</span>
           <table>
             <tbody>
-              <tr><td style={{ width: "50%" }}>答對次數：</td><td>{this.state.correct}</td></tr>
+              <tr><td style={{ width: "50%", fontSize: "calc(10px + 12vmin)" }} rowSpan="5">{this.state.score} 分</td><td style={{ width: "30%" }}>答對次數：</td><td>{this.state.correct}</td></tr>
               <tr><td>答錯次數：</td><td>{this.state.incorrect}</td></tr>
               <tr><td>逾時次數：</td><td>{this.state.timeout}</td></tr>
               <tr><td>平均耗時：</td><td>{this.state.avgDuration.toFixed(1)} 秒</td></tr>
