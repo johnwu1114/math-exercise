@@ -8,14 +8,8 @@
 
 .app .start {
     cursor: pointer;
-    padding: 20px;
-    border-radius: 20%;
-}
-
-.app .start {
-    cursor: pointer;
     font-size: calc(10px + 5vmin);
-    padding: 30px;
+    padding: 20px;
     width: 20%;
     border-radius: 50%;
     transition-duration: 0.4s;

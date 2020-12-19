@@ -41,6 +41,10 @@ export default class Countdown extends React.Component {
     this.props.timeout();
   }
 
+  getDuration = () => {
+    return Math.min(this.max, this.max - this.state.second);
+  }
+
   render() {
     return (
       <progress max={this.max} value={this.state.second.toFixed(1)}></progress>
