@@ -53,8 +53,8 @@ export default class ResultReport extends Component {
             </thead>
             <tbody>
               {this.state.results.map((result, i) =>
-                <tr key={i}>
-                  <td>{result.pass ? <b className="pass">O</b> : <b className="fail">X</b>}</td>
+                <tr key={i} className={result.pass ? "pass" : "fail"}>
+                  <td><b /></td>
                   <td>{result.question}</td>
                   <td>{result.answer}</td>
                   <td>{result.reply || "--"}</td>

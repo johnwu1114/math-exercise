@@ -33,6 +33,7 @@ export default class Countdown extends React.Component {
     this.setState(state => ({
       second: state.second - 0.1
     }));
+    this.props.onChanged(this.state.second);
     if (this.state.second > 0) return;
     this.timeout();
   }

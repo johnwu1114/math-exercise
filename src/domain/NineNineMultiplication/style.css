@@ -90,14 +90,18 @@ progress::-webkit-progress-value {
     background-color: #ccc;
 }
 
-.pass {
+.pass b::before {
     color: greenyellow;
-    float: left;
+    content: "O";
 }
 
-.fail {
+tr.fail {
+    background-color: rosybrown;
+}
+
+.fail b::before {
     color: red;
-    float: left;
+    content: "X";
 }
 
 .close {
@@ -110,4 +114,37 @@ progress::-webkit-progress-value {
 
 .close:hover {
     background-color: #888;
+}
+
+@keyframes fade {
+    from {
+        opacity: 1.0;
+    }
+
+    50% {
+        opacity: 0.4;
+    }
+
+    to {
+        opacity: 1.0;
+    }
+}
+
+@-webkit-keyframes fade {
+    from {
+        opacity: 1.0;
+    }
+
+    50% {
+        opacity: 0.4;
+    }
+
+    to {
+        opacity: 1.0;
+    }
+}
+
+.blink {
+    animation: fade 600ms infinite;
+    -webkit-animation: fade 600ms infinite;
 }

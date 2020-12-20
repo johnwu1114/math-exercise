@@ -10,17 +10,10 @@ export default class NineNineMultiplication extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      question: "",
-      answer: "",
-      selections: [],
-      showReport: false,
-      results: []
-    };
     this.countdown = React.createRef();
-
     this.questions = [];
     this.results = [];
+    this.enableRepeat = props.enableRepeat || false;
 
     for (let i = 2; i <= 9; i++)
       for (let j = 2; j <= 9; j++) {
@@ -29,6 +22,14 @@ export default class NineNineMultiplication extends Component {
           answer: i * j
         });
       }
+
+    this.state = {
+      question: "",
+      answer: "",
+      selections: [],
+      showReport: false,
+      results: []
+    };
   }
 
   componentDidMount() {
@@ -71,7 +72,7 @@ export default class NineNineMultiplication extends Component {
   answer = (reply) => {
     this.countdown.current.pause();
 
-    if (reply !== this.state.answer) {
+    if (this.enableRepeat && reply !== this.state.answer) {
       this.questions.push({
         question: this.state.question,
         answer: this.state.answer
@@ -99,13 +100,17 @@ export default class NineNineMultiplication extends Component {
     this.props.onClose();
   }
 
+  onCountdownChanged = (value) => {
+    this.setState({ countdown: value });
+  }
+
   render() {
     return (
       <div>
         <div className="header">
-          <span className="close" onClick={() => this.onClose()}>x</span>
+          {!this.state.showReport && <span className="close" onClick={() => this.onClose()}>x</span>}
         </div>
-        <div className="question">
+        <div className={`question ${this.state.countdown < 3 && "blink"}`}>
           {this.state.question}
         </div>
         <ul className="selections">
@@ -113,7 +118,10 @@ export default class NineNineMultiplication extends Component {
             <li key={i} onClick={() => this.answer(selection)} >{selection}</li>
           )}
         </ul>
-        <Countdown ref={this.countdown} max={this.countdownSeconds} timeout={() => this.answer()} />
+        <Countdown ref={this.countdown}
+          max={this.countdownSeconds}
+          timeout={() => this.answer()}
+          onChanged={value => this.onCountdownChanged(value)} />
         {this.state.showReport && <ResultReport onClose={() => this.onClose()} results={this.state.results} />}
       </div>
     );
