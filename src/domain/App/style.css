@@ -10,8 +10,8 @@
     cursor: pointer;
     font-size: calc(10px + 5vmin);
     padding: 20px;
-    width: 300px;
-    border-radius: 50%;
+    width: 20%;
+    border-radius: 10%;
     transition-duration: 0.4s;
     background-color: #4CAF4F;
 }

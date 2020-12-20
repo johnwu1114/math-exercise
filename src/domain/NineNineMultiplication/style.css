@@ -6,12 +6,11 @@
 }
 
 .header .close {
-    margin: 50px 30px;
+    margin: 35px 15px;
 }
 
 .question {
-    font-size: calc(10px + 20vmin);
-    min-width: 600px;
+    font-size: calc(10px + 15vmin);
 }
 
 .selections {
@@ -34,6 +33,12 @@
 
 .selections li:hover {
     background-color: #048CBA;
+}
+
+@media (hover: none) {
+    .selections li:hover {
+        background-color: #ccc;
+    }
 }
 
 progress {
