@@ -10,3 +10,17 @@ body {
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
+footer {
+  padding: 10px 0;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  font-size: 14px;
+}
+
+footer a {
+  color: white;
+  text-decoration: none;
+}
