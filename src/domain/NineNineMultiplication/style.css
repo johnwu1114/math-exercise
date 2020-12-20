@@ -148,3 +148,21 @@ tr.fail {
     animation: fade 600ms infinite;
     -webkit-animation: fade 600ms infinite;
 }
+
+p {
+    font-size: calc(10px + 5vmin);
+}
+
+.btn-next {
+    cursor: pointer;
+    margin: 10px;
+    padding: 10px 50px;
+    border-radius: 10%;
+    transition-duration: 0.4s;
+    background-color: #048CBA;
+    border: 2px solid #048CBA;
+}
+
+.btn-next:hover {
+    background-color: #48abcc;
+}

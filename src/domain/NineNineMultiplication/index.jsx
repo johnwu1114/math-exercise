@@ -37,9 +37,13 @@ export default class NineNineMultiplication extends Component {
   }
 
   nextQuestion = () => {
+    this.setState({ pass: null });
+
     if (this.questions.length === 0) {
-      this.setState({ showReport: true });
-      this.setState({ results: this.results });
+      this.setState({
+        showReport: true,
+        results: this.results
+      });
       return;
     }
 
@@ -72,25 +76,30 @@ export default class NineNineMultiplication extends Component {
   answer = (reply) => {
     this.countdown.current.pause();
 
-    if (this.enableRepeat && reply !== this.state.answer) {
+    let pass = reply === this.state.answer;
+    this.setState({ pass: pass });
+
+    if (pass) this.nextQuestion();
+    else this.fail();
+
+    this.logAnswer(reply)
+  }
+
+  fail = () => {
+    if (this.enableRepeat) {
       this.questions.push({
         question: this.state.question,
         answer: this.state.answer
       });
     }
-    this.logAnswer(reply)
-
-    this.nextQuestion();
   }
 
   logAnswer = (reply) => {
-    let pass = reply === this.state.answer;
     let result = {
       question: this.state.question,
       answer: this.state.answer,
       reply: reply,
-      timeout: reply ? false : true,
-      pass: pass,
+      pass: reply === this.state.answer,
       duration: this.countdown.current.getDuration()
     };
     this.results.push(result);
@@ -110,14 +119,16 @@ export default class NineNineMultiplication extends Component {
         <div className="header">
           {!this.state.showReport && <span className="close" onClick={() => this.onClose()}>x</span>}
         </div>
-        <div className={`question ${this.state.countdown < 3 && "blink"}`}>
-          {this.state.question}
+        <div className={`question ${this.state.countdown < 3 && this.state.pass !== false && "blink"}`}>
+          {this.state.question} {this.state.pass === false && `= ${this.state.answer}`}
         </div>
-        <ul className="selections">
-          {this.state.selections.map((selection, i) =>
-            <li key={i} onClick={() => this.answer(selection)} >{selection}</li>
-          )}
-        </ul>
+        {this.state.pass === false
+          ? <p>答錯了！<span className="btn-next" onClick={() => this.nextQuestion()}>下一題</span></p>
+          : <ul className="selections">
+            {this.state.selections.map((selection, i) =>
+              <li key={i} onClick={() => this.answer(selection)} >{selection}</li>
+            )}
+          </ul>}
         <Countdown ref={this.countdown}
           max={this.countdownSeconds}
           timeout={() => this.answer()}
