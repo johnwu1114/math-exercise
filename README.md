@@ -3,7 +3,7 @@
 小學二年級的女兒學到乘法時，隨手寫的練習程式。  
 由於工作關係，三年多沒碰前端，順便練習寫一下 ReactJS；這是我第一次寫 ReactJS，寫得不好的地方請多指教。  
 
-[數學練習小程式](http://math-exercise.johnwu.cc/)  
+[數學練習小程式](https://math-exercise.johnwu.cc/)  
 
 ## 本機開發
 
