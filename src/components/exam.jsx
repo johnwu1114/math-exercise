@@ -1,34 +1,24 @@
-import "./style.css";
+import "../styles/exam.css";
 import React, { Component } from "react";
-import Countdown from "../../components/countdown.jsx";
-import ResultReport from "./result-report.jsx";
+import Countdown from "./countdown.jsx";
+import ExamResult from "./exam-results.jsx";
 
-export default class NineNineMultiplication extends Component {
-  selectionCount = 6;
+export default class Exam extends Component {
   countdownSeconds = 10;
 
   constructor(props) {
     super(props);
 
-    this.countdown = React.createRef();
-    this.questions = [];
-    this.results = [];
+    this.strategy = props.strategy;
     this.enableRepeat = props.enableRepeat || false;
-
-    for (let i = 2; i <= 9; i++)
-      for (let j = 2; j <= 9; j++) {
-        this.questions.push({
-          question: `${i} x ${j}`,
-          answer: i * j
-        });
-      }
+    if (this.enableRepeat) this.mistakes = [];
+    this.countdown = React.createRef();
+    this.results = [];
 
     this.state = {
       question: "",
       answer: "",
-      selections: [],
-      showReport: false,
-      results: []
+      selections: []
     };
   }
 
@@ -39,55 +29,34 @@ export default class NineNineMultiplication extends Component {
   nextQuestion = () => {
     this.setState({ pass: null });
 
-    if (this.questions.length === 0) {
+    let question = this.strategy.nextQuestion();
+    if (question === null) {
       this.setState({
-        showReport: true,
+        showExamResult: true,
         results: this.results
       });
       return;
     }
 
-    let index = Math.floor(Math.random() * this.questions.length);
-    let item = this.questions.splice(index, 1)[0];
-    this.setState(item);
-    this.createSelections(item.answer);
+    this.state.selections.splice(0, this.state.selections.length);
+    this.setState(question);
     this.countdown.current.reset();
   }
 
-  createSelections = (answer) => {
-    this.state.selections.splice(0, this.state.selections.length);
-
-    let seeds = [];
-    for (let i = Math.max(2, answer - 20); i < answer + 20; i++) {
-      if (i !== answer) seeds.push(i);
-    }
-
-    let selections = [];
-    for (let i = 1; i < this.selectionCount; i++) {
-      let index = Math.floor(Math.random() * seeds.length);
-      let selection = seeds.splice(index, 1)[0];
-      selections.push(selection);
-    }
-    selections.splice(Math.floor(Math.random() * 5), 0, answer);
-
-    this.setState({ selections: selections });
-  }
-
-  answer = (reply) => {
+  checkAnswer = (reply) => {
     this.countdown.current.pause();
 
-    let pass = reply === this.state.answer;
+    let pass = this.strategy.checkAnswer(reply);
     this.setState({ pass: pass });
+    this.logAnswer(reply);
 
     if (pass) this.nextQuestion();
     else this.fail();
-
-    this.logAnswer(reply)
   }
 
   fail = () => {
     if (this.enableRepeat) {
-      this.questions.push({
+      this.mistakes.push({
         question: this.state.question,
         answer: this.state.answer
       });
@@ -99,7 +68,7 @@ export default class NineNineMultiplication extends Component {
       question: this.state.question,
       answer: this.state.answer,
       reply: reply,
-      pass: reply === this.state.answer,
+      pass: this.strategy.checkAnswer(reply),
       duration: this.countdown.current.getDuration()
     };
     this.results.push(result);
@@ -117,7 +86,7 @@ export default class NineNineMultiplication extends Component {
     return (
       <div>
         <div className="header">
-          {!this.state.showReport && <span className="close" onClick={() => this.onClose()}>x</span>}
+          {!this.state.showExamResult && <span className="close" onClick={() => this.onClose()}>x</span>}
         </div>
         <div className={`question ${this.state.countdown < 3 && this.state.pass !== false && "blink"}`}>
           {this.state.question} {this.state.pass === false && `= ${this.state.answer}`}
@@ -126,14 +95,14 @@ export default class NineNineMultiplication extends Component {
           ? <p>答錯了！<span className="btn-next" onClick={() => this.nextQuestion()}>下一題</span></p>
           : <ul className="selections">
             {this.state.selections.map((selection, i) =>
-              <li key={i} onClick={() => this.answer(selection)} >{selection}</li>
+              <li key={i} onClick={() => this.checkAnswer(selection)} >{selection}</li>
             )}
           </ul>}
         <Countdown ref={this.countdown}
           max={this.countdownSeconds}
-          timeout={() => this.answer()}
+          timeout={() => this.checkAnswer()}
           onChanged={value => this.onCountdownChanged(value)} />
-        {this.state.showReport && <ResultReport onClose={() => this.onClose()} results={this.state.results} />}
+        {this.state.showExamResult && <ExamResult onClose={() => this.onClose()} results={this.state.results} />}
       </div>
     );
   }
