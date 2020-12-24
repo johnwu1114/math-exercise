@@ -82,29 +82,43 @@ progress::-webkit-progress-value {
     margin-bottom: 30px;
 }
 
-.modal-content .btn-close {
+.btn {
     cursor: pointer;
-    padding: 10px 30px 10px 30px;
+    margin: 10px;
+    padding: 10px 30px;
     border-radius: 10%;
     transition-duration: 0.4s;
     background-color: #888;
 }
 
-.modal-content .btn-close:hover {
+.btn {
+    background-color: #888;
+}
+
+.btn:hover {
     border: 2px solid #ccc;
     background-color: #ccc;
 }
 
-.pass b::before {
+.btn.next, .btn.review  {
+    background-color: #048CBA;
+    border: 2px solid #048CBA;
+}
+
+.btn.next:hover, .btn.review:hover {
+    background-color: #48abcc;
+}
+
+.correct b::before {
     color: greenyellow;
     content: "O";
 }
 
-tr.fail {
+tr.incorrect {
     background-color: rosybrown;
 }
 
-.fail b::before {
+.incorrect b::before {
     color: red;
     content: "X";
 }
@@ -156,18 +170,4 @@ tr.fail {
 
 p {
     font-size: calc(10px + 5vmin);
-}
-
-.btn-next {
-    cursor: pointer;
-    margin: 10px;
-    padding: 10px 50px;
-    border-radius: 10%;
-    transition-duration: 0.4s;
-    background-color: #048CBA;
-    border: 2px solid #048CBA;
-}
-
-.btn-next:hover {
-    background-color: #48abcc;
 }

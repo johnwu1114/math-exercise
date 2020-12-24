@@ -9,7 +9,7 @@ export default class ExamResult extends Component {
     let timeout = 0;
     let duration = 0;
     this.props.results.forEach(result => {
-      if (result.pass) correct++;
+      if (result.correct) correct++;
       else if (result.reply) incorrect++;
       else timeout++;
       duration += result.duration;
@@ -51,8 +51,8 @@ export default class ExamResult extends Component {
               </tr>
             </thead>
             <tbody>
-              {this.state.results.map((result, i) => result.pass ||
-                <tr key={i} className={result.pass ? "pass" : "fail"}>
+              {this.state.results.map((result, i) => result.correct ||
+                <tr key={i} className={result.correct ? "correct" : "incorrect"}>
                   <td><b /></td>
                   <td>{result.question}</td>
                   <td>{result.answer}</td>
@@ -62,7 +62,8 @@ export default class ExamResult extends Component {
               )}
             </tbody>
           </table>
-          <span className="btn-close" onClick={() => this.props.onClose()}>關閉</span>
+          <span className="btn" onClick={() => this.props.onClose()}>關閉</span>
+          {this.state.incorrect >= 3 && <span className="btn review" onClick={() => this.props.onReview()}>複習</span>}
         </div>
       </div>
     );

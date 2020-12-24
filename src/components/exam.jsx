@@ -10,8 +10,6 @@ export default class Exam extends Component {
     super(props);
 
     this.strategy = props.strategy;
-    this.enableRepeat = props.enableRepeat || false;
-    if (this.enableRepeat) this.mistakes = [];
     this.countdown = React.createRef();
     this.results = [];
 
@@ -27,7 +25,7 @@ export default class Exam extends Component {
   }
 
   nextQuestion = () => {
-    this.setState({ pass: null });
+    this.setState({ correct: null });
 
     let question = this.strategy.nextQuestion();
     if (question === null) {
@@ -46,21 +44,11 @@ export default class Exam extends Component {
   checkAnswer = (reply) => {
     this.countdown.current.pause();
 
-    let pass = this.strategy.checkAnswer(reply);
-    this.setState({ pass: pass });
+    let correct = this.strategy.checkAnswer(reply);
+    this.setState({ correct: correct });
     this.logAnswer(reply);
 
-    if (pass) this.nextQuestion();
-    else this.fail();
-  }
-
-  fail = () => {
-    if (this.enableRepeat) {
-      this.mistakes.push({
-        question: this.state.question,
-        answer: this.state.answer
-      });
-    }
+    if (correct) this.nextQuestion();
   }
 
   logAnswer = (reply) => {
@@ -68,10 +56,29 @@ export default class Exam extends Component {
       question: this.state.question,
       answer: this.state.answer,
       reply: reply,
-      pass: this.strategy.checkAnswer(reply),
+      correct: this.strategy.checkAnswer(reply),
       duration: this.countdown.current.getDuration()
     };
     this.results.push(result);
+  }
+
+  onReview = () => {
+    let questions = this.results
+      .filter(x => !x.correct)
+      .map(x => {
+        return {
+          question: x.question,
+          answer: x.answer
+        }
+      });
+    for (let i = 0; i < 3; i++)
+      this.strategy.addQuestions(questions);
+    this.state.results.splice(0, this.state.results.length);
+    this.setState({
+      showExamResult: false,
+      results: this.results
+    });
+    this.nextQuestion();
   }
 
   onClose = () => {
@@ -88,11 +95,11 @@ export default class Exam extends Component {
         <div className="header">
           {!this.state.showExamResult && <span className="close" onClick={() => this.onClose()}>x</span>}
         </div>
-        <div className={`question ${this.state.countdown < 3 && this.state.pass !== false && "blink"}`}>
-          {this.state.question} {this.state.pass === false && `= ${this.state.answer}`}
+        <div className={`question ${this.state.countdown < 3 && this.state.correct !== false && "blink"}`}>
+          {this.state.question} {this.state.correct === false && `= ${this.state.answer}`}
         </div>
-        {this.state.pass === false
-          ? <p>答錯了！<span className="btn-next" onClick={() => this.nextQuestion()}>下一題</span></p>
+        {this.state.correct === false
+          ? <p>答錯了！<span className="btn next" onClick={() => this.nextQuestion()}>下一題</span></p>
           : <ul className="selections">
             {this.state.selections.map((selection, i) =>
               <li key={i} onClick={() => this.checkAnswer(selection)} >{selection}</li>
@@ -102,7 +109,11 @@ export default class Exam extends Component {
           max={this.countdownSeconds}
           timeout={() => this.checkAnswer()}
           onChanged={value => this.onCountdownChanged(value)} />
-        {this.state.showExamResult && <ExamResult onClose={() => this.onClose()} results={this.state.results} />}
+        {this.state.showExamResult &&
+          <ExamResult
+            results={this.state.results}
+            onReview={() => this.onReview()}
+            onClose={() => this.onClose()} />}
       </div>
     );
   }

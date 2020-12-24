@@ -1,9 +1,8 @@
 export default class NineNineMultiplication {
   selectionCount = 6;
-  questions = [];
 
   constructor() {
-    this.generateQuestions()
+    this.addQuestions(this.generateQuestions());
   }
 
   generateQuestions = () => {
@@ -16,7 +15,7 @@ export default class NineNineMultiplication {
         });
       }
     }
-    this.questions = questions;
+    return questions;
   }
 
   generateSelections = (answer) => {
@@ -34,6 +33,11 @@ export default class NineNineMultiplication {
     selections.splice(Math.floor(Math.random() * 5), 0, answer);
 
     return selections;
+  }
+
+  addQuestions = (questions) => {
+    this.questions = this.questions || [];
+    this.questions = this.questions.concat(questions || []);
   }
 
   nextQuestion = () => {
