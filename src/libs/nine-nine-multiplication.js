@@ -5,34 +5,46 @@ export default class NineNineMultiplication {
     this.addQuestions(this.generateQuestions());
   }
 
-  generateQuestions = () => {
-    let questions = [];
+  getSections = () => {
+    let sections = [];
     for (let i = 2; i <= 9; i++) {
+      sections.push({
+        text: `${i} x 9`,
+        value: i
+      });
+    }
+    return sections;
+  }
+
+  generateQuestions = (sections) => {
+    let questions = [];
+    (sections || this.getSections().map(x => x.value))
+    .forEach(section => {
       for (let j = 2; j <= 9; j++) {
         questions.push({
-          question: `${i} x ${j}`,
-          answer: i * j
+          question: `${section} x ${j}`,
+          answer: section * j
         });
       }
-    }
+    });
     return questions;
   }
 
-  generateSelections = (answer) => {
+  generateChoices = (answer) => {
     let seeds = [];
     for (let i = Math.max(2, answer - 20); i < answer + 20; i++) {
       if (i !== answer) seeds.push(i);
     }
 
-    let selections = [];
+    let choices = [];
     for (let i = 1; i < this.selectionCount; i++) {
       let index = Math.floor(Math.random() * seeds.length);
-      let selection = seeds.splice(index, 1)[0];
-      selections.push(selection);
+      let choice = seeds.splice(index, 1)[0];
+      choices.push(choice);
     }
-    selections.splice(Math.floor(Math.random() * 5), 0, answer);
+    choices.splice(Math.floor(Math.random() * 5), 0, answer);
 
-    return selections;
+    return choices;
   }
 
   addQuestions = (questions) => {
@@ -44,7 +56,7 @@ export default class NineNineMultiplication {
     if (this.questions.length === 0) return null;
     let index = Math.floor(Math.random() * this.questions.length);
     let question = this.questions.splice(index, 1)[0];
-    question.selections = this.generateSelections(question.answer);
+    question.choices = this.generateChoices(question.answer);
     return this.currentQuestion = question;
   }
 

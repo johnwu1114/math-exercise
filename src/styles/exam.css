@@ -13,11 +13,11 @@
     font-size: calc(10px + 15vmin);
 }
 
-.selections {
+.choices {
     padding: 0;
 }
 
-.selections li {
+.choices li {
     cursor: pointer;
     font-size: calc(10px + 5vmin);
     display: inline-block;
@@ -31,12 +31,12 @@
     border: 2px solid #048CBA;
 }
 
-.selections li:hover {
+.choices li:hover {
     background-color: #048CBA;
 }
 
 @media (hover: none) {
-    .selections li:hover {
+    .choices li:hover {
         background-color: #ccc;
     }
 }
