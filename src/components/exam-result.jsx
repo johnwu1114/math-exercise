@@ -8,20 +8,21 @@ export default class ExamResult extends Component {
     let incorrect = 0;
     let timeout = 0;
     let duration = 0;
-    this.props.results.forEach(result => {
+    let results = this.props.results || [];
+    results.forEach(result => {
       if (result.correct) correct++;
       else if (result.reply) incorrect++;
       else timeout++;
       duration += result.duration;
     });
     this.state = {
-      results: this.props.results,
+      results: results,
       correct: correct,
       incorrect: incorrect,
       timeout: timeout,
-      avgDuration: duration / this.props.results.length,
+      avgDuration: results.length && duration / results.length,
       duration: duration,
-      score: Math.floor(correct / this.props.results.length * 100),
+      score: results.length && Math.floor(correct / results.length * 100),
     };
   }
 

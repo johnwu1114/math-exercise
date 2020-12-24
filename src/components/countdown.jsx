@@ -7,10 +7,6 @@ export default class Countdown extends React.Component {
     this.state = { second: this.max };
   }
 
-  componentDidMount() {
-    this.reset();
-  }
-
   componentWillUnmount() {
     clearInterval(this.intervalId);
   }
