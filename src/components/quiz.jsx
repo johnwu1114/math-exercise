@@ -1,4 +1,4 @@
-import "../styles/exam.css";
+import "../styles/quiz.css";
 import React, { Component } from "react";
 import QuizAttempt from "./quiz-attempt.jsx";
 import QuizResult from "./quiz-result.jsx";

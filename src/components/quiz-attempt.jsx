@@ -1,4 +1,3 @@
-import "../styles/exam.css";
 import React, { Component } from "react";
 import Countdown from "./countdown.jsx";
 

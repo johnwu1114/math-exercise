@@ -44,14 +44,18 @@ export default class QuizSectionSelector extends Component {
       <div>
         <ul className="sections">
           {this.state.sections.map((section, i) =>
-            <li key={`sections_${i}`}>
-              <input id={`sections_${i}`} type="checkbox" onChange={this.onSelected} checked={section.isChecked || false} value={section.value} />
-              <label htmlFor={`sections_${i}`}>{section.text}</label>
+            <li key={i}>
+              <label className="section">
+                <input type="checkbox" onChange={this.onSelected} checked={section.isChecked || false} value={section.value} />
+                <span className="checkmark">{section.text}</span>
+              </label>
             </li>
           )}
           <li >
-            <input id="selectedAll" type="checkbox" onChange={this.toggleAll} checked={this.state.selectedAll} />
-            <label htmlFor="selectedAll">全部</label>
+            {this.state.selectedAll || <label className="section">
+              <input type="checkbox" onChange={this.toggleAll} checked={this.state.selectedAll} />
+              <span className="checkmark">全部</span>
+            </label>}
           </li>
         </ul>
         <span className="btn start" onClick={() => this.onStart()}>開始</span>
