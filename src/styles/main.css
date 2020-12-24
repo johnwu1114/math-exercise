@@ -33,7 +33,7 @@ footer a {
   justify-content: center;
 }
 
-.app .btn-start {
+.btn.start {
   cursor: pointer;
   font-size: calc(10px + 5vmin);
   padding: 20px;
@@ -43,7 +43,7 @@ footer a {
   background-color: #4CAF4F;
 }
 
-.app .btn-start:hover {
+.btn.start:hover {
   border: 2px solid #4CAF4F;
   background-color: #77c57ae0;
 }

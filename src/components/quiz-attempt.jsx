@@ -65,9 +65,6 @@ export default class QuizAttempt extends Component {
   render() {
     return (
       <div>
-        <div className="header">
-          <span className="close" onClick={() => this.props.onClose()}>x</span>
-        </div>
         <div className={`question ${this.state.countdown < 3 && this.state.correct !== false && "blink"}`}>
           {this.state.question} {this.state.correct === false && `= ${this.state.answer}`}
         </div>

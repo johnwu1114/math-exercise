@@ -17,6 +17,12 @@ export default class Quiz extends Component {
     this.quizAttempt = React.createRef();
   }
 
+  onStart = (sections) => {
+    let questions = this.props.strategy.generateQuestions(sections);
+    this.props.strategy.addQuestions(questions);
+    this.setState({ isStarted: true });
+  }
+
   showResult = (results) => {
     this.state.results.splice(0, this.state.results.length);
     this.setState({
@@ -48,11 +54,17 @@ export default class Quiz extends Component {
   render() {
     return (
       <div>
-        <QuizAttempt ref={this.quizAttempt}
-          strategy={this.props.strategy}
-          onFinish={results => this.showResult(results)}
-          onClose={() => this.onClose()} />
-        {/* <QuizSectionSelector /> */}
+        <div className="header">
+          {this.state.isShowResult || <span className="close" onClick={() => this.props.onClose()}>x</span>}
+        </div>
+        {this.state.isStarted
+          ? <QuizAttempt ref={this.quizAttempt}
+            strategy={this.props.strategy}
+            onFinish={results => this.showResult(results)}
+            onClose={() => this.onClose()} />
+          : <QuizSectionSelector
+            strategy={this.props.strategy}
+            onStart={sections => this.onStart(sections)} />}
         {this.state.isShowResult &&
           <QuizResult
             results={this.state.results}

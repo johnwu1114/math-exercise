@@ -1,10 +1,6 @@
 export default class NineNineMultiplication {
   selectionCount = 6;
 
-  constructor() {
-    this.addQuestions(this.generateQuestions());
-  }
-
   getSections = () => {
     let sections = [];
     for (let i = 2; i <= 9; i++) {
@@ -18,12 +14,12 @@ export default class NineNineMultiplication {
 
   generateQuestions = (sections) => {
     let questions = [];
-    (sections || this.getSections().map(x => x.value))
+    (sections || this.getSections())
     .forEach(section => {
       for (let j = 2; j <= 9; j++) {
         questions.push({
-          question: `${section} x ${j}`,
-          answer: section * j
+          question: `${section.value} x ${j}`,
+          answer: section.value * j
         });
       }
     });
