@@ -20,7 +20,7 @@ export default class App extends Component {
       <div className="app">
         { this.state.isStart
           ? <Quiz strategy={this.state.strategy} onClose={() => this.setState({ isStart: false })} />
-          : <span className="btn green" onClick={() => this.start(new NineNineMultiplication())}>九九乘法練習</span>
+          : <span className="btn large green" onClick={() => this.start(new NineNineMultiplication())}>九九乘法練習</span>
         }
       </div>
     );

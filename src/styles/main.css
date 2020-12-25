@@ -35,9 +35,10 @@ footer a {
 
 .btn {
   cursor: pointer;
-  user-select: none; 
+  user-select: none;
+  font-size: calc(10px + 2vmin);
   margin: 10px;
-  padding: 10px 30px;
+  padding: calc(5px + 1vmin) calc(20px + 1vmin);
   border-radius: 10%;
   transition-duration: 0.4s;
   background-color: #888;
@@ -69,4 +70,9 @@ footer a {
 .btn.blue:hover {
   border: 2px solid #048CBA;
   background-color: #48abcc;
+}
+
+.btn.large {
+  font-size: calc(10px + 3vmin);
+  padding: calc(5px + 2vmin) calc(20px + 2vmin);
 }

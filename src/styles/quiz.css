@@ -149,6 +149,8 @@ p {
 
 .sections {
     padding: 0px;
+    margin-bottom: 50px;
+    max-width: 800px;
 }
 
 .sections li {
@@ -159,13 +161,11 @@ p {
 
 .sections label {
     padding: 0;
-    margin-right: 3px;
     cursor: pointer;
 }
 
 .sections input[type=checkbox] {
-    display: 
-    none;
+    display: none;
 }
 
 .sections input[type=checkbox]+span {
@@ -192,5 +192,5 @@ p {
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
     top: calc(10px + 1vmin);
-    left: calc(10px + 2vmin);
-  } 
+    left: calc(5px + 2vmin);
+}

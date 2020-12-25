@@ -49,6 +49,7 @@ export default class QuizSectionSelector extends Component {
   render() {
     return (
       <div>
+        <h1>請選擇</h1>
         <ul className="sections">
           {this.state.sections.map((section, i) =>
             <li key={i}>
@@ -65,7 +66,7 @@ export default class QuizSectionSelector extends Component {
             </label>
           </li> */}
         </ul>
-        <span className={`btn ${this.state.isSelected ? "green" : "disable"}`} onClick={() => this.onStart()}>開始</span>
+        <span className={`btn large ${this.state.isSelected ? "green" : "disable"}`} onClick={() => this.onStart()}>開始</span>
       </div>
     );
   }
