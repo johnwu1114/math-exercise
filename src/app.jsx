@@ -8,10 +8,10 @@ export default class App extends Component {
     this.state = { isStart: false };
   }
 
-  start = () => {
+  start = (strategy) => {
     this.setState({
       isStart: true,
-      strategy: new NineNineMultiplication()
+      strategy: strategy
     });
   }
 
@@ -20,7 +20,7 @@ export default class App extends Component {
       <div className="app">
         { this.state.isStart
           ? <Quiz strategy={this.state.strategy} onClose={() => this.setState({ isStart: false })} />
-          : <div><h1>九九乘法練習</h1><span className="btn start" onClick={() => this.start()}>開始</span></div>
+          : <span className="btn green" onClick={() => this.start(new NineNineMultiplication())}>九九乘法練習</span>
         }
       </div>
     );

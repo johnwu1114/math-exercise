@@ -68,7 +68,7 @@ export default class QuizAttempt extends Component {
           {this.state.question} {this.state.correct === false && `= ${this.state.answer}`}
         </div>
         {this.state.correct === false
-          ? <p>答錯了！<span className="btn next" onClick={() => this.nextQuestion()}>下一題</span></p>
+          ? <p>答錯了！<span className="btn blue" onClick={() => this.nextQuestion()}>下一題</span></p>
           : <ul className="choices">
             {this.state.choices.map((choice, i) =>
               <li key={i} onClick={() => this.checkAnswer(choice)} >{choice}</li>

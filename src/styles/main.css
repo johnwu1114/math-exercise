@@ -33,17 +33,40 @@ footer a {
   justify-content: center;
 }
 
-.btn.start {
+.btn {
   cursor: pointer;
-  font-size: calc(10px + 5vmin);
-  padding: 20px;
-  width: 20%;
+  user-select: none; 
+  margin: 10px;
+  padding: 10px 30px;
   border-radius: 10%;
   transition-duration: 0.4s;
+  background-color: #888;
+}
+
+.btn:hover {
+  border: 2px solid #888;
+  background-color: #ccc;
+}
+
+.btn.disable {
+  cursor: not-allowed;
+  background-color: #888;
+}
+
+.btn.green {
   background-color: #4CAF4F;
 }
 
-.btn.start:hover {
+.btn.green:hover {
   border: 2px solid #4CAF4F;
   background-color: #77c57ae0;
+}
+
+.btn.blue {
+  background-color: #048CBA;
+}
+
+.btn.blue:hover {
+  border: 2px solid #048CBA;
+  background-color: #48abcc;
 }

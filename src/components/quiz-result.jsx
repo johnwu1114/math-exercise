@@ -64,7 +64,7 @@ export default class QuizResult extends Component {
             </tbody>
           </table>
           <span className="btn" onClick={() => this.props.onClose()}>關閉</span>
-          {this.state.incorrect >= 3 && <span className="btn review" onClick={() => this.props.onReview()}>複習</span>}
+          {this.state.incorrect >= 3 && <span className="btn blue" onClick={() => this.props.onReview()}>複習</span>}
         </div>
       </div>
     );

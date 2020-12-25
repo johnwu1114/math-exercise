@@ -26,8 +26,11 @@ export default class QuizSectionSelector extends Component {
         section.isChecked = event.target.checked;
       }
     });
-    let selectedAll = sections.filter(x => x.isChecked !== true).length === 0;
-    this.setState({ sections: sections, selectedAll: selectedAll });
+    this.setState({
+      isSelected: sections.filter(x => x.isChecked).length > 0,
+      sections: sections,
+      selectedAll: sections.filter(x => x.isChecked !== true).length === 0
+    });
   }
 
   toggleAll = () => {
@@ -36,7 +39,11 @@ export default class QuizSectionSelector extends Component {
     sections.forEach(section => {
       section.isChecked = selectedAll;
     })
-    this.setState({ sections: sections, selectedAll: selectedAll });
+    this.setState({
+      isSelected: sections.filter(x => x.isChecked).length > 0,
+      sections: sections,
+      selectedAll: selectedAll
+    });
   }
 
   render() {
@@ -45,20 +52,20 @@ export default class QuizSectionSelector extends Component {
         <ul className="sections">
           {this.state.sections.map((section, i) =>
             <li key={i}>
-              <label className="section">
+              <label>
                 <input type="checkbox" onChange={this.onSelected} checked={section.isChecked || false} value={section.value} />
-                <span className="checkmark">{section.text}</span>
+                <span>{section.text}</span>
               </label>
             </li>
           )}
-          <li >
-            {this.state.selectedAll || <label className="section">
+          {/* <li >
+            <label>
               <input type="checkbox" onChange={this.toggleAll} checked={this.state.selectedAll} />
-              <span className="checkmark">全部</span>
-            </label>}
-          </li>
+              <span>全部</span>
+            </label>
+          </li> */}
         </ul>
-        <span className="btn start" onClick={() => this.onStart()}>開始</span>
+        <span className={`btn ${this.state.isSelected ? "green" : "disable"}`} onClick={() => this.onStart()}>開始</span>
       </div>
     );
   }

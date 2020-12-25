@@ -19,6 +19,7 @@
 
 .choices li {
     cursor: pointer;
+    user-select: none;
     font-size: calc(10px + 5vmin);
     display: inline-block;
     margin: 10px;
@@ -82,34 +83,6 @@ progress::-webkit-progress-value {
     margin-bottom: 30px;
 }
 
-.btn {
-    cursor: pointer;
-    margin: 10px;
-    padding: 10px 30px;
-    border-radius: 10%;
-    transition-duration: 0.4s;
-    background-color: #888;
-}
-
-.btn {
-    background-color: #888;
-}
-
-.btn:hover {
-    border: 2px solid #ccc;
-    background-color: #ccc;
-}
-
-.btn.next,
-.btn.review {
-    background-color: #048CBA;
-    border: 2px solid #048CBA;
-}
-
-.btn.next:hover,
-.btn.review:hover {
-    background-color: #48abcc;
-}
 
 .correct b::before {
     color: greenyellow;
@@ -174,77 +147,50 @@ p {
     font-size: calc(10px + 5vmin);
 }
 
+.sections {
+    padding: 0px;
+}
 
 .sections li {
-    font-size: calc(10px + 5vmin);
     display: inline-block;
     margin: 10px;
-    width: 30%;
-}
-
-/* Customize the label (the section) */
-.section {
-    display: block;
     position: relative;
-    margin: calc(5px + 2vmin);
-    padding: calc(5px + 2vmin);
+}
+
+.sections label {
+    padding: 0;
+    margin-right: 3px;
     cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
+}
+
+.sections input[type=checkbox] {
+    display: 
+    none;
+}
+
+.sections input[type=checkbox]+span {
+    display: inline-block;
+    background-color: #888;
+    padding: 10px calc(10px + 5vmin);
     user-select: none;
-}
-
-/* Hide the browser's default checkbox */
-.section input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-}
-
-/* Create a custom checkbox */
-.checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
     border-radius: 10%;
-    padding: calc(5px + 2vmin);
-    /* background-color: #eee; */
+    transition-duration: 0.4s;
 }
 
-/* On mouse-over, add a grey background color */
-.section:hover input~.checkmark {
-    /* background-color: #ccc; */
+.sections input[type=checkbox]:checked+span {
+    background-color: #48abcc;
 }
 
-/* When the checkbox is checked, add a blue background */
-.section input:checked~.checkmark {
-    background-color: #2196F3;
-}
-
-/* Create the checkmark/indicator (hidden when not checked) */
-.checkmark:after {
+.sections input[type=checkbox]:checked+span:after {
     content: "";
+    width: 5px;
+    height: 10px;
     position: absolute;
-    display: none;
-}
-
-/* Show the checkmark when checked */
-.section input:checked~.checkmark:after {
-    display: block;
-}
-
-/* Style the checkmark/indicator */
-.section .checkmark:after {
-    left: -20px;
-    top: calc(0px + 1vmin);
-    width: calc(5px + 1vmin);
-    height: calc(10px + 2vmin);
-    border: solid white;
-    border-width: 0 5px 5px 0;
+    border: 2px solid #00ff08;
+    border-width: 0 3px 3px 0;
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
-}
+    top: calc(10px + 1vmin);
+    left: calc(10px + 2vmin);
+  } 
