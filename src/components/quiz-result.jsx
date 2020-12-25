@@ -35,7 +35,7 @@ export default class QuizResult extends Component {
             <tbody>
               <tr>
                 <td style={{ width: "40%", fontSize: "calc(10px + 10vmin)", textAlign: "right" }} rowSpan="5">{this.state.score} 分</td>
-                <td style={{ width: "calc(80px + 10vmin);" }}>答對次數：</td><td>{this.state.correct}</td>
+                <td style={{ width: "calc(80px + 10vmin)" }}>答對次數：</td><td>{this.state.correct}</td>
               </tr>
               <tr><td>答錯次數：</td><td>{this.state.incorrect}</td></tr>
               <tr><td>逾時次數：</td><td>{this.state.timeout}</td></tr>

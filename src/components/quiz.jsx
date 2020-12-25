@@ -18,8 +18,8 @@ export default class Quiz extends Component {
   }
 
   onStart = (sections) => {
-    let questions = this.props.strategy.generateQuestions(sections);
-    this.props.strategy.addQuestions(questions);
+    let questions = this.props.questionBank.generateQuestions(sections);
+    this.props.questionBank.addQuestions(questions);
     this.setState({ isStarted: true });
   }
 
@@ -41,7 +41,7 @@ export default class Quiz extends Component {
         }
       });
     for (let i = 0; i < 3; i++)
-      this.props.strategy.addQuestions(questions);
+      this.props.questionBank.addQuestions(questions);
 
     this.quizAttempt.current.nextQuestion();
     this.setState({ isShowResult: false });
@@ -59,11 +59,11 @@ export default class Quiz extends Component {
         </div>
         {this.state.isStarted
           ? <QuizAttempt ref={this.quizAttempt}
-            strategy={this.props.strategy}
+            questionBank={this.props.questionBank}
             onFinish={results => this.showResult(results)}
             onClose={() => this.onClose()} />
           : <QuizSectionSelector
-            strategy={this.props.strategy}
+            questionBank={this.props.questionBank}
             onStart={sections => this.onStart(sections)} />}
         {this.state.isShowResult &&
           <QuizResult

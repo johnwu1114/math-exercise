@@ -89,3 +89,10 @@ footer a {
 .icon-blog {
   content: url(../images/blog-solid.svg);
 }
+
+li {
+  display: block;
+  margin: 10px;
+  position: relative;
+  user-select: none;
+}

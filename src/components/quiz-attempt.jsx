@@ -7,7 +7,7 @@ export default class QuizAttempt extends Component {
   constructor(props) {
     super(props);
 
-    this.strategy = props.strategy;
+    this.questionBank = props.questionBank;
     this.results = [];
 
     this.state = {
@@ -25,7 +25,7 @@ export default class QuizAttempt extends Component {
   nextQuestion = () => {
     this.setState({ correct: null });
 
-    let question = this.strategy.nextQuestion();
+    let question = this.questionBank.nextQuestion();
     if (question === null) {
       this.props.onFinish(this.results);
       this.results = [];
@@ -39,7 +39,7 @@ export default class QuizAttempt extends Component {
 
   checkAnswer = (reply) => {
     this.countdown.current.pause();
-    let correct = this.strategy.checkAnswer(reply);
+    let correct = this.questionBank.checkAnswer(reply);
     this.setState({ correct: correct });
     this.logAnswer(reply);
 
@@ -51,7 +51,7 @@ export default class QuizAttempt extends Component {
       question: this.state.question,
       answer: this.state.answer,
       reply: reply,
-      correct: this.strategy.checkAnswer(reply),
+      correct: this.questionBank.checkAnswer(reply),
       duration: this.countdown.current.getDuration()
     };
     this.results.push(result);

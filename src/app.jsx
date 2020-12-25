@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Quiz from "./components/quiz.jsx";
-import NineNineMultiplication from "./libs/nine-nine-multiplication.js";
+import MultiplicationQuestionBank from "./libs/question-bank/multiplication.js";
 
 export default class App extends Component {
   constructor(props) {
@@ -8,10 +8,10 @@ export default class App extends Component {
     this.state = { isStart: false };
   }
 
-  start = (strategy) => {
+  start = (questionBank) => {
     this.setState({
       isStart: true,
-      strategy: strategy
+      questionBank: questionBank
     });
   }
 
@@ -19,8 +19,16 @@ export default class App extends Component {
     return (
       <div className="app">
         { this.state.isStart
-          ? <Quiz strategy={this.state.strategy} onClose={() => this.setState({ isStart: false })} />
-          : <span className="btn large green" onClick={() => this.start(new NineNineMultiplication())}>九九乘法練習</span>
+          ? <Quiz questionBank={this.state.questionBank} onClose={() => this.setState({ isStart: false })} />
+          : <ul>
+            <li className="btn large green" onClick={() => this.start(new MultiplicationQuestionBank())}>
+              9 x 9 乘法練習
+            </li>
+            <li className="btn large green" onClick={() => this.start(new MultiplicationQuestionBank(2))}>
+              19 x 19 乘法練習
+            </li>
+          </ul>
+
         }
       </div>
     );
