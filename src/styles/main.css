@@ -14,9 +14,8 @@ body {
 footer {
   padding: 10px 0;
   width: 100%;
-  position: absolute;
+  position: fixed;
   bottom: 0;
-  left: 0;
   font-size: 14px;
 }
 
@@ -75,4 +74,18 @@ footer a {
 .btn.large {
   font-size: calc(10px + 3vmin);
   padding: calc(5px + 2vmin) calc(20px + 2vmin);
+}
+
+.icon {
+  margin: 0 2px;
+  width: 16px;
+  height: 16px;
+}
+
+.icon-github {
+  content: url(../images/github-brands.svg);
+}
+
+.icon-blog {
+  content: url(../images/blog-solid.svg);
 }
