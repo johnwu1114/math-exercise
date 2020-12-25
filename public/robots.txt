@@ -1,0 +1,11 @@
+User-Agent: Googlebot
+Allow: *.js
+Allow: *.css
+
+User-Agent: bingbot
+Allow: *.js
+Allow: *.css
+
+User-agent: *
+Allow: /
+Disallow: /static/
