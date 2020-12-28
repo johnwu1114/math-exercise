@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Quiz from "./components/quiz.jsx";
+import AdditionQuestionBank from "./libs/question-bank/addition.js";
 import MultiplicationQuestionBank from "./libs/question-bank/multiplication.js";
 
 export default class App extends Component {
@@ -21,6 +22,9 @@ export default class App extends Component {
         { this.state.isStart
           ? <Quiz questionBank={this.state.questionBank} onClose={() => this.setState({ isStart: false })} />
           : <ul>
+            <li className="btn large green" onClick={() => this.start(new AdditionQuestionBank())}>
+              加法練習
+            </li>
             <li className="btn large green" onClick={() => this.start(new MultiplicationQuestionBank())}>
               9 x 9 乘法練習
             </li>
