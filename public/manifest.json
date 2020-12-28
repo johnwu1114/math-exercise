@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "math-exercise",
+  "name": "Online math exercises for elementary students",
   "icons": [
     {
       "src": "favicon.ico",
