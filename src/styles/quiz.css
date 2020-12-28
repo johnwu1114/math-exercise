@@ -54,7 +54,17 @@ progress {
 }
 
 progress::-webkit-progress-value {
-    background: #048CBA;
+    background: #5DB75D;
+}
+
+progress.warning::-webkit-progress-value {
+    background: #EFAD4C;
+    transition-duration: 0.4s;
+}
+
+progress.danger::-webkit-progress-value {
+    background: #D9544E;
+    transition-duration: 0.4s;
 }
 
 .modal {

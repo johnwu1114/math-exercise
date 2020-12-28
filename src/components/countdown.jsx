@@ -1,10 +1,12 @@
 import React from "react"
 
 export default class Countdown extends React.Component {
+  intervalSeconds = 0.1;
+
   constructor(props) {
     super(props);
-    this.max = parseFloat(props.max || 10);
-    this.state = { second: this.max };
+    this.maximum = parseFloat(props.seconds || 10);
+    this.state = { timer: this.maximum };
   }
 
   componentWillUnmount() {
@@ -13,7 +15,7 @@ export default class Countdown extends React.Component {
 
   reset = () => {
     this.pause();
-    this.setState({ second: this.max });
+    this.setState({ timer: this.maximum });
     this.resume();
   }
 
@@ -22,15 +24,15 @@ export default class Countdown extends React.Component {
   }
 
   resume = () => {
-    this.intervalId = setInterval(this.countdown, 100);
+    this.intervalId = setInterval(this.countdown, this.intervalSeconds * 1000);
   }
 
   countdown = () => {
     this.setState(state => ({
-      second: state.second - 0.1
+      timer: state.timer - this.intervalSeconds
     }));
-    this.props.onChanged(this.state.second);
-    if (this.state.second > 0) return;
+    this.props.onChanged(this.state.timer);
+    if (this.state.timer > 0) return;
     this.timeout();
   }
 
@@ -39,12 +41,19 @@ export default class Countdown extends React.Component {
   }
 
   getDuration = () => {
-    return Math.min(this.max, this.max - this.state.second);
+    return Math.min(this.maximum, this.maximum - this.state.timer);
+  }
+
+  getStatus = () => {
+    let rate = Math.round(this.state.timer / this.maximum * 100);
+    if(rate < 20) return "danger";
+    else if(rate < 50) return "warning";
+    return "";
   }
 
   render() {
     return (
-      <progress max={this.max} value={this.state.second.toFixed(1)}></progress>
+      <progress className={this.getStatus()} max={this.maximum} value={this.state.timer.toFixed(1)}></progress>
     );
   }
 }

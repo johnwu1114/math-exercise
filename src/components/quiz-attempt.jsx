@@ -81,7 +81,7 @@ export default class QuizAttempt extends Component {
             )}
           </ul>}
         <Countdown ref={this.countdown}
-          max={this.countdownSeconds}
+          seconds={this.countdownSeconds}
           timeout={() => this.checkAnswer()}
           onChanged={value => this.onCountdownChanged(value)} />
       </div>
