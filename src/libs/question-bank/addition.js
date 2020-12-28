@@ -1,7 +1,6 @@
 import QuestionBankBase from "./base.js";
 
 export default class AdditionQuestionBank extends QuestionBankBase {
-  selectionCount = 6;
   questionCount = 20;
 
   getSections = () => {
@@ -47,6 +46,6 @@ export default class AdditionQuestionBank extends QuestionBankBase {
         }
       }
     });
-    return questions;
+    return this.pickRandomItems(questions, this.questionCount);;
   }
 }
