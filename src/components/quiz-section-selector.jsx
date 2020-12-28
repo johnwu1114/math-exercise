@@ -4,8 +4,8 @@ export default class QuizSectionSelector extends Component {
   constructor(props) {
     super(props);
     let sections = this.props.questionBank.getSections();
-    sections[0].isSelected = true;
     this.state = {
+      isSelected: sections[0].isSelected = true,
       sections: sections,
       isSelectedAll: false
     }
@@ -20,7 +20,7 @@ export default class QuizSectionSelector extends Component {
   onSelected = (event) => {
     let sections = this.state.sections;
     sections.forEach(section => {
-      if (section.value.toString() === event.target.value.toString()) {
+      if (section.text === event.target.value) {
         section.isSelected = event.target.checked;
       }
     });
@@ -52,7 +52,7 @@ export default class QuizSectionSelector extends Component {
           {this.state.sections.map((section, i) =>
             <li key={i}>
               <label>
-                <input type="checkbox" onChange={this.onSelected} checked={section.isSelected || false} value={section.value} />
+                <input type="checkbox" onChange={this.onSelected} checked={section.isSelected || false} value={section.text} />
                 <span>{section.text}</span>
               </label>
             </li>
