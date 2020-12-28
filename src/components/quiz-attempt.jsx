@@ -23,7 +23,10 @@ export default class QuizAttempt extends Component {
   }
 
   nextQuestion = () => {
-    this.setState({ correct: null });
+    this.setState({
+      correct: null,
+      timeout: null
+    });
 
     let question = this.questionBank.nextQuestion();
     if (question === null) {
@@ -40,7 +43,10 @@ export default class QuizAttempt extends Component {
   checkAnswer = (reply) => {
     this.countdown.current.pause();
     let correct = this.questionBank.checkAnswer(reply);
-    this.setState({ correct: correct });
+    this.setState({
+      correct: correct,
+      timeout: reply == null
+    });
     this.logAnswer(reply);
 
     if (correct) this.nextQuestion();
@@ -68,7 +74,7 @@ export default class QuizAttempt extends Component {
           {this.state.question} {this.state.correct === false && `= ${this.state.answer}`}
         </div>
         {this.state.correct === false
-          ? <p>答錯了！<span className="btn large blue" onClick={() => this.nextQuestion()}>下一題</span></p>
+          ? <p>{this.state.timeout ? "時間到！" : "答錯了！"}<span className="btn large blue" onClick={() => this.nextQuestion()}>下一題</span></p>
           : <ul className="choices">
             {this.state.choices.map((choice, i) =>
               <li key={i} onClick={() => this.checkAnswer(choice)} >{choice}</li>
