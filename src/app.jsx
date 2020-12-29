@@ -3,6 +3,7 @@ import Quiz from "./components/quiz.jsx";
 import AdditionQuestionBank from "./libs/question-bank/addition.js";
 import SubtractionQuestionBank from "./libs/question-bank/subtraction.js";
 import MultiplicationQuestionBank from "./libs/question-bank/multiplication.js";
+import Clock from "./components/clock.jsx";
 
 export default class App extends Component {
   constructor(props) {
@@ -20,6 +21,7 @@ export default class App extends Component {
   render() {
     return (
       <div className="app">
+        <Clock />
         { this.state.isStart
           ? <Quiz questionBank={this.state.questionBank} onClose={() => this.setState({ isStart: false })} />
           : <ul>
