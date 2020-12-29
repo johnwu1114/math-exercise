@@ -34,7 +34,10 @@ export default class MultiplicationQuestionBank extends QuestionBankBase {
       for (let i = 2; i <= this.multiplicand; i++) {
         questions.push({
           description: `${section.value} x ${i}`,
-          answer: section.value * i
+          answer: {
+            text: this.convertText(section.value * i),
+            value: section.value * i
+          },
         });
       }
     });

@@ -44,10 +44,13 @@ export default class ClockQuestionBank extends QuestionBankBase {
         let disableSecondhand = section.intervalSeconds !== 5;
         let random = RandomUtil.getRandomInt(this.secondsInDay / 2);
         random = random - random % section.intervalSeconds;
-        let key = this.convertSecondToHHMMSS(random, disableSecondhand);
+        let key = this.convertText(random, disableSecondhand);
         hashMap.set(key, {
           description: <Clock hhmmss={key} disableSecondhand={disableSecondhand.toString()} />,
-          answer: random,
+          answer: {
+            text: key,
+            value: random
+          },
           answerRange: section.answerRange,
           intervalSeconds: section.intervalSeconds,
           disableSecondhand: disableSecondhand
@@ -61,13 +64,13 @@ export default class ClockQuestionBank extends QuestionBankBase {
   }
 
   generateChoices = (question) => {
-    let answer = question.answer;
+    let answer = question.answer.value;
     let answerRange = question.answerRange * question.intervalSeconds;
     let intervalSeconds = question.intervalSeconds;
     let seeds = [];
     for (let i = Math.max(0, answer - answerRange); i < Math.min(answer + answerRange, this.secondsInDay / 2); i += intervalSeconds) {
       if (i !== answer) seeds.push({
-        text: this.convertSecondToHHMMSS(i, question.disableSecondhand),
+        text: this.convertText(i, question.disableSecondhand),
         value: i
       });
     }
@@ -75,16 +78,16 @@ export default class ClockQuestionBank extends QuestionBankBase {
     let randomCount = this.selectionCount - 1;
     let choices = RandomUtil.pickRandomItems(seeds, randomCount);
     choices.splice(RandomUtil.getRandomInt(randomCount), 0, {
-      text: this.convertSecondToHHMMSS(answer, question.disableSecondhand),
+      text: this.convertText(answer, question.disableSecondhand),
       value: answer
     });
     return choices;
   }
 
-  convertSecondToHHMMSS = (totalSeconds, disableSeconds) => {
-    let hour = Math.floor(totalSeconds / (60 * 60)) + 1;
-    let minute = Math.floor(totalSeconds % (60 * 60) / 60);
-    let second = totalSeconds % 60;
+  convertText = (value, disableSeconds) => {
+    let hour = Math.floor(value / (60 * 60)) + 1;
+    let minute = Math.floor(value % (60 * 60) / 60);
+    let second = value % 60;
     let result = `${hour.toString().padStart(2, "0")}:${minute.toString().padStart(2, "0")}`;
     if (!disableSeconds) result += `:${second.toString().padStart(2, "0")}`;
 

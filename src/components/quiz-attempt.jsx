@@ -12,7 +12,7 @@ export default class QuizAttempt extends Component {
 
     this.state = {
       description: "",
-      answer: "",
+      answer: {},
       choices: []
     };
     this.countdown = React.createRef();
@@ -54,8 +54,7 @@ export default class QuizAttempt extends Component {
 
   logAnswer = (reply) => {
     let result = {
-      description: this.state.description,
-      answer: this.state.answer,
+      question: this.state,
       reply: reply,
       correct: this.questionBank.checkAnswer(reply),
       duration: this.countdown.current.getDuration()
@@ -71,13 +70,13 @@ export default class QuizAttempt extends Component {
     return (
       <div>
         <div className={`question ${this.state.countdown < 3 && this.state.correct !== false && "blink"}`}>
-          {this.state.description} {this.state.correct === false && `= ${this.state.answer}`}
+          {this.state.description} {this.state.correct === false && `= ${this.state.answer.text}`}
         </div>
         {this.state.correct === false
           ? <p>{this.state.timeout ? "時間到！" : "答錯了！"}<span className="btn large blue" onClick={() => this.nextQuestion()}>下一題</span></p>
           : <ul className="choices">
             {this.state.choices.map((choice, i) =>
-              <li key={i} onClick={() => this.checkAnswer(choice.value)} >{choice.text}</li>
+              <li key={i} onClick={() => this.checkAnswer(choice)} >{choice.text}</li>
             )}
           </ul>}
         <Countdown ref={this.countdown}

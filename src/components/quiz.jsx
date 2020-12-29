@@ -10,7 +10,7 @@ export default class Quiz extends Component {
     super(props);
     this.state = {
       description: "",
-      answer: "",
+      answer: {},
       choices: [],
       results: []
     };
@@ -34,12 +34,7 @@ export default class Quiz extends Component {
   onReview = () => {
     let questions = this.state.results
       .filter(x => !x.correct)
-      .map(x => {
-        return {
-          description: x.description,
-          answer: x.answer
-        }
-      });
+      .map(x => x.question);
     for (let i = 0; i < 3; i++)
       this.props.questionBank.addQuestions(questions);
 

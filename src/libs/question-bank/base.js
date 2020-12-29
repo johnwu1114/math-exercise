@@ -4,12 +4,12 @@ export default class QuestionBankBase {
   selectionCount = 6;
 
   generateChoices = (question) => {
-    let answer = question.answer;
+    let answer = question.answer.value;
     let answerRange = question.answerRange || 20;
     let seeds = [];
     for (let i = Math.max(2, answer - answerRange); i < answer + answerRange; i++) {
       if (i !== answer) seeds.push({
-        text: i.toString(),
+        text: this.convertText(i),
         value: i
       });
     }
@@ -17,7 +17,7 @@ export default class QuestionBankBase {
     let randomCount = this.selectionCount - 1;
     let choices = RandomUtil.pickRandomItems(seeds, randomCount);
     choices.splice(RandomUtil.getRandomInt(randomCount), 0, {
-      text: answer.toString(),
+      text: this.convertText(answer),
       value: answer
     });
     return choices;
@@ -37,6 +37,10 @@ export default class QuestionBankBase {
   }
 
   checkAnswer = (reply) => {
-    return reply === this.currentQuestion.answer;
+    return reply != null && reply.value === this.currentQuestion.answer.value;
+  }
+
+  convertText = (value) => {
+    return value.toString();
   }
 }

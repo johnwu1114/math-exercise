@@ -55,7 +55,10 @@ export default class AdditionQuestionBank extends QuestionBankBase {
         let key = `${x} + ${y}`;
         hashMap.set(key, {
           description: key,
-          answer: summation,
+          answer: {
+            text: this.convertText(summation),
+            value: summation
+          },
           answerRange: section.answerRange
         });
       }
