@@ -81,7 +81,7 @@ export default class Clock extends React.Component {
     hour = (hour * Math.PI / 6) +
       (minute * Math.PI / (6 * 60)) +
       (second * Math.PI / (360 * 60));
-    this.drawHand(hour, radius * 0.4, radius * 0.05);
+    this.drawHand(hour, radius * 0.4, radius * 0.07);
 
     // Minute
     minute = (minute * Math.PI / 30) + (second * Math.PI / (30 * 60));

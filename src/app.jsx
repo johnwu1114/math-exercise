@@ -23,24 +23,26 @@ export default class App extends Component {
       <div className="app">
         { this.state.isStart
           ? <Quiz questionBank={this.state.questionBank} onClose={() => this.setState({ isStart: false })} />
-          : <ul>
-            <li className="btn large green" onClick={() => this.start(new AdditionQuestionBank())}>
-              加法練習
-          </li>
-            <li className="btn large green" onClick={() => this.start(new SubtractionQuestionBank())}>
-              減法練習
-            </li>
-            <li className="btn large green" onClick={() => this.start(new MultiplicationQuestionBank())}>
-              9 x 9 乘法練習
-            </li>
-            <li className="btn large green" onClick={() => this.start(new MultiplicationQuestionBank(2))}>
-              19 x 19 乘法練習
-            </li>
-            <li className="btn large green" onClick={() => this.start(new ClockQuestionBank())}>
-              時鐘練習
-            </li>
-          </ul>
-
+          : <div>
+            <h1>數學練習小程式</h1>
+            <ul>
+              <li className="btn large green" onClick={() => this.start(new AdditionQuestionBank())}>
+                加法練習
+              </li>
+              <li className="btn large green" onClick={() => this.start(new SubtractionQuestionBank())}>
+                減法練習
+              </li>
+              <li className="btn large green" onClick={() => this.start(new MultiplicationQuestionBank())}>
+                9 x 9 乘法練習
+              </li>
+              <li className="btn large green" onClick={() => this.start(new MultiplicationQuestionBank(2))}>
+                19 x 19 乘法練習
+              </li>
+              <li className="btn large green" onClick={() => this.start(new ClockQuestionBank())}>
+                時鐘練習
+              </li>
+            </ul>
+          </div>
         }
       </div>
     );
