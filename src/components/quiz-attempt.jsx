@@ -77,7 +77,7 @@ export default class QuizAttempt extends Component {
           ? <p>{this.state.timeout ? "時間到！" : "答錯了！"}<span className="btn large blue" onClick={() => this.nextQuestion()}>下一題</span></p>
           : <ul className="choices">
             {this.state.choices.map((choice, i) =>
-              <li key={i} onClick={() => this.checkAnswer(choice)} >{choice}</li>
+              <li key={i} onClick={() => this.checkAnswer(choice.value)} >{choice.text}</li>
             )}
           </ul>}
         <Countdown ref={this.countdown}

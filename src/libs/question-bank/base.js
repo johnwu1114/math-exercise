@@ -8,12 +8,18 @@ export default class QuestionBankBase {
     let answerRange = question.answerRange || 20;
     let seeds = [];
     for (let i = Math.max(2, answer - answerRange); i < answer + answerRange; i++) {
-      if (i !== answer) seeds.push(i);
+      if (i !== answer) seeds.push({
+        text: i.toString(),
+        value: i
+      });
     }
 
     let randomCount = this.selectionCount - 1;
     let choices = RandomUtil.pickRandomItems(seeds, randomCount);
-    choices.splice(RandomUtil.getRandomInt(randomCount), 0, answer);
+    choices.splice(RandomUtil.getRandomInt(randomCount), 0, {
+      text: answer.toString(),
+      value: answer
+    });
     return choices;
   }
 
