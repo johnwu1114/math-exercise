@@ -52,9 +52,9 @@ export default class AdditionQuestionBank extends QuestionBankBase {
         let summation = RandomUtil.getRandomIntRange(section.minSummation, section.maxSummation);
         let x = RandomUtil.getRandomIntRange(section.minimum, summation - section.minimum);
         let y = summation - x;
-        let question = `${x} + ${y}`;
-        hashMap.set(question, {
-          question: question,
+        let key = `${x} + ${y}`;
+        hashMap.set(key, {
+          description: key,
           answer: summation,
           answerRange: section.answerRange
         });

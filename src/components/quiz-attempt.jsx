@@ -11,7 +11,7 @@ export default class QuizAttempt extends Component {
     this.results = [];
 
     this.state = {
-      question: "",
+      description: "",
       answer: "",
       choices: []
     };
@@ -54,7 +54,7 @@ export default class QuizAttempt extends Component {
 
   logAnswer = (reply) => {
     let result = {
-      question: this.state.question,
+      description: this.state.description,
       answer: this.state.answer,
       reply: reply,
       correct: this.questionBank.checkAnswer(reply),
@@ -71,7 +71,7 @@ export default class QuizAttempt extends Component {
     return (
       <div>
         <div className={`question ${this.state.countdown < 3 && this.state.correct !== false && "blink"}`}>
-          {this.state.question} {this.state.correct === false && `= ${this.state.answer}`}
+          {this.state.description} {this.state.correct === false && `= ${this.state.answer}`}
         </div>
         {this.state.correct === false
           ? <p>{this.state.timeout ? "時間到！" : "答錯了！"}<span className="btn large blue" onClick={() => this.nextQuestion()}>下一題</span></p>

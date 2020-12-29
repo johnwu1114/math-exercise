@@ -52,9 +52,9 @@ export default class SubtractionQuestionBank extends QuestionBankBase {
         let x = RandomUtil.getRandomIntRange(section.minSummation, section.maxSummation);
         let y = RandomUtil.getRandomIntRange(section.minimum, x);
         let summation = x - y;
-        let question = `${x} - ${y}`;
-        hashMap.set(question, {
-          question: question,
+        let key = `${x} - ${y}`;
+        hashMap.set(key, {
+          description: key,
           answer: summation,
           answerRange: section.answerRange
         });

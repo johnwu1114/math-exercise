@@ -9,7 +9,7 @@ export default class Quiz extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      question: "",
+      description: "",
       answer: "",
       choices: [],
       results: []
@@ -36,7 +36,7 @@ export default class Quiz extends Component {
       .filter(x => !x.correct)
       .map(x => {
         return {
-          question: x.question,
+          description: x.description,
           answer: x.answer
         }
       });

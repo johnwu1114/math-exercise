@@ -58,7 +58,7 @@ export default class QuizResult extends Component {
               {this.state.results.map((result, i) => result.correct ||
                 <tr key={i} className={result.correct ? "correct" : "incorrect"}>
                   <td><b /></td>
-                  <td>{result.question}</td>
+                  <td>{result.description}</td>
                   <td>{result.answer}</td>
                   <td>{result.reply || "--"}</td>
                   <td>{result.duration.toFixed(1)}</td>
