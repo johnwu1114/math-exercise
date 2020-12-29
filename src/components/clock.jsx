@@ -16,14 +16,11 @@ export default class Clock extends React.Component {
 
     this.context = context;
     this.radius = radius;
-    this.drawClock(10, 25, 30);
-    // setInterval(() => {
-    //   var now = new Date();
-    //   var hour = now.getHours();
-    //   var minute = now.getMinutes();
-    //   var second = now.getSeconds();
-    //   this.drawClock(hour, minute, second);
-    // }, 1000);
+    let hhmmss = (this.props.hhmmss || "00:00:00").split(":");
+    let hour = hhmmss[0] || "0";
+    let minute = hhmmss[1] || "0";
+    let second = hhmmss[2] || "0";
+    this.drawClock(hour, minute, second);
   }
 
   drawClock = (hour, minute, second) => {
@@ -116,7 +113,7 @@ export default class Clock extends React.Component {
 
   render() {
     return (
-      <canvas ref={this.canvas} width={this.props.width || 300} />
+      <canvas className="clock" ref={this.canvas} width={this.props.width || 200} />
     );
   }
 }

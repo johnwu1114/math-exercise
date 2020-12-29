@@ -200,3 +200,7 @@ p {
     top: calc(10px + 1vmin);
     left: calc(5px + 2vmin);
 }
+
+.clock {
+    margin-top: 50px;
+}

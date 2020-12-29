@@ -3,7 +3,7 @@ import Quiz from "./components/quiz.jsx";
 import AdditionQuestionBank from "./libs/question-bank/addition.js";
 import SubtractionQuestionBank from "./libs/question-bank/subtraction.js";
 import MultiplicationQuestionBank from "./libs/question-bank/multiplication.js";
-import Clock from "./components/clock.jsx";
+import ClockQuestionBank from "./libs/question-bank/clock.js";
 
 export default class App extends Component {
   constructor(props) {
@@ -21,7 +21,6 @@ export default class App extends Component {
   render() {
     return (
       <div className="app">
-        <Clock />
         { this.state.isStart
           ? <Quiz questionBank={this.state.questionBank} onClose={() => this.setState({ isStart: false })} />
           : <ul>
@@ -36,6 +35,9 @@ export default class App extends Component {
             </li>
             <li className="btn large green" onClick={() => this.start(new MultiplicationQuestionBank(2))}>
               19 x 19 乘法練習
+            </li>
+            <li className="btn large green" onClick={() => this.start(new ClockQuestionBank())}>
+              時鐘練習
             </li>
           </ul>
 
