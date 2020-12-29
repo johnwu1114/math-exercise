@@ -1,3 +1,4 @@
+import RandomUtil from "../utils/random.js";
 import QuestionBankBase from "./base.js";
 
 export default class SubtractionQuestionBank extends QuestionBankBase {
@@ -48,8 +49,8 @@ export default class SubtractionQuestionBank extends QuestionBankBase {
     .forEach(section => {
       let hashMap = new Map();
       while (hashMap.size < this.questionCount) {
-        let x = this.getRandomIntRange(section.minSummation, section.maxSummation);
-        let y = this.getRandomIntRange(section.minimum, x);
+        let x = RandomUtil.getRandomIntRange(section.minSummation, section.maxSummation);
+        let y = RandomUtil.getRandomIntRange(section.minimum, x);
         let summation = x - y;
         let question = `${x} - ${y}`;
         hashMap.set(question, {

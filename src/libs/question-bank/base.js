@@ -1,3 +1,5 @@
+import RandomUtil from "../utils/random.js";
+
 export default class QuestionBankBase {
   selectionCount = 6;
 
@@ -10,27 +12,9 @@ export default class QuestionBankBase {
     }
 
     let randomCount = this.selectionCount - 1;
-    let choices = this.pickRandomItems(seeds, randomCount);
-    choices.splice(this.getRandomInt(randomCount), 0, answer);
+    let choices = RandomUtil.pickRandomItems(seeds, randomCount);
+    choices.splice(RandomUtil.getRandomInt(randomCount), 0, answer);
     return choices;
-  }
-
-  pickRandomItems = (arr, count) => {
-    let items = []
-    for (let i = 0; i < count; i++) {
-      let index = this.getRandomInt(arr.length);
-      let item = arr.splice(index, 1)[0];
-      items.push(item);
-    }
-    return items;
-  }
-
-  getRandomInt = (max) => {
-    return this.getRandomIntRange(0, max);
-  }
-
-  getRandomIntRange = (min, max) => {
-    return Math.floor(Math.random() * (max - min) + min);
   }
 
   addQuestions = (questions) => {
@@ -40,7 +24,7 @@ export default class QuestionBankBase {
 
   nextQuestion = () => {
     if (this.questions.length === 0) return null;
-    let index = this.getRandomInt(this.questions.length);
+    let index = RandomUtil.getRandomInt(this.questions.length);
     let question = this.questions.splice(index, 1)[0];
     question.choices = this.generateChoices(question);
     return this.currentQuestion = question;

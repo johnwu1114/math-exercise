@@ -1,3 +1,4 @@
+import RandomUtil from "../utils/random.js";
 import QuestionBankBase from "./base.js";
 
 export default class AdditionQuestionBank extends QuestionBankBase {
@@ -48,8 +49,8 @@ export default class AdditionQuestionBank extends QuestionBankBase {
     .forEach(section => {
       let hashMap = new Map();
       while (hashMap.size < this.questionCount) {
-        let summation = this.getRandomIntRange(section.minSummation, section.maxSummation);
-        let x = this.getRandomIntRange(section.minimum, summation - section.minimum);
+        let summation = RandomUtil.getRandomIntRange(section.minSummation, section.maxSummation);
+        let x = RandomUtil.getRandomIntRange(section.minimum, summation - section.minimum);
         let y = summation - x;
         let question = `${x} + ${y}`;
         hashMap.set(question, {
