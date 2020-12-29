@@ -24,6 +24,20 @@ export default class SubtractionQuestionBank extends QuestionBankBase {
         minSummation: 20,
         maxSummation: 99,
         answerRange: 20
+      },
+      {
+        text: "三位數減法",
+        minimum: 100,
+        minSummation: 200,
+        maxSummation: 999,
+        answerRange: 50
+      },
+      {
+        text: "四位數減法",
+        minimum: 1000,
+        minSummation: 2000,
+        maxSummation: 9909,
+        answerRange: 50
       }
     ];
   }

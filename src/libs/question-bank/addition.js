@@ -24,6 +24,20 @@ export default class AdditionQuestionBank extends QuestionBankBase {
         minSummation: 20,
         maxSummation: 99,
         answerRange: 20
+      },
+      {
+        text: "三位數加法",
+        minimum: 100,
+        minSummation: 200,
+        maxSummation: 999,
+        answerRange: 50
+      },
+      {
+        text: "四位數加法",
+        minimum: 1000,
+        minSummation: 2000,
+        maxSummation: 9999,
+        answerRange: 50
       }
     ];
   }
@@ -35,7 +49,7 @@ export default class AdditionQuestionBank extends QuestionBankBase {
       let hashMap = new Map();
       while (hashMap.size < this.questionCount) {
         let summation = this.getRandomIntRange(section.minSummation, section.maxSummation);
-        let x = this.getRandomIntRange(section.minimum, summation);
+        let x = this.getRandomIntRange(section.minimum, summation - section.minimum);
         let y = summation - x;
         let question = `${x} + ${y}`;
         hashMap.set(question, {
