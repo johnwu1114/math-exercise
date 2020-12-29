@@ -6,24 +6,28 @@ export default class Clock extends React.Component {
     this.canvas = React.createRef();
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.drawClock(nextProps.hhmmss);
+  }
+
   componentDidMount() {
+    this.drawClock(this.props.hhmmss);
+  }
+
+  drawClock = (hhmmss) => {
     let canvas = this.canvas.current;
     canvas.height = canvas.width;
     let context = canvas.getContext("2d");
     let radius = canvas.height / 2;
     context.translate(radius, radius);
     radius = radius * 0.90;
-
     this.context = context;
     this.radius = radius;
-    let hhmmss = (this.props.hhmmss || "00:00:00").split(":");
-    let hour = hhmmss[0] || "0";
-    let minute = hhmmss[1] || "0";
-    let second = hhmmss[2] || "0";
-    this.drawClock(hour, minute, second);
-  }
+    let arr = (hhmmss || "00:00:00").split(":");
+    let hour = arr[0] || "0";
+    let minute = arr[1] || "0";
+    let second = arr[2] || "0";
 
-  drawClock = (hour, minute, second) => {
     this.drawFace();
     this.drawNumbers();
     this.drawTime(hour, minute, second);
