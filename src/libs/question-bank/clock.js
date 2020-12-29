@@ -4,6 +4,7 @@ import Clock from "../../components/clock.jsx";
 
 export default class ClockQuestionBank extends QuestionBankBase {
   questionCount = 10;
+  secondsInDay = 24 * 60 * 60;
 
   getSections = () => {
     return [{
@@ -35,14 +36,13 @@ export default class ClockQuestionBank extends QuestionBankBase {
   }
 
   generateQuestions = (sections) => {
-    let totalSeconds = 12 * 60 * 60;
     let questions = [];
     (sections || this.getSections())
     .forEach(section => {
       let hashMap = new Map();
       while (hashMap.size < this.questionCount) {
         let disableSecondhand = section.intervalSeconds !== 5;
-        let random = RandomUtil.getRandomInt(totalSeconds);
+        let random = RandomUtil.getRandomInt(this.secondsInDay / 2);
         random = random - random % section.intervalSeconds;
         let key = this.convertSecondToHHMMSS(random, disableSecondhand);
         hashMap.set(key, {
@@ -65,7 +65,7 @@ export default class ClockQuestionBank extends QuestionBankBase {
     let answerRange = question.answerRange * question.intervalSeconds;
     let intervalSeconds = question.intervalSeconds;
     let seeds = [];
-    for (let i = Math.max(0, answer - answerRange); i < answer + answerRange; i += intervalSeconds) {
+    for (let i = Math.max(0, answer - answerRange); i < Math.min(answer + answerRange, this.secondsInDay / 2); i += intervalSeconds) {
       if (i !== answer) seeds.push({
         text: this.convertSecondToHHMMSS(i, question.disableSecondhand),
         value: i
