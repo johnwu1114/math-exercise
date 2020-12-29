@@ -60,7 +60,7 @@ export default class QuizResult extends Component {
                   <td><b /></td>
                   <td>{result.question.description}</td>
                   <td>{result.question.answer.text}</td>
-                  <td>{result.reply.text || "--"}</td>
+                  <td>{result.reply == null ? "--" : result.reply.text}</td>
                   <td>{result.duration.toFixed(1)}</td>
                 </tr>
               )}
