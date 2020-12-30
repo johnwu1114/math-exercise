@@ -1,6 +1,6 @@
-import React from "react"
+import React, { Component } from "react";
 
-export default class Countdown extends React.Component {
+export default class Countdown extends Component {
   intervalSeconds = 0.1;
 
   constructor(props) {
