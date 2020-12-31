@@ -1,5 +1,6 @@
 import "../styles/schulte-table.css";
 import React, { Component } from "react";
+import RandomUtil from "../libs/utils/random.js";
 
 export default class SchulteTable extends Component {
 
@@ -7,37 +8,77 @@ export default class SchulteTable extends Component {
     super(props);
     this.state = {
       numbers: [],
-      clicked: {}
+      clicked: {},
+      cursor: 1
     };
 
-    for (let i = 1; i <= 25; i++) {
-      this.state.numbers.push(i);
+    let count = 9;
+    let numbers = [];
+    for (let i = 1; i <= count; i++) {
+      numbers.push(i);
     }
+
+    this.state.numbers = RandomUtil.pickRandomItems(numbers, count);
   }
 
-  onClick = (num) => {
+  checkAnswer = (reply) => {
     clearTimeout(this.timeoutId);
+    let sytle = "incorrect";
+    let cursor = this.state.cursor;
+    let correct = reply === cursor;
+
+    if (correct) {
+      sytle = "correct";
+      cursor++;
+      if (cursor > this.state.numbers.length) {
+        console.log("Finish");
+        return;
+      }
+    }
+
     this.setState({
       clicked: {
-        num: num,
-        sytle: num % 2 === 1 ? "correct" : "incorrect"
-      }
+        num: reply,
+        sytle: sytle
+      },
+      cursor: cursor
     });
     this.timeoutId = setTimeout(() => {
       this.setState({ clicked: {} });
-    }, 1000);
+    }, 500);
+  }
+
+  logAnswer = (reply) => {
+    let squareRoot = Math.sqrt(this.state.numbers.length);
+    let result = {
+      question: {
+        description: `${squareRoot} x ${squareRoot}`,
+        answer: {
+          text: this.state.cursor.toString()
+        }
+      },
+      reply: {
+        text: reply.toString()
+      },
+      correct: reply === this.state.cursor,
+      duration: this.countdown.current.getDuration()
+    };
+    this.results.push(result);
   }
 
   render() {
     const { clicked } = this.state;
     return (
       <div>
-        <div className="schulte-table size-5x5">
-          {this.state.numbers.map((num) =>
-            <div key={num}
-              className={"cell " + (clicked.num === num && clicked.sytle)}
-              onClick={() => this.onClick(num)}><span>{num}</span></div>
-          )}
+        <div className="schulte-table">
+          <div className="cursor">下一個: {this.state.cursor}</div>
+          <div className={`numbers size-${this.state.numbers.length}`}>
+            {this.state.numbers.map((num) =>
+              <div key={num}
+                className={`cell ${(clicked.num === num ? clicked.sytle : "")}`}
+                onClick={() => this.checkAnswer(num)}><span>{num}</span></div>
+            )}
+          </div>
         </div>
       </div >
     );

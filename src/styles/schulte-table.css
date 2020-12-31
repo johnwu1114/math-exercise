@@ -1,59 +1,92 @@
 .schulte-table {
     display: block;
-    width: 100%;
-    position: absolute;
     left: 0;
-    top: 150px;
+    top: 80px;
     height: calc(100% - 200px);
+    position: absolute;
+    width: 100%;
 }
 
-.schulte-table .cell {
+.cursor {
+    height: 50px;
+    margin: 5px;
+}
+
+.numbers {
+    height: 100%;
+    margin: 5px;
+    user-select: none;
+}
+
+.numbers .cell {
     border: 1px solid #ccc;
     display: inline-block;
     position: relative;
-    margin-top: -6px;
     transition-duration: 0.4s;
+    margin-top: -6px;
+    font-size: calc(10px + 5vmin);
+    font-weight: bold;
 }
 
-.schulte-table.size-3x3 .cell {
-    width: calc(33% - 2px);
-    height: calc(33% - 2px);
+.numbers.size-9 .cell {
+    width: calc(33.3% - 2px);
+    height: calc(33.3% - 2px);
 }
 
-.schulte-table.size-4x4 .cell {
+.numbers.size-16 .cell {
     width: calc(25% - 2px);
     height: calc(25% - 2px);
 }
 
-.schulte-table.size-5x5 .cell {
+.numbers.size-25 .cell {
     width: calc(20% - 2px);
     height: calc(20% - 2px);
 }
 
-.schulte-table .cell span {
+.numbers.size-36 .cell {
+    width: calc(16.6% - 2px);
+    height: calc(16.6% - 2px);
+}
+
+.numbers.size-49 .cell {
+    width: calc(14.2% - 2px);
+    height: calc(14.2% - 2px);
+    font-size: calc(10px + 3vmin);
+}
+
+.numbers.size-64 .cell {
+    width: calc(12.5% - 2px);
+    height: calc(12.5% - 2px);
+    font-size: calc(10px + 3vmin);
+}
+
+.numbers.size-81 .cell {
+    width: calc(11.1% - 2px);
+    height: calc(11.1% - 2px);
+    font-size: calc(10px + 2vmin);
+}
+
+.numbers .cell span {
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    font-size: calc(10px + 10vmin);
-    font-weight: bold;
-    user-select: none;
 }
 
-.schulte-table .cell.correct {
+.numbers .cell.correct {
     background-color: #5DB75D !important;
 }
 
-.schulte-table .cell.incorrect {
+.numbers .cell.incorrect {
     background-color: #D9544E !important;
 }
 
-.schulte-table .cell:hover {
+.numbers .cell:hover {
     background-color: #048CBA;
 }
 
 @media (hover: none) {
-    .schulte-table .cell:hover {
+    .numbers .cell:hover {
         background-color: inherit;
     }
 }
