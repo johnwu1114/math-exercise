@@ -1,5 +1,6 @@
 import "../styles/schulte-table.css";
 import React, { Component } from "react";
+import Timer from "../libs/utils/timer";
 
 export default class SchulteTable extends Component {
 
@@ -8,6 +9,7 @@ export default class SchulteTable extends Component {
 
     this.questionBank = props.questionBank;
     this.results = [];
+    this.timer = new Timer();
 
     this.state = {
       numbers: this.questionBank.nextQuestion(),
@@ -16,7 +18,12 @@ export default class SchulteTable extends Component {
     };
   }
 
+  componentDidMount() {
+    this.timer.start();
+  }
+
   checkAnswer = (reply) => {
+    this.timer.stop();
     clearTimeout(this.effectId);
     let sytle = "incorrect";
     let cursor = this.state.cursor;
@@ -43,23 +50,23 @@ export default class SchulteTable extends Component {
     this.effectId = setTimeout(() => {
       this.setState({ clicked: {} });
     }, 500);
+    this.timer.restart();
   }
 
   logAnswer = (reply) => {
     let squareRoot = Math.sqrt(this.state.numbers.length);
     let result = {
       question: {
-        description: `${squareRoot} x ${squareRoot}`,
+        description: `${squareRoot} x ${squareRoot} 格`,
         answer: {
-          text: this.state.cursor.toString()
+          text: `順序 ${this.state.cursor}`
         }
       },
       reply: {
         text: reply.toString()
       },
       correct: this.questionBank.checkAnswer(reply),
-      duration: 0
-      // duration: this.countdown.current.getDuration()
+      duration: this.timer.getDuration()
     };
     this.results.push(result);
   }
