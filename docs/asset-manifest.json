@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/static/css/main.86651a55.chunk.css",
-    "main.js": "/static/js/main.1e2b5f0a.chunk.js",
-    "main.js.map": "/static/js/main.1e2b5f0a.chunk.js.map",
+    "main.css": "/static/css/main.19ada6b3.chunk.css",
+    "main.js": "/static/js/main.2095420f.chunk.js",
+    "main.js.map": "/static/js/main.2095420f.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.ea498a9c.js",
     "runtime-main.js.map": "/static/js/runtime-main.ea498a9c.js.map",
     "static/js/2.bb142389.chunk.js": "/static/js/2.bb142389.chunk.js",
     "static/js/2.bb142389.chunk.js.map": "/static/js/2.bb142389.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/main.86651a55.chunk.css.map": "/static/css/main.86651a55.chunk.css.map",
+    "static/css/main.19ada6b3.chunk.css.map": "/static/css/main.19ada6b3.chunk.css.map",
     "static/js/2.bb142389.chunk.js.LICENSE.txt": "/static/js/2.bb142389.chunk.js.LICENSE.txt",
     "static/media/main.css": "/static/media/github-brands.8bce9409.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.ea498a9c.js",
     "static/js/2.bb142389.chunk.js",
-    "static/css/main.86651a55.chunk.css",
-    "static/js/main.1e2b5f0a.chunk.js"
+    "static/css/main.19ada6b3.chunk.css",
+    "static/js/main.2095420f.chunk.js"
   ]
 }
