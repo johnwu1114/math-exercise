@@ -8,7 +8,7 @@ export default class Timer {
   start = () => {
     this.intervalId = setInterval(() => {
       this.durationSeconds += this.intervalSeconds;
-      if (this.callback) this.callback();
+      if (this.callback) this.callback(this.durationSeconds);
     }, this.intervalSeconds * 1000);
   }
 

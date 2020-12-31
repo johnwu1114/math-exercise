@@ -10,6 +10,15 @@
 .cursor {
     height: 50px;
     margin: 5px;
+    font-size: calc(10px + 3vmin);
+}
+
+.time {
+    position: absolute;
+    right: 10px;
+    top: 6px;
+    font-size: calc(10px + 3vmin);
+    font-family: serif;
 }
 
 .numbers {

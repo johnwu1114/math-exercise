@@ -9,21 +9,28 @@ export default class SchulteTable extends Component {
 
     this.questionBank = props.questionBank;
     this.results = [];
-    this.timer = new Timer();
+    this.timer = new Timer(this.updateTime);
+    this.answerTimer = new Timer();
 
     this.state = {
       numbers: this.questionBank.nextQuestion(),
       cursor: this.questionBank.nextCursor(),
-      clicked: {}
+      clicked: {},
+      time: 0
     };
   }
 
   componentDidMount() {
     this.timer.start();
+    this.answerTimer.start();
+  }
+
+  updateTime = (seconds) => {
+    this.setState({ time: seconds });
   }
 
   checkAnswer = (reply) => {
-    this.timer.stop();
+    this.answerTimer.stop();
     clearTimeout(this.effectId);
     let sytle = "incorrect";
     let cursor = this.state.cursor;
@@ -50,7 +57,7 @@ export default class SchulteTable extends Component {
     this.effectId = setTimeout(() => {
       this.setState({ clicked: {} });
     }, 500);
-    this.timer.restart();
+    this.answerTimer.restart();
   }
 
   logAnswer = (reply) => {
@@ -66,7 +73,7 @@ export default class SchulteTable extends Component {
         text: reply.toString()
       },
       correct: this.questionBank.checkAnswer(reply),
-      duration: this.timer.getDuration()
+      duration: this.answerTimer.getDuration()
     };
     this.results.push(result);
   }
@@ -76,7 +83,8 @@ export default class SchulteTable extends Component {
     return (
       <div>
         <div className="schulte-table">
-          <div className="cursor">下一個: {this.state.cursor}</div>
+          <div className="cursor">下一個：<b>{this.state.cursor}</b></div>
+          <div className="time">{this.state.time.toFixed(1)}s</div>
           <div className={`numbers size-${this.state.numbers.length}`}>
             {this.state.numbers.map((num) =>
               <div key={num}
