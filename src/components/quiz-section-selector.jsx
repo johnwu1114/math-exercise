@@ -4,6 +4,7 @@ export default class QuizSectionSelector extends Component {
   constructor(props) {
     super(props);
     let sections = this.props.questionBank.getSections();
+    this.isSingleSelection =  this.props.questionBank.getComponentName() === "SchulteTable";
     this.state = {
       isSelected: sections[0].isSelected = true,
       sections: sections,
@@ -22,6 +23,8 @@ export default class QuizSectionSelector extends Component {
     sections.forEach(section => {
       if (section.text === event.target.value) {
         section.isSelected = event.target.checked;
+      } else if(this.isSingleSelection) {
+        section.isSelected = false;
       }
     });
     this.setState({
@@ -57,7 +60,7 @@ export default class QuizSectionSelector extends Component {
               </label>
             </li>
           )}
-          {<li>
+          {this.isSingleSelection || <li>
             <label>
               <input type="checkbox" onChange={this.toggleAll} checked={this.state.isSelectedAll} />
               <span>全選</span>
