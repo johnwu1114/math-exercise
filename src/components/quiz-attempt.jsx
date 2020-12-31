@@ -43,12 +43,12 @@ export default class QuizAttempt extends Component {
   checkAnswer = (reply) => {
     this.countdown.current.pause();
     let correct = this.questionBank.checkAnswer(reply);
+    this.logAnswer(reply);
+
     this.setState({
       correct: correct,
       timeout: reply == null
     });
-    this.logAnswer(reply);
-
     if (correct) this.nextQuestion();
   }
 

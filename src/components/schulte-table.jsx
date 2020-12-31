@@ -1,37 +1,34 @@
 import "../styles/schulte-table.css";
 import React, { Component } from "react";
-import RandomUtil from "../libs/utils/random.js";
 
 export default class SchulteTable extends Component {
 
   constructor(props) {
     super(props);
+
+    this.questionBank = props.questionBank;
+    this.results = [];
+
     this.state = {
-      numbers: [],
-      clicked: {},
-      cursor: 1
+      numbers: this.questionBank.nextQuestion(),
+      cursor: this.questionBank.nextCursor(),
+      clicked: {}
     };
-
-    let count = 9;
-    let numbers = [];
-    for (let i = 1; i <= count; i++) {
-      numbers.push(i);
-    }
-
-    this.state.numbers = RandomUtil.pickRandomItems(numbers, count);
   }
 
   checkAnswer = (reply) => {
-    clearTimeout(this.timeoutId);
+    clearTimeout(this.effectId);
     let sytle = "incorrect";
     let cursor = this.state.cursor;
-    let correct = reply === cursor;
+    let correct = this.questionBank.checkAnswer(reply);
+    this.logAnswer(reply);
 
     if (correct) {
       sytle = "correct";
-      cursor++;
-      if (cursor > this.state.numbers.length) {
-        console.log("Finish");
+      cursor = this.questionBank.nextCursor();
+      if (cursor === null) {
+        this.props.onFinish(this.results);
+        this.results = [];
         return;
       }
     }
@@ -43,7 +40,7 @@ export default class SchulteTable extends Component {
       },
       cursor: cursor
     });
-    this.timeoutId = setTimeout(() => {
+    this.effectId = setTimeout(() => {
       this.setState({ clicked: {} });
     }, 500);
   }
@@ -60,8 +57,9 @@ export default class SchulteTable extends Component {
       reply: {
         text: reply.toString()
       },
-      correct: reply === this.state.cursor,
-      duration: this.countdown.current.getDuration()
+      correct: this.questionBank.checkAnswer(reply),
+      duration: 0
+      // duration: this.countdown.current.getDuration()
     };
     this.results.push(result);
   }

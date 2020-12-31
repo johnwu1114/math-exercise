@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Quiz from "./components/quiz.jsx";
+import SchulteTableQuestionBank from "./libs/question-bank/schulte-table.js";
 import AdditionQuestionBank from "./libs/question-bank/addition.js";
 import SubtractionQuestionBank from "./libs/question-bank/subtraction.js";
 import MultiplicationQuestionBank from "./libs/question-bank/multiplication.js";
@@ -26,6 +27,9 @@ export default class App extends Component {
           : <div>
             <h1>數學練習小程式</h1>
             <ul>
+              <li className="btn large green" onClick={() => this.start(new SchulteTableQuestionBank())}>
+                舒爾特方格
+              </li>
               <li className="btn large green" onClick={() => this.start(new AdditionQuestionBank())}>
                 加法練習
               </li>
@@ -42,8 +46,7 @@ export default class App extends Component {
                 時鐘練習
               </li>
             </ul>
-          </div>
-        }
+          </div>}
       </div>
     );
   }

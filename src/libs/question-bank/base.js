@@ -43,4 +43,8 @@ export default class QuestionBankBase {
   convertText = (value) => {
     return value.toString();
   }
+
+  getComponentName = () => {
+    return "QuizAttempt";
+  }
 }

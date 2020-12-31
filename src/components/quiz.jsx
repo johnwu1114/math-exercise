@@ -1,5 +1,6 @@
 import "../styles/quiz.css";
 import React, { Component } from "react";
+import SchulteTable from "./schulte-table.jsx";
 import QuizAttempt from "./quiz-attempt.jsx";
 import QuizResult from "./quiz-result.jsx";
 import QuizSectionSelector from "./quiz-section-selector.jsx";
@@ -18,9 +19,10 @@ export default class Quiz extends Component {
   }
 
   onStart = (sections) => {
-    let questions = this.props.questionBank.generateQuestions(sections);
-    this.props.questionBank.addQuestions(questions);
-    this.setState({ isStarted: true });
+    let questionBank = this.props.questionBank;
+    let questions = questionBank.generateQuestions(sections);
+    questionBank.addQuestions(questions);
+    this.setState({ componentName: questionBank.getComponentName() });
   }
 
   showResult = (results) => {
@@ -46,20 +48,30 @@ export default class Quiz extends Component {
     this.props.onClose();
   }
 
+  renderSwitch = (componentName) => {
+    switch (componentName) {
+      case "QuizAttempt":
+        return <QuizAttempt ref={this.quizAttempt}
+          questionBank={this.props.questionBank}
+          onFinish={results => this.showResult(results)} />;
+      case "SchulteTable":
+        return <SchulteTable
+          questionBank={this.props.questionBank}
+          onFinish={results => this.showResult(results)} />;
+      default:
+        return <QuizSectionSelector
+          questionBank={this.props.questionBank}
+          onStart={sections => this.onStart(sections)} />;
+    }
+  }
+
   render() {
     return (
       <div>
         <div className="header">
           {this.state.isShowResult || <span className="close" onClick={() => this.props.onClose()}>x</span>}
         </div>
-        {this.state.isStarted
-          ? <QuizAttempt ref={this.quizAttempt}
-            questionBank={this.props.questionBank}
-            onFinish={results => this.showResult(results)}
-            onClose={() => this.onClose()} />
-          : <QuizSectionSelector
-            questionBank={this.props.questionBank}
-            onStart={sections => this.onStart(sections)} />}
+        {this.renderSwitch(this.state.componentName)}
         {this.state.isShowResult &&
           <QuizResult
             results={this.state.results}
