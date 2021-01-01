@@ -88,9 +88,12 @@ progress.danger::-webkit-progress-value {
 
 .modal-content table {
     width: 100%;
-    margin-bottom: 30px;
+    padding-top: 20px;
 }
 
+.modal-footer {
+    padding-top: 30px;
+}
 
 .correct b::before {
     color: greenyellow;

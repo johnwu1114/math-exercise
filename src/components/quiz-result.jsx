@@ -33,17 +33,15 @@ export default class QuizResult extends Component {
           <span className="close" onClick={() => this.props.onClose()}>x</span>
           <table>
             <tbody>
-              <tr>
-                <td style={{ width: "40%", fontSize: "calc(10px + 10vmin)", textAlign: "right" }} rowSpan="5">{this.state.score} 分</td>
-                <td style={{ width: "calc(80px + 10vmin)" }}>答對次數：</td><td>{this.state.correct}</td>
-              </tr>
-              <tr><td>答錯次數：</td><td>{this.state.incorrect}</td></tr>
-              <tr><td>逾時次數：</td><td>{this.state.timeout}</td></tr>
+              <tr className="correct"><td>答對次數：</td><td>{this.state.correct}</td></tr>
+              <tr className={this.state.incorrect > 0 && "incorrect"}><td>答錯次數：</td><td>{this.state.incorrect}</td></tr>
+              {this.state.timeout > 0 && <tr><td>逾時次數：</td><td>{this.state.timeout}</td></tr>}
               <tr><td>平均耗時：</td><td>{this.state.avgDuration.toFixed(1)} 秒</td></tr>
               <tr><td>全部耗時：</td><td>{this.state.duration.toFixed(1)} 秒</td></tr>
             </tbody>
           </table>
           <hr />
+          {this.state.incorrect > 0 && 
           <table>
             <thead>
               <tr>
@@ -65,9 +63,11 @@ export default class QuizResult extends Component {
                 </tr>
               )}
             </tbody>
-          </table>
-          <span className="btn" onClick={() => this.props.onClose()}>關閉</span>
-          {this.state.incorrect >= 3 && <span className="btn blue" onClick={() => this.props.onReview()}>複習</span>}
+          </table>}
+          <div className="modal-footer">
+            <span className="btn" onClick={() => this.props.onClose()}>關閉</span>
+            {this.state.incorrect >= 3 && <span className="btn blue" onClick={() => this.props.onReview()}>複習</span>}
+          </div>
         </div>
       </div>
     );

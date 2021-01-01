@@ -26,7 +26,7 @@ export default class SchulteTable extends Component {
   }
 
   updateTime = (seconds) => {
-    this.setState({ time: seconds });
+    this.setState({ time: `${seconds.toFixed(1)}s` });
   }
 
   checkAnswer = (reply) => {
@@ -41,6 +41,8 @@ export default class SchulteTable extends Component {
       sytle = "correct";
       cursor = this.questionBank.nextCursor();
       if (cursor === null) {
+        this.timer.stop();
+        this.setState({ time: null });
         this.props.onFinish(this.results);
         this.results = [];
         return;
@@ -84,7 +86,7 @@ export default class SchulteTable extends Component {
       <div>
         <div className="schulte-table">
           <div className="cursor">下一個：<b>{this.state.cursor}</b></div>
-          <div className="time">{this.state.time.toFixed(1)}s</div>
+          <div className="time">{this.state.time}</div>
           <div className={`numbers size-${this.state.numbers.length}`}>
             {this.state.numbers.map((num) =>
               <div key={num}
