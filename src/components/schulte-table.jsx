@@ -71,9 +71,7 @@ export default class SchulteTable extends Component {
           text: `順序 ${this.state.cursor}`
         }
       },
-      reply: {
-        text: reply.toString()
-      },
+      reply: reply.toString(),
       correct: this.questionBank.checkAnswer(reply),
       duration: this.answerTimer.getDuration()
     };

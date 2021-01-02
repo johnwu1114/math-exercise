@@ -13,6 +13,14 @@
     font-size: calc(10px + 15vmin);
 }
 
+.filling .question {
+    width: 100%;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    font-size: calc(10px + 8vmin);
+}
+
 .choices {
     padding: 0;
 }

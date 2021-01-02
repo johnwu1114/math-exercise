@@ -1,5 +1,22 @@
+.numeric-keypad {
+    left: 0;
+    top: calc(100px + 15vmin);
+    height: calc(100% - 160px - 15vmin);
+    position: absolute;
+    width: 100%;
+}
+
+.numeric-keypad .numbers .cell {
+    width: calc(33.3% - 2px);
+    height: calc(25% - 2px);
+}
+
+.numbers.size-9 .cell {
+    width: calc(33.3% - 2px);
+    height: calc(33.3% - 2px);
+}
+
 .schulte-table {
-    display: block;
     left: 0;
     top: 80px;
     height: calc(100% - 200px);
