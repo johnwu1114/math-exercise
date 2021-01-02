@@ -15,7 +15,8 @@ export default class QuizAttempt extends Component {
       description: "",
       answer: {},
       choices: [],
-      reply: ""
+      reply: "",
+      answerMethod: this.questionBank.getAnswerMethod()
     };
     this.countdown = React.createRef();
   }
@@ -58,7 +59,7 @@ export default class QuizAttempt extends Component {
   logAnswer = (reply) => {
     let result = {
       question: this.state,
-      reply: reply,
+      reply: this.questionBank.convertText(reply, this.state.disableSecondhand),
       correct: this.questionBank.checkAnswer(reply),
       duration: this.countdown.current.getDuration()
     };
@@ -69,28 +70,33 @@ export default class QuizAttempt extends Component {
     this.setState({ countdown: value });
   }
 
+  renderSwitch = () => {
+    switch (this.state.answerMethod) {
+      case "filling":
+        return <NumericKeypad
+          onChanged={value => this.setState({ reply: value })}
+          onConfirm={value => this.checkAnswer(parseInt(value))} />
+      default:
+        return <ul className="choices">
+          {this.state.choices.map((choice, i) =>
+            <li key={i} onClick={() => this.checkAnswer(choice.value)} >{choice.text}</li>
+          )}
+        </ul>
+    }
+  }
+
   render() {
     return (
-      <div className="filling">
+      <div className={this.state.answerMethod}>
         <div className={`question ${this.state.countdown < 3 && this.state.correct !== false && "blink"}`}>
-          {this.state.description} {`= ${this.state.reply}`}
+          {this.state.description} {this.state.answerMethod === "filling" && <span>{`= ${this.state.reply}`}</span>}
         </div>
         {this.state.correct === false
           ? <div>
-            <p>
-              {this.state.reply === "" ? "時間到！" : "答錯了！"} 答案是：{this.state.answer.text}
-            </p>
+            <p>{this.state.reply === "" ? "時間到！" : "答錯了！"} 答案是 {this.state.answer.text}</p>
             <span className="btn large blue" onClick={() => this.nextQuestion()}>下一題</span>
           </div>
-          : <NumericKeypad
-            onChanged={value => this.setState({ reply: value })}
-            onConfirm={value => this.checkAnswer(parseInt(value))} />
-          // : <ul className="choices">
-          //   {this.state.choices.map((choice, i) =>
-          //     <li key={i} onClick={() => this.checkAnswer(choice.value)} >{choice.text}</li>
-          //   )}
-          // </ul>}
-        }
+          : this.renderSwitch()}
         <Countdown ref={this.countdown}
           seconds={this.countdownSeconds}
           timeout={() => this.checkAnswer()}

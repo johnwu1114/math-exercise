@@ -50,4 +50,12 @@ export default class SchulteTableQuestionBank {
     if (this.cursor >= this.questions.length) return null;
     return ++this.cursor;
   }
+
+  setAnswerMethod = (answerMethod) => {
+    this.answerMethod = answerMethod;
+  }
+
+  getAnswerMethod = () => {
+    return this.answerMethod;
+  }
 }

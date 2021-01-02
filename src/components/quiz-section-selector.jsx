@@ -5,7 +5,7 @@ export default class QuizSectionSelector extends Component {
     super(props);
     let sections = this.props.questionBank.getSections();
     let name = this.props.questionBank.getName();
-    this.isSingleSelection =  this.props.questionBank.getComponentName() === "SchulteTable";
+    this.isSingleSelection = this.props.questionBank.getComponentName() === "SchulteTable";
     this.state = {
       name: name,
       isSelected: sections[0].isSelected = true,
@@ -17,7 +17,10 @@ export default class QuizSectionSelector extends Component {
   onStart = () => {
     let selected = this.state.sections.filter(x => x.isSelected);
     if (selected.length > 0)
-      this.props.onStart(selected);
+      this.props.onStart({
+        sections: selected,
+        answerMethod: this.state.answerMethod
+      });
   }
 
   onSelected = (event) => {
@@ -25,7 +28,7 @@ export default class QuizSectionSelector extends Component {
     sections.forEach(section => {
       if (section.text === event.target.value) {
         section.isSelected = event.target.checked;
-      } else if(this.isSingleSelection) {
+      } else if (this.isSingleSelection) {
         section.isSelected = false;
       }
     });
@@ -49,6 +52,12 @@ export default class QuizSectionSelector extends Component {
     });
   }
 
+  onChangeAnswerMethod = (event) => {
+    this.setState({
+      answerMethod: event.target.value
+    });
+  }
+
   render() {
     return (
       <div>
@@ -69,6 +78,27 @@ export default class QuizSectionSelector extends Component {
               <span>全選</span>
             </label>
           </li>}
+        </ul>
+        <h2>答題方式</h2>
+        <ul className="sections">
+          <li>
+            <label>
+              <input type="radio"
+                value="choice"
+                onChange={this.onChangeAnswerMethod}
+                checked={this.state.answerMethod === "choice"} />
+              <span>選擇題</span>
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio"
+                value="filling"
+                onChange={this.onChangeAnswerMethod}
+                checked={this.state.answerMethod === "filling"} />
+              <span>填充題</span>
+            </label>
+          </li>
         </ul>
         <span className={`btn large ${this.state.isSelected ? "green" : "disable"}`} onClick={() => this.onStart()}>開始</span>
       </div>

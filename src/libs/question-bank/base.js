@@ -47,4 +47,12 @@ export default class QuestionBankBase {
   getComponentName = () => {
     return "QuizAttempt";
   }
+
+  setAnswerMethod = (answerMethod) => {
+    this.answerMethod = answerMethod;
+  }
+
+  getAnswerMethod = () => {
+    return this.answerMethod || "choice";
+  }
 }
