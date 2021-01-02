@@ -4,8 +4,10 @@ export default class QuizSectionSelector extends Component {
   constructor(props) {
     super(props);
     let sections = this.props.questionBank.getSections();
+    let name = this.props.questionBank.getName();
     this.isSingleSelection =  this.props.questionBank.getComponentName() === "SchulteTable";
     this.state = {
+      name: name,
       isSelected: sections[0].isSelected = true,
       sections: sections,
       isSelectedAll: false
@@ -50,7 +52,8 @@ export default class QuizSectionSelector extends Component {
   render() {
     return (
       <div>
-        <h1>請選擇</h1>
+        <h1>{this.state.name}</h1>
+        <h2>請選擇</h2>
         <ul className="sections">
           {this.state.sections.map((section, i) =>
             <li key={i}>

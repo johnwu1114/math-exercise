@@ -2,6 +2,10 @@ import RandomUtil from "../utils/random.js";
 
 export default class SchulteTableQuestionBank {
 
+  getName = () => {
+    return "舒爾特方格";
+  }
+
   getSections = () => {
     let sections = [];
     for (let i = 3; i <= 9; i++) {

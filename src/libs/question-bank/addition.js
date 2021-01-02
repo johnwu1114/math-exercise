@@ -3,6 +3,10 @@ import QuestionBankBase from "./base.js";
 
 export default class AdditionQuestionBank extends QuestionBankBase {
   questionCount = 10;
+  
+  getName = () => {
+    return "加法練習";
+  }
 
   getSections = () => {
     return [{

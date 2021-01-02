@@ -6,6 +6,10 @@ export default class ClockQuestionBank extends QuestionBankBase {
   questionCount = 10;
   secondsInDay = 24 * 60 * 60;
 
+  getName = () => {
+    return "時鐘練習";
+  }
+
   getSections = () => {
     return [{
         text: "整點鐘",

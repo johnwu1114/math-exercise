@@ -8,12 +8,18 @@ export default class MultiplicationQuestionBank extends QuestionBankBase {
       case 2:
         this.multiplier = 11;
         this.multiplicand = 19;
+        this.name = "19 x 19 乘法練習";
         break;
       default:
         this.multiplier = 2;
         this.multiplicand = 9;
+        this.name = "9 x 9 乘法練習";
         break;
     }
+  }
+  
+  getName = () => {
+    return this.name;
   }
 
   getSections = () => {

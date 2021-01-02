@@ -3,6 +3,10 @@ import QuestionBankBase from "./base.js";
 
 export default class SubtractionQuestionBank extends QuestionBankBase {
   questionCount = 10;
+  
+  getName = () => {
+    return "減法練習";
+  }
 
   getSections = () => {
     return [{

@@ -9,7 +9,17 @@ import ClockQuestionBank from "./libs/question-bank/clock.js";
 export default class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { isStart: false };
+    this.state = {
+      isStart: false,
+      questionBanks: [
+        new SchulteTableQuestionBank(),
+        new AdditionQuestionBank(),
+        new SubtractionQuestionBank(),
+        new MultiplicationQuestionBank(),
+        new MultiplicationQuestionBank(2),
+        new ClockQuestionBank()
+      ]
+    };
   }
 
   start = (questionBank) => {
@@ -27,24 +37,10 @@ export default class App extends Component {
           : <div>
             <h1>數學練習小程式</h1>
             <ul>
-              <li className="btn green" onClick={() => this.start(new SchulteTableQuestionBank())}>
-                舒爾特方格
-              </li>
-              <li className="btn green" onClick={() => this.start(new AdditionQuestionBank())}>
-                加法練習
-              </li>
-              <li className="btn green" onClick={() => this.start(new SubtractionQuestionBank())}>
-                減法練習
-              </li>
-              <li className="btn green" onClick={() => this.start(new MultiplicationQuestionBank())}>
-                9 x 9 乘法練習
-              </li>
-              <li className="btn green" onClick={() => this.start(new MultiplicationQuestionBank(2))}>
-                19 x 19 乘法練習
-              </li>
-              <li className="btn green" onClick={() => this.start(new ClockQuestionBank())}>
-                時鐘練習
-              </li>
+              {this.state.questionBanks.map((questionBank, i) =>
+                <li key={i} className="btn green" onClick={() => this.start(questionBank)}>
+                  {questionBank.getName()}
+                </li>)}
             </ul>
           </div>}
       </div>
