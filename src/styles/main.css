@@ -1,6 +1,7 @@
 html, body {
   height: 100%;
   margin: 0;
+  user-select: none;
 }
 
 body {
@@ -54,7 +55,6 @@ nav {
 
 .btn {
   cursor: pointer;
-  user-select: none;
   font-size: calc(10px + 2vmin);
   margin: 10px;
   padding: calc(5px + 1vmin) calc(20px + 1vmin);
@@ -126,5 +126,4 @@ li {
   display: block;
   margin: 10px;
   position: relative;
-  user-select: none;
 }
