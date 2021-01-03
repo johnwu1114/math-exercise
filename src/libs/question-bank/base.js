@@ -37,7 +37,7 @@ export default class QuestionBankBase {
   }
 
   checkAnswer = (reply) => {
-    return reply != null && reply === this.currentQuestion.answer.value;
+    return reply != null && reply.toString() === this.currentQuestion.answer.value.toString();
   }
 
   convertText = (value) => {

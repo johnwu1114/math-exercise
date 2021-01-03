@@ -18,6 +18,7 @@ export default class QuizAttempt extends Component {
       reply: "",
       answerMethod: this.props.method
     };
+    this.numericKeypad = React.createRef();
     this.countdown = React.createRef();
   }
 
@@ -38,6 +39,7 @@ export default class QuizAttempt extends Component {
     }
 
     this.state.choices.splice(0, this.state.choices.length);
+    this.numericKeypad.current.clear();
     question.reply = "";
     this.setState(question);
     this.countdown.current.reset();
@@ -73,7 +75,7 @@ export default class QuizAttempt extends Component {
   renderSwitch = () => {
     switch (this.state.answerMethod) {
       case "filling":
-        return <NumericKeypad
+        return <NumericKeypad ref={this.numericKeypad}
           onChanged={value => this.setState({ reply: value })}
           onConfirm={value => this.checkAnswer(parseInt(value))} />
       default:
@@ -99,7 +101,7 @@ export default class QuizAttempt extends Component {
           : this.renderSwitch()}
         <Countdown ref={this.countdown}
           seconds={this.countdownSeconds}
-          timeout={() => this.checkAnswer()}
+          timeout={() => this.checkAnswer(this.state.reply)}
           onChanged={value => this.onCountdownChanged(value)} />
       </div>
     );
