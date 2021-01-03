@@ -35,6 +35,7 @@ export default class NumericKeypad extends Component {
   }
 
   onConfirm = () => {
+    if (this.input === "") return;
     this.props.onConfirm(this.input);
     this.clear();
   }
