@@ -169,7 +169,7 @@ p {
 
 .sections {
     padding: 0px;
-    margin-bottom: 50px;
+    margin: 0;
     max-width: 800px;
 }
 

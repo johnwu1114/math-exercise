@@ -65,41 +65,50 @@ export default class QuizSectionSelector extends Component {
   render() {
     return (
       <div>
-        <h1>{this.state.name}</h1>
-        <h2>請選擇</h2>
-        <ul className="sections">
-          {this.state.sections.map((section, i) =>
-            <li key={i}>
+        <h2>{this.state.name}</h2>
+        <section>
+          <h3>請選擇</h3>
+          <ul className="sections">
+            {this.state.sections.map((section, i) =>
+              <li key={i}>
+                <label>
+                  <input type="checkbox"
+                    value={section.text}
+                    onChange={this.onSelected}
+                    checked={section.isSelected || false} />
+                  <span>{section.text}</span>
+                </label>
+              </li>
+            )}
+            {this.isSingleSelection || <li>
               <label>
-                <input type="checkbox" onChange={this.onSelected} checked={section.isSelected || false} value={section.text} />
-                <span>{section.text}</span>
+                <input type="checkbox" onChange={this.toggleAll} checked={this.state.isSelectedAll} />
+                <span>全選</span>
               </label>
-            </li>
-          )}
-          {this.isSingleSelection || <li>
-            <label>
-              <input type="checkbox" onChange={this.toggleAll} checked={this.state.isSelectedAll} />
-              <span>全選</span>
-            </label>
-          </li>}
-        </ul>
-        {this.state.methods.length > 1 &&
-          <div>
-            <h2>答題方式</h2>
-            <ul className="sections">
-              {this.state.methods.map((method, i) =>
-                <li key={i}>
-                  <label>
-                    <input type="radio"
-                      value={method.value}
-                      onChange={this.onChangeAnswerMethod}
-                      checked={this.state.answerMethod === method.value} />
-                    <span>{method.text}</span>
-                  </label>
-                </li>)}
-            </ul>
-          </div>}
-        <span className={`btn large ${this.state.isSelected ? "green" : "disable"}`} onClick={() => this.onStart()}>開始</span>
+            </li>}
+          </ul>
+        </section>
+        <section>
+          {this.state.methods.length > 1 &&
+            <div>
+              <h3>答題方式</h3>
+              <ul className="sections">
+                {this.state.methods.map((method, i) =>
+                  <li key={i}>
+                    <label>
+                      <input type="checkbox"
+                        value={method.value}
+                        onChange={this.onChangeAnswerMethod}
+                        checked={this.state.answerMethod === method.value} />
+                      <span>{method.text}</span>
+                    </label>
+                  </li>)}
+              </ul>
+            </div>}
+        </section>
+        <nav>
+          <span className={`btn large ${this.state.isSelected ? "green" : "disable"}`} onClick={() => this.onStart()}>開始</span>
+        </nav>
       </div>
     );
   }

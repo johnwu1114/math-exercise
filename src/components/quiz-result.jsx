@@ -35,7 +35,7 @@ export default class QuizResult extends Component {
             <tbody>
               <tr className="correct"><td>答對次數：</td><td>{this.state.correct}</td></tr>
               <tr className={this.state.incorrect > 0 ? "incorrect" : ""}><td>答錯次數：</td><td>{this.state.incorrect}</td></tr>
-              {this.state.timeout > 0 && <tr><td>逾時次數：</td><td>{this.state.timeout}</td></tr>}
+              {this.state.timeout > 0 && <tr className="incorrect"><td>逾時次數：</td><td>{this.state.timeout}</td></tr>}
               <tr><td>平均耗時：</td><td>{this.state.avgDuration.toFixed(1)} 秒</td></tr>
               <tr><td>全部耗時：</td><td>{this.state.duration.toFixed(1)} 秒</td></tr>
             </tbody>
