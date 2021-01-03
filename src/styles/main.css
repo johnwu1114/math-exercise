@@ -98,6 +98,14 @@ footer a {
   content: url(../images/blog-solid.svg);
 }
 
+.icon-backspace {
+  content: url(../images/backspace-solid.svg);
+}
+
+.icon-check {
+  content: url(../images/check-solid.svg);
+}
+
 ul {
   padding: 0;
 }

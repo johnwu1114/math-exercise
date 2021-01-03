@@ -53,10 +53,10 @@ export default class NumericKeypad extends Component {
               className={`cell ${(clicked.num === num ? clicked.sytle : "")}`}
               onClick={() => this.onClick(num)}><span>{num}</span></div>
           )}
-          <div className="cell" onClick={() => this.onBack()}><span>Back</span></div>
+          <div className="cell" onClick={() => this.onBack()}><span className="icon-backspace"></span></div>
           <div className={`cell ${(clicked.num === 0 ? clicked.sytle : "")}`}
             onClick={() => this.onClick(0)}><span>0</span></div>
-          <div className="cell" onClick={() => this.onConfirm()}><span>Confirm</span></div>
+          <div className="cell" onClick={() => this.onConfirm()}><span className="icon-check"></span></div>
         </div>
       </div>
     )

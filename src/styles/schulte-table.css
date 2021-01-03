@@ -11,6 +11,10 @@
     height: calc(25% - 2px);
 }
 
+.numeric-keypad .icon-backspace, .numeric-keypad .icon-check{
+    width: calc(10px + 5vmin);
+}
+
 .numbers.size-9 .cell {
     width: calc(33.3% - 2px);
     height: calc(33.3% - 2px);
