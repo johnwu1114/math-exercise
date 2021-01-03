@@ -25,6 +25,11 @@ export default class SchulteTable extends Component {
     this.answerTimer.start();
   }
 
+  componentWillUnmount() {
+    this.timer.stop();
+    this.answerTimer.stop();
+  }
+
   updateTime = (seconds) => {
     this.setState({ time: `${seconds.toFixed(1)}s` });
   }

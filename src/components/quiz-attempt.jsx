@@ -18,12 +18,16 @@ export default class QuizAttempt extends Component {
       reply: "",
       answerMethod: this.props.method
     };
-    this.numericKeypad = React.createRef();
     this.countdown = React.createRef();
+    this.numericKeypad = React.createRef();
   }
 
   componentDidMount() {
     this.nextQuestion();
+  }
+
+  componentWillUnmount() {
+    this.countdown.current.pause();
   }
 
   nextQuestion = () => {
@@ -39,10 +43,11 @@ export default class QuizAttempt extends Component {
     }
 
     this.state.choices.splice(0, this.state.choices.length);
-    this.numericKeypad.current.clear();
     question.reply = "";
     this.setState(question);
     this.countdown.current.reset();
+    if (this.numericKeypad.current)
+      this.numericKeypad.current.clear();
   }
 
   checkAnswer = (reply) => {
