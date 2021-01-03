@@ -97,4 +97,11 @@ export default class ClockQuestionBank extends QuestionBankBase {
 
     return result;
   }
+
+  getAnswerMethods = () => {
+    return [{
+      text: "選擇題",
+      value: "choice"
+    }];
+  }
 }

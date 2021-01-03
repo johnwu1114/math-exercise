@@ -16,7 +16,7 @@ export default class QuizAttempt extends Component {
       answer: {},
       choices: [],
       reply: "",
-      answerMethod: this.questionBank.getAnswerMethod()
+      answerMethod: this.props.method
     };
     this.countdown = React.createRef();
   }

@@ -51,11 +51,7 @@ export default class SchulteTableQuestionBank {
     return ++this.cursor;
   }
 
-  setAnswerMethod = (answerMethod) => {
-    this.answerMethod = answerMethod;
-  }
-
-  getAnswerMethod = () => {
-    return this.answerMethod;
+  getAnswerMethods = () => {
+    return [];
   }
 }

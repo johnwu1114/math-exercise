@@ -48,11 +48,15 @@ export default class QuestionBankBase {
     return "QuizAttempt";
   }
 
-  setAnswerMethod = (answerMethod) => {
-    this.answerMethod = answerMethod;
-  }
-
-  getAnswerMethod = () => {
-    return this.answerMethod || "choice";
+  getAnswerMethods = () => {
+    return [{
+        text: "選擇題",
+        value: "choice"
+      },
+      {
+        text: "填充題",
+        value: "filling"
+      }
+    ];
   }
 }

@@ -13,7 +13,8 @@ export default class Quiz extends Component {
       description: "",
       answer: {},
       choices: [],
-      results: []
+      results: [],
+      method: "choice"
     };
     this.quizAttempt = React.createRef();
   }
@@ -22,8 +23,10 @@ export default class Quiz extends Component {
     let questionBank = this.props.questionBank;
     let questions = questionBank.generateQuestions(option.sections);
     questionBank.addQuestions(questions);
-    questionBank.setAnswerMethod(option.answerMethod);
-    this.setState({ componentName: questionBank.getComponentName() });
+    this.setState({ 
+      componentName: questionBank.getComponentName(),
+      method: option.answerMethod
+     });
   }
 
   showResult = (results) => {
@@ -54,6 +57,7 @@ export default class Quiz extends Component {
       case "QuizAttempt":
         return <QuizAttempt ref={this.quizAttempt}
           questionBank={this.props.questionBank}
+          method={this.state.method}
           onFinish={results => this.showResult(results)} />;
       case "SchulteTable":
         return <SchulteTable

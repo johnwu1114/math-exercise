@@ -3,14 +3,18 @@ import React, { Component } from "react";
 export default class QuizSectionSelector extends Component {
   constructor(props) {
     super(props);
-    let sections = this.props.questionBank.getSections();
-    let name = this.props.questionBank.getName();
-    this.isSingleSelection = this.props.questionBank.getComponentName() === "SchulteTable";
+    let questionBank = this.props.questionBank;
+    let sections = questionBank.getSections();
+    let name = questionBank.getName();
+    this.isSingleSelection = questionBank.getComponentName() === "SchulteTable";
+    let methods = questionBank.getAnswerMethods();
     this.state = {
       name: name,
       isSelected: sections[0].isSelected = true,
       sections: sections,
-      isSelectedAll: false
+      isSelectedAll: false,
+      methods: methods,
+      answerMethod: methods.length > 1 ? methods[0].value : ""
     }
   }
 
@@ -79,27 +83,22 @@ export default class QuizSectionSelector extends Component {
             </label>
           </li>}
         </ul>
-        <h2>答題方式</h2>
-        <ul className="sections">
-          <li>
-            <label>
-              <input type="radio"
-                value="choice"
-                onChange={this.onChangeAnswerMethod}
-                checked={this.state.answerMethod === "choice"} />
-              <span>選擇題</span>
-            </label>
-          </li>
-          <li>
-            <label>
-              <input type="radio"
-                value="filling"
-                onChange={this.onChangeAnswerMethod}
-                checked={this.state.answerMethod === "filling"} />
-              <span>填充題</span>
-            </label>
-          </li>
-        </ul>
+        {this.state.methods.length > 1 &&
+          <div>
+            <h2>答題方式</h2>
+            <ul className="sections">
+              {this.state.methods.map((method, i) =>
+                <li key={i}>
+                  <label>
+                    <input type="radio"
+                      value={method.value}
+                      onChange={this.onChangeAnswerMethod}
+                      checked={this.state.answerMethod === method.value} />
+                    <span>{method.text}</span>
+                  </label>
+                </li>)}
+            </ul>
+          </div>}
         <span className={`btn large ${this.state.isSelected ? "green" : "disable"}`} onClick={() => this.onStart()}>開始</span>
       </div>
     );
