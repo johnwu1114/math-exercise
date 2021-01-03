@@ -7,10 +7,12 @@ export default class Clock extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    this.disableSecondhand = nextProps.disableSecondhand;
     this.drawClock(nextProps.hhmmss);
   }
 
   componentDidMount() {
+    this.disableSecondhand = this.props.disableSecondhand;
     this.drawClock(this.props.hhmmss);
   }
 
@@ -88,7 +90,7 @@ export default class Clock extends Component {
     this.drawHand(minute, radius * 0.7, radius * 0.05);
 
     // Second
-    if (this.props.disableSecondhand === "true") return;
+    if (this.disableSecondhand === "true") return;
     second = (second * Math.PI / 30);
     this.drawHand(second, radius * 0.6, radius * 0.02, "red");
   }

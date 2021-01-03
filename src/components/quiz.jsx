@@ -22,11 +22,11 @@ export default class Quiz extends Component {
   onStart = (option) => {
     let questionBank = this.props.questionBank;
     let questions = questionBank.generateQuestions(option.sections);
-    questionBank.addQuestions(questions);
-    this.setState({ 
+    questionBank.setQuestions(questions);
+    this.setState({
       componentName: questionBank.getComponentName(),
       method: option.answerMethod
-     });
+    });
   }
 
   showResult = (results) => {
@@ -38,11 +38,13 @@ export default class Quiz extends Component {
   }
 
   onReview = () => {
-    let questions = this.state.results
+    let questions = [];
+    let incorrectQuestions = this.state.results
       .filter(x => !x.correct)
       .map(x => x.question);
     for (let i = 0; i < 3; i++)
-      this.props.questionBank.addQuestions(questions);
+      questions = questions.concat(incorrectQuestions);
+    this.props.questionBank.setQuestions(questions);
 
     this.quizAttempt.current.nextQuestion();
     this.setState({ isShowResult: false });

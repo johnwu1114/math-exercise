@@ -23,9 +23,8 @@ export default class QuestionBankBase {
     return choices;
   }
 
-  addQuestions = (questions) => {
-    this.questions = this.questions || [];
-    this.questions = this.questions.concat(questions || []);
+  setQuestions = (questions) => {
+    this.questions = questions || [];
   }
 
   nextQuestion = () => {

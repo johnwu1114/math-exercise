@@ -25,7 +25,7 @@ export default class SchulteTableQuestionBank {
     return RandomUtil.pickRandomItems(questions, count);
   }
 
-  addQuestions = (questions) => {
+  setQuestions = (questions) => {
     this.questions = questions || [];
   }
 
