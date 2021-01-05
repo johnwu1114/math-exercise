@@ -15,11 +15,6 @@
     width: calc(10px + 5vmin);
 }
 
-.numbers.size-9 .cell {
-    width: calc(33.3% - 2px);
-    height: calc(33.3% - 2px);
-}
-
 .schulte-table {
     left: 0;
     top: 80px;
@@ -42,12 +37,12 @@
     font-family: serif;
 }
 
-.numbers {
+.characters {
     height: 100%;
     margin: 5px;
 }
 
-.numbers .cell {
+.characters .cell {
     border: 1px solid #ccc;
     display: inline-block;
     position: relative;
@@ -57,65 +52,65 @@
     font-weight: bold;
 }
 
-.numbers.size-9 .cell {
+.characters.size-9 .cell {
     width: calc(33.3% - 2px);
     height: calc(33.3% - 2px);
 }
 
-.numbers.size-16 .cell {
+.characters.size-16 .cell {
     width: calc(25% - 2px);
     height: calc(25% - 2px);
 }
 
-.numbers.size-25 .cell {
+.characters.size-25 .cell {
     width: calc(20% - 2px);
     height: calc(20% - 2px);
 }
 
-.numbers.size-36 .cell {
+.characters.size-36 .cell {
     width: calc(16.6% - 2px);
     height: calc(16.6% - 2px);
 }
 
-.numbers.size-49 .cell {
+.characters.size-49 .cell {
     width: calc(14.2% - 2px);
     height: calc(14.2% - 2px);
     font-size: calc(10px + 3vmin);
 }
 
-.numbers.size-64 .cell {
+.characters.size-64 .cell {
     width: calc(12.5% - 2px);
     height: calc(12.5% - 2px);
     font-size: calc(10px + 3vmin);
 }
 
-.numbers.size-81 .cell {
+.characters.size-81 .cell {
     width: calc(11.1% - 2px);
     height: calc(11.1% - 2px);
     font-size: calc(10px + 2vmin);
 }
 
-.numbers .cell span {
+.characters .cell span {
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
 }
 
-.numbers .cell.correct {
+.characters .cell.correct {
     background-color: #5DB75D !important;
 }
 
-.numbers .cell.incorrect {
+.characters .cell.incorrect {
     background-color: #D9544E !important;
 }
 
-.numbers .cell:hover {
+.characters .cell:hover {
     background-color: #048CBA;
 }
 
 @media (hover: none) {
-    .numbers .cell:hover {
+    .characters .cell:hover {
         background-color: inherit;
     }
 }

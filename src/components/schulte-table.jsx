@@ -13,7 +13,7 @@ export default class SchulteTable extends Component {
     this.answerTimer = new Timer();
 
     this.state = {
-      numbers: this.questionBank.nextQuestion(),
+      characters: this.questionBank.nextQuestion(),
       cursor: this.questionBank.nextCursor(),
       clicked: {},
       time: 0
@@ -39,7 +39,7 @@ export default class SchulteTable extends Component {
     clearTimeout(this.effectId);
     let sytle = "incorrect";
     let cursor = this.state.cursor;
-    let correct = this.questionBank.checkAnswer(reply);
+    let correct = this.questionBank.checkAnswer(reply.value);
     this.logAnswer(reply);
 
     if (correct) {
@@ -56,7 +56,7 @@ export default class SchulteTable extends Component {
 
     this.setState({
       clicked: {
-        num: reply,
+        value: reply,
         sytle: sytle
       },
       cursor: cursor
@@ -68,16 +68,16 @@ export default class SchulteTable extends Component {
   }
 
   logAnswer = (reply) => {
-    let squareRoot = Math.sqrt(this.state.numbers.length);
+    let squareRoot = Math.sqrt(this.state.characters.length);
     let result = {
       question: {
         description: `${squareRoot} x ${squareRoot} 格`,
         answer: {
-          text: `順序 ${this.state.cursor}`
+          text: `順序 ${this.state.cursor.text}`
         }
       },
-      reply: reply.toString(),
-      correct: this.questionBank.checkAnswer(reply),
+      reply: reply.text,
+      correct: this.questionBank.checkAnswer(reply.value),
       duration: this.answerTimer.getDuration()
     };
     this.results.push(result);
@@ -88,13 +88,13 @@ export default class SchulteTable extends Component {
     return (
       <div>
         <div className="schulte-table">
-          <div className="cursor">下一個：<b>{this.state.cursor}</b></div>
+          <div className="cursor">下一個：<b>{this.state.cursor.text}</b></div>
           <div className="time">{this.state.time}</div>
-          <div className={`numbers size-${this.state.numbers.length}`}>
-            {this.state.numbers.map((num) =>
-              <div key={num}
-                className={`cell ${(clicked.num === num ? clicked.sytle : "")}`}
-                onClick={() => this.checkAnswer(num)}><span>{num}</span></div>
+          <div className={`characters size-${this.state.characters.length}`}>
+            {this.state.characters.map((character) =>
+              character && <div key={character.value}
+                className={`cell ${(clicked.value === character.value ? clicked.sytle : "")}`}
+                onClick={() => this.checkAnswer(character)}><span>{character.text}</span></div>
             )}
           </div>
         </div>

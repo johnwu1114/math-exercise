@@ -2,6 +2,14 @@ import RandomUtil from "../utils/random.js";
 
 export default class SchulteTableQuestionBank {
 
+  characterOptions = {
+    zhuyin: "ㄅㄆㄇㄈㄉㄊㄋㄌㄍㄎㄏㄐㄑㄒㄓㄔㄕㄖㄗㄘㄙㄧㄨㄩㄚㄛㄜㄝㄞㄟㄠㄡㄢㄣㄤㄥㄦ",
+    blockLetter: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    smallLetter: "abcdefghijklmnopqrstuvwxyz",
+    hiragana: "あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをん",
+    katakana: "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン"
+  };
+
   getName = () => {
     return "舒爾特方格";
   }
@@ -18,10 +26,21 @@ export default class SchulteTableQuestionBank {
   }
 
   generateQuestions = (sections) => {
+    // numeral
+    let characters = this.characters = this.getCharacters("numeral");
+    let squareRoot = Math.min(sections[0].value, Math.ceil(Math.sqrt(characters.length)));
+    let count = Math.pow(squareRoot, 2);
+
     let questions = [];
-    let count = Math.pow(sections[0].value, 2);
-    for (let i = 1; i <= count; i++)
-      questions.push(i);
+
+    for (let i = 1; i <= count; i++) {
+      let char = characters[i - 1];
+      questions.push(char == null ? null : {
+        text: char,
+        value: i
+      });
+    }
+
     return RandomUtil.pickRandomItems(questions, count);
   }
 
@@ -48,10 +67,20 @@ export default class SchulteTableQuestionBank {
 
   nextCursor = () => {
     if (this.cursor >= this.questions.length) return null;
-    return ++this.cursor;
+    let current = this.cursor++;
+    return {
+      text: this.characters[current],
+      value: current
+    };
   }
 
   getAnswerMethods = () => {
     return [];
+  }
+
+  getCharacters = (name) => {
+    let characters = this.characterOptions[name];
+    if (characters == null) return Array.from({length: Math.pow(9, 2)}, (x, i) => i + 1);;
+    return characters.split("");
   }
 }
