@@ -4,61 +4,61 @@ export default class QuizSectionSelector extends Component {
   constructor(props) {
     super(props);
     let questionBank = this.props.questionBank;
-    let sections = questionBank.getSections();
     let name = questionBank.getName();
-    this.isSingleSelection = questionBank.getComponentName() === "SchulteTable";
-    let methods = questionBank.getAnswerMethods();
+    let menu = questionBank.getMenu();
+
     this.state = {
       name: name,
-      isSelected: sections[0].isSelected = true,
-      sections: sections,
-      isSelectedAll: false,
-      methods: methods,
-      answerMethod: methods.length > 1 ? methods[0].value : ""
-    }
+      menu: menu,
+      ready: true
+    };
   }
 
   onStart = () => {
-    let selected = this.state.sections.filter(x => x.isSelected);
-    if (selected.length > 0)
-      this.props.onStart({
-        sections: selected,
-        answerMethod: this.state.answerMethod
-      });
+    if (this.state.ready > 0)
+      this.props.onStart(this.state.menu.map(x => {
+        x.selections = x.selections.filter(s => s.selected);
+        return x;
+      }));
   }
 
-  onSelected = (event) => {
-    let sections = this.state.sections;
-    sections.forEach(section => {
-      if (section.text === event.target.value) {
-        section.isSelected = event.target.checked;
-      } else if (this.isSingleSelection) {
-        section.isSelected = false;
+  onSelected = (event, item) => {
+    item.selections.forEach(selection => {
+      if (selection.text === event.target.value) {
+        selection.selected = event.target.checked;
+      } else if (item.type === "single-choice") {
+        selection.selected = false;
       }
     });
-    this.setState({
-      isSelected: sections.filter(x => x.isSelected).length > 0,
-      sections: sections,
-      isSelectedAll: sections.filter(x => x.isSelected !== true).length === 0
-    });
+    item.selectedAll = item.selections.filter(x => x.selected !== true).length === 0;
+
+    this.updateMenuItem(item);
   }
 
-  toggleAll = () => {
-    let sections = this.state.sections;
-    let isSelectedAll = !this.state.isSelectedAll;
-    sections.forEach(section => {
-      section.isSelected = isSelectedAll;
+  toggleAll = (name) => {
+    let item = this.state.menu.filter(x => x.name === name)[0];
+    let selections = item.selections;
+    item.selectedAll = !item.selectedAll;
+    selections.forEach(selection => {
+      selection.selected = item.selectedAll;
     })
-    this.setState({
-      isSelected: sections.filter(x => x.isSelected).length > 0,
-      sections: sections,
-      isSelectedAll: isSelectedAll
-    });
+
+    this.updateMenuItem(item);
   }
 
-  onChangeAnswerMethod = (event) => {
-    this.setState({
-      answerMethod: event.target.value
+  updateMenuItem = (item) => {
+    let ready = true;
+    this.setState(state => {
+      state.menu.forEach(x => {
+        if (x.name === item.name) x = item;
+        if (x.selections.filter(s => s.selected).length === 0)
+          ready = false;
+      });
+
+      return {
+        menu: state.menu,
+        ready: ready
+      }
     });
   }
 
@@ -66,48 +66,32 @@ export default class QuizSectionSelector extends Component {
     return (
       <div>
         <h2>{this.state.name}</h2>
-        <section>
-          <h3>請選擇</h3>
-          <ul className="sections">
-            {this.state.sections.map((section, i) =>
-              <li key={i}>
+        {this.state.menu.map((item, i) =>
+          <section key={i}>
+            <h3>{item.title}</h3>
+            <ul className="sections">
+              {item.selections.map((selection, j) =>
+                <li key={j}>
+                  <label>
+                    <input type="checkbox"
+                      value={selection.text}
+                      onChange={e => this.onSelected(e, item)}
+                      checked={selection.selected || false} />
+                    <span>{selection.text}</span>
+                  </label>
+                </li>
+              )}
+              {item.type === "multiple-choice" && <li>
                 <label>
-                  <input type="checkbox"
-                    value={section.text}
-                    onChange={this.onSelected}
-                    checked={section.isSelected || false} />
-                  <span>{section.text}</span>
+                  <input type="checkbox" onChange={() => this.toggleAll(item.name)} checked={item.selectedAll || false} />
+                  <span>全選</span>
                 </label>
-              </li>
-            )}
-            {this.isSingleSelection || <li>
-              <label>
-                <input type="checkbox" onChange={this.toggleAll} checked={this.state.isSelectedAll} />
-                <span>全選</span>
-              </label>
-            </li>}
-          </ul>
-        </section>
-        <section>
-          {this.state.methods.length > 1 &&
-            <div>
-              <h3>答題方式</h3>
-              <ul className="sections">
-                {this.state.methods.map((method, i) =>
-                  <li key={i}>
-                    <label>
-                      <input type="checkbox"
-                        value={method.value}
-                        onChange={this.onChangeAnswerMethod}
-                        checked={this.state.answerMethod === method.value} />
-                      <span>{method.text}</span>
-                    </label>
-                  </li>)}
-              </ul>
-            </div>}
-        </section>
+              </li>}
+            </ul>
+          </section>
+        )}
         <nav>
-          <span className={`btn large ${this.state.isSelected ? "green" : "disable"}`} onClick={() => this.onStart()}>開始</span>
+          <span className={`btn large ${this.state.ready ? "green" : "disable"}`} onClick={() => this.onStart()}>開始</span>
         </nav>
       </div>
     );

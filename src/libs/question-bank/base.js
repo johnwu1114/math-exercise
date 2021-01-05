@@ -46,16 +46,4 @@ export default class QuestionBankBase {
   getComponentName = () => {
     return "QuizAttempt";
   }
-
-  getAnswerMethods = () => {
-    return [{
-        text: "選擇題",
-        value: "choice"
-      },
-      {
-        text: "填充題",
-        value: "filling"
-      }
-    ];
-  }
 }

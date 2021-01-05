@@ -19,14 +19,15 @@ export default class Quiz extends Component {
     this.quizAttempt = React.createRef();
   }
 
-  onStart = (option) => {
-    let questionBank = this.props.questionBank;
-    let questions = questionBank.generateQuestions(option.sections);
-    questionBank.setQuestions(questions);
-    this.setState({
-      componentName: questionBank.getComponentName(),
-      method: option.answerMethod
-    });
+  onStart = (settings) => {
+    console.log(settings);
+    // let questionBank = this.props.questionBank;
+    // let questions = questionBank.generateQuestions(option.sections);
+    // questionBank.setQuestions(questions);
+    // this.setState({
+    //   componentName: questionBank.getComponentName(),
+    //   method: option.answerMethod
+    // });
   }
 
   showResult = (results) => {
