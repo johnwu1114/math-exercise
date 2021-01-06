@@ -10,6 +10,20 @@ export default class ClockQuestionBank extends QuestionBankBase {
     return "時鐘練習";
   }
 
+  getOptions = () => {
+    let sections = this.getSections();
+    sections[0].selected = true;
+
+    return [
+      {
+        title: "請選擇",
+        name: "section",
+        type: "multiple-choice",
+        selections: sections
+      }
+    ];
+  }
+
   getSections = () => {
     return [{
         text: "整點鐘",

@@ -22,7 +22,7 @@ export default class Quiz extends Component {
   onStart = (options) => {
     let sections = options.filter(x => x.name === "section")[0].selections;
     let option = options.filter(x => x.name === "anwser-method")[0];
-    let answerMethod = option == null ? this.state.answerMethod : temp.selections[0].value;
+    let answerMethod = option == null ? this.state.answerMethod : option.selections[0].value;
 
     let questionBank = this.props.questionBank;
     let questions = questionBank.generateQuestions(sections);
