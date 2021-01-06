@@ -10,6 +10,7 @@
 }
 
 .question {
+    margin-top: 80px;
     font-size: calc(10px + 15vmin);
 }
 
@@ -209,10 +210,6 @@ p {
     transform: rotate(45deg);
     top: calc(10px + 1vmin);
     left: calc(5px + 2vmin);
-}
-
-.clock {
-    margin-top: 50px;
 }
 
 .incorrect .clock {

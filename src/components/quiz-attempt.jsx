@@ -16,7 +16,7 @@ export default class QuizAttempt extends Component {
       answer: {},
       choices: [],
       reply: "",
-      answerMethod: this.props.method
+      answerMethod: this.props.answerMethod
     };
     this.countdown = React.createRef();
     this.numericKeypad = React.createRef();
