@@ -37,12 +37,12 @@
     font-family: serif;
 }
 
-.characters {
+.characters, .numbers {
     height: 100%;
     margin: 5px;
 }
 
-.characters .cell {
+.characters .cell, .numbers .cell {
     border: 1px solid #ccc;
     display: inline-block;
     position: relative;
@@ -90,7 +90,7 @@
     font-size: calc(10px + 2vmin);
 }
 
-.characters .cell span {
+.characters .cell span, .numbers .cell span{
     position: absolute;
     left: 50%;
     top: 50%;
@@ -105,12 +105,12 @@
     background-color: #D9544E !important;
 }
 
-.characters .cell:hover {
+.characters .cell:hover, .numbers .cell:hover {
     background-color: #048CBA;
 }
 
 @media (hover: none) {
-    .characters .cell:hover {
+    .characters .cell:hover, .numbers .cell:hover {
         background-color: inherit;
     }
 }

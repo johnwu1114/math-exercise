@@ -5,58 +5,58 @@ export default class QuizSectionSelector extends Component {
     super(props);
     let questionBank = this.props.questionBank;
     let name = questionBank.getName();
-    let menu = questionBank.getMenu();
+    let options = questionBank.getOptions();
 
     this.state = {
       name: name,
-      menu: menu,
+      options: options,
       ready: true
     };
   }
 
   onStart = () => {
     if (this.state.ready > 0)
-      this.props.onStart(this.state.menu.map(x => {
+      this.props.onStart(this.state.options.map(x => {
         x.selections = x.selections.filter(s => s.selected);
         return x;
       }));
   }
 
-  onSelected = (event, item) => {
-    item.selections.forEach(selection => {
+  onSelected = (event, option) => {
+    option.selections.forEach(selection => {
       if (selection.text === event.target.value) {
         selection.selected = event.target.checked;
-      } else if (item.type === "single-choice") {
+      } else if (option.type === "single-choice") {
         selection.selected = false;
       }
     });
-    item.selectedAll = item.selections.filter(x => x.selected !== true).length === 0;
+    option.selectedAll = option.selections.filter(x => x.selected !== true).length === 0;
 
-    this.updateMenuItem(item);
+    this.updateMenuItem(option);
   }
 
   toggleAll = (name) => {
-    let item = this.state.menu.filter(x => x.name === name)[0];
-    let selections = item.selections;
-    item.selectedAll = !item.selectedAll;
+    let option = this.state.options.filter(x => x.name === name)[0];
+    let selections = option.selections;
+    option.selectedAll = !option.selectedAll;
     selections.forEach(selection => {
-      selection.selected = item.selectedAll;
+      selection.selected = option.selectedAll;
     })
 
-    this.updateMenuItem(item);
+    this.updateMenuItem(option);
   }
 
-  updateMenuItem = (item) => {
+  updateMenuItem = (option) => {
     let ready = true;
     this.setState(state => {
-      state.menu.forEach(x => {
-        if (x.name === item.name) x = item;
+      state.options.forEach(x => {
+        if (x.name === option.name) x = option;
         if (x.selections.filter(s => s.selected).length === 0)
           ready = false;
       });
 
       return {
-        menu: state.menu,
+        options: state.options,
         ready: ready
       }
     });
@@ -66,24 +66,24 @@ export default class QuizSectionSelector extends Component {
     return (
       <div>
         <h2>{this.state.name}</h2>
-        {this.state.menu.map((item, i) =>
+        {this.state.options.map((option, i) =>
           <section key={i}>
-            <h3>{item.title}</h3>
+            <h3>{option.title}</h3>
             <ul className="sections">
-              {item.selections.map((selection, j) =>
+              {option.selections.map((selection, j) =>
                 <li key={j}>
                   <label>
                     <input type="checkbox"
                       value={selection.text}
-                      onChange={e => this.onSelected(e, item)}
+                      onChange={e => this.onSelected(e, option)}
                       checked={selection.selected || false} />
                     <span>{selection.text}</span>
                   </label>
                 </li>
               )}
-              {item.type === "multiple-choice" && <li>
+              {option.type === "multiple-choice" && <li>
                 <label>
-                  <input type="checkbox" onChange={() => this.toggleAll(item.name)} checked={item.selectedAll || false} />
+                  <input type="checkbox" onChange={() => this.toggleAll(option.name)} checked={option.selectedAll || false} />
                   <span>全選</span>
                 </label>
               </li>}

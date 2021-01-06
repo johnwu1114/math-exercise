@@ -46,4 +46,33 @@ export default class QuestionBankBase {
   getComponentName = () => {
     return "QuizAttempt";
   }
+
+  getOptions = () => {
+    let sections = this.getSections();
+    sections[0].selected = true;
+
+    return [
+      {
+        title: "請選擇",
+        name: "section",
+        type: "multiple-choice",
+        selections: sections
+      },
+      {
+        title: "答題方式",
+        name: "anwser-method",
+        type: "single-choice",
+        selections: [{
+            text: "選擇題",
+            value: "choice",
+            selected: true
+          },
+          {
+            text: "填充題",
+            value: "filling"
+          }
+        ]
+      }
+    ];
+  }
 }

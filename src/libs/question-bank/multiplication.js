@@ -22,38 +22,6 @@ export default class MultiplicationQuestionBank extends QuestionBankBase {
     return this.name;
   }
 
-  getMenu = () => {
-    let menu = [];
-
-    let sections = this.getSections();
-    sections[0].selected = true;
-
-    menu.push({
-      title: "請選擇",
-      name: "sections",
-      type: "multiple-choice",
-      selections: sections
-    });
-
-    menu.push({
-      title: "答題方式",
-      name: "methods",
-      type: "single-choice",
-      selections: [{
-          text: "選擇題",
-          value: "choice",
-          selected: true
-        },
-        {
-          text: "填充題",
-          value: "filling"
-        }
-      ]
-    });
-
-    return menu;
-  }
-
   getSections = () => {
     let sections = [];
     for (let i = this.multiplier; i <= this.multiplicand; i++) {
