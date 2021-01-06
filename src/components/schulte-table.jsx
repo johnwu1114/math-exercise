@@ -88,7 +88,7 @@ export default class SchulteTable extends Component {
     return (
       <div>
         <div className="schulte-table">
-          <div className="cursor">下一個：<b>{this.state.cursor.text}</b></div>
+          <div className="cursor">按下：<b>{this.state.cursor.text}</b></div>
           <div className="time">{this.state.time}</div>
           <div className={`characters size-${this.state.characters.length}`}>
             {this.state.characters.map((character) =>

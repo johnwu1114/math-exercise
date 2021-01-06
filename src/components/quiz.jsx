@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import SchulteTable from "./schulte-table.jsx";
 import QuizAttempt from "./quiz-attempt.jsx";
 import QuizResult from "./quiz-result.jsx";
-import QuizSectionSelector from "./quiz-section-selector.jsx";
+import QuizSetting from "./quiz-setting.jsx";
 
 export default class Quiz extends Component {
 
@@ -65,7 +65,7 @@ export default class Quiz extends Component {
           questionBank={this.props.questionBank}
           onFinish={results => this.showResult(results)} />;
       default:
-        return <QuizSectionSelector
+        return <QuizSetting
           questionBank={this.props.questionBank}
           onStart={option => this.onStart(option)} />;
     }

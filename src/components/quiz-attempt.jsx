@@ -9,6 +9,7 @@ export default class QuizAttempt extends Component {
 
     this.questionBank = props.questionBank;
     let answerMethod = this.questionBank.getSetting("anwser-method");
+    let timeoutSeconds = this.questionBank.getSetting("timeoutSeconds");
 
     this.results = [];
     this.state = {
@@ -16,7 +17,7 @@ export default class QuizAttempt extends Component {
       answer: {},
       choices: [],
       reply: "",
-      timeoutSeconds: this.questionBank.getSetting("timeoutSeconds"),
+      timeoutSeconds: timeoutSeconds,
       answerMethod: answerMethod == null ? "choice" : answerMethod[0].value
     };
     this.countdown = React.createRef();

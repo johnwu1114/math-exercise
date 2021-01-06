@@ -21,6 +21,12 @@ export default class ClockQuestionBank extends QuestionBankBase {
         name: "sections",
         type: "multiple-choice",
         selections: sections
+      },
+      {
+        title: "答題限時",
+        name: "timeoutSeconds",
+        type: "range-slider",
+        value: 10
       }
     ];
   }

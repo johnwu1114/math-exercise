@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-export default class QuizSectionSelector extends Component {
+export default class QuizSetting extends Component {
   constructor(props) {
     super(props);
     let questionBank = this.props.questionBank;
@@ -17,7 +17,8 @@ export default class QuizSectionSelector extends Component {
   onStart = () => {
     if (this.state.ready > 0)
       this.props.onStart(this.state.options.map(x => {
-        x.selections = x.selections.filter(s => s.selected);
+        if (x.selections != null)
+          x.selections = x.selections.filter(s => s.selected);
         return x;
       }));
   }
@@ -33,6 +34,16 @@ export default class QuizSectionSelector extends Component {
     option.selectedAll = option.selections.filter(x => x.selected !== true).length === 0;
 
     this.updateMenuItem(option);
+  }
+
+  onSlide = (event, option) => {
+    option.value = event.target.value;
+    this.updateMenuItem(option);
+    this.setState(state => {
+      state.options.forEach(x => {
+        if (x.name === option.name) x = option;
+      });
+    });
   }
 
   toggleAll = (name) => {
@@ -51,7 +62,7 @@ export default class QuizSectionSelector extends Component {
     this.setState(state => {
       state.options.forEach(x => {
         if (x.name === option.name) x = option;
-        if (x.selections.filter(s => s.selected).length === 0)
+        if (x.selections != null && x.selections.filter(s => s.selected).length === 0)
           ready = false;
       });
 
@@ -62,6 +73,41 @@ export default class QuizSectionSelector extends Component {
     });
   }
 
+  renderSwitch = (option) => {
+    switch (option.type) {
+      case "single-choice":
+      case "multiple-choice":
+        return <ul className="sections">
+          {option.selections.map((selection, j) =>
+            <li key={j}>
+              <label>
+                <input type="checkbox"
+                  value={selection.text}
+                  onChange={e => this.onSelected(e, option)}
+                  checked={selection.selected || false} />
+                <span>{selection.text}</span>
+              </label>
+            </li>
+          )}
+          {option.type === "multiple-choice" && <li>
+            <label>
+              <input type="checkbox" onChange={() => this.toggleAll(option.name)} checked={option.selectedAll || false} />
+              <span>全選</span>
+            </label>
+          </li>}
+        </ul>;
+      case "range-slider":
+        return <div className="sections">
+          <input className="slider" type="range" min="3" max="60"
+            value={option.value} onChange={e => this.onSlide(e, option)} />
+            {option.value} 秒
+        </div>;
+      default:
+        return <div></div>;
+    }
+  }
+
+
   render() {
     return (
       <div>
@@ -69,25 +115,7 @@ export default class QuizSectionSelector extends Component {
         {this.state.options.map((option, i) =>
           <section key={i}>
             <h3>{option.title}</h3>
-            <ul className="sections">
-              {option.selections.map((selection, j) =>
-                <li key={j}>
-                  <label>
-                    <input type="checkbox"
-                      value={selection.text}
-                      onChange={e => this.onSelected(e, option)}
-                      checked={selection.selected || false} />
-                    <span>{selection.text}</span>
-                  </label>
-                </li>
-              )}
-              {option.type === "multiple-choice" && <li>
-                <label>
-                  <input type="checkbox" onChange={() => this.toggleAll(option.name)} checked={option.selectedAll || false} />
-                  <span>全選</span>
-                </label>
-              </li>}
-            </ul>
+            {this.renderSwitch(option)}
           </section>
         )}
         <nav>

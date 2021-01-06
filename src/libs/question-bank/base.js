@@ -6,7 +6,6 @@ export default class QuestionBankBase {
     this.settings = {
       component: "QuizAttempt",
       enableReview: true,
-      timeoutSeconds: 10,
       choiceCount: 6
     };
   }
@@ -80,13 +79,19 @@ export default class QuestionBankBase {
             value: "filling"
           }
         ]
+      },
+      {
+        title: "答題限時",
+        name: "timeoutSeconds",
+        type: "range-slider",
+        value: 10
       }
     ];
   }
 
   setSettings = (options) => {
     options.forEach(option => {
-      this.settings[option.name] = option.selections;
+      this.settings[option.name] = option.selections || option.value;
     });
   }
 
