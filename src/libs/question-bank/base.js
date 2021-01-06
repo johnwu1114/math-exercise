@@ -75,4 +75,8 @@ export default class QuestionBankBase {
       }
     ];
   }
+
+  setSettings = (options) =>{
+    this.settings = options;
+  }
 }

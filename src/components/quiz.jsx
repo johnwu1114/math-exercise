@@ -25,6 +25,7 @@ export default class Quiz extends Component {
     let answerMethod = option == null ? this.state.answerMethod : option.selections[0].value;
 
     let questionBank = this.props.questionBank;
+    questionBank.setSettings(options);
     let questions = questionBank.generateQuestions(sections);
     questionBank.setQuestions(questions);
     this.setState({

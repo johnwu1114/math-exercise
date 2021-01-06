@@ -14,6 +14,55 @@ export default class SchulteTableQuestionBank {
     return "舒爾特方格";
   }
 
+  getOptions = () => {
+    let sections = this.getSections();
+    sections[0].selected = true;
+
+    return [
+      {
+        title: "請選擇",
+        name: "section",
+        type: "single-choice",
+        selections: sections
+      },
+      {
+        title: "文字",
+        name: "character",
+        type: "single-choice",
+        selections: [{
+            text: "123",
+            value: "numeral",
+            selected: true
+          },
+          {
+            text: "ㄅㄆㄇ",
+            value: "zhuyin"
+          },
+          {
+            text: "ABC",
+            value: "blockLetter"
+          },
+          {
+            text: "abc",
+            value: "smallLetter"
+          },
+          {
+            text: "あいう",
+            value: "hiragana"
+          },
+          {
+            text: "アイウ",
+            value: "katakana"
+          }
+        ]
+      }
+    ];
+  }
+
+  setSettings = (options) =>{
+    this.settings = options;
+  }
+
   getSections = () => {
     let sections = [];
     for (let i = 3; i <= 9; i++) {
@@ -26,8 +75,8 @@ export default class SchulteTableQuestionBank {
   }
 
   generateQuestions = (sections) => {
-    // numeral
-    let characters = this.characters = this.getCharacters("numeral");
+    let characterName = this.settings.filter(x => x.name === "character")[0].selections[0].value;
+    let characters = this.characters = this.getCharacters(characterName);
     let squareRoot = Math.min(sections[0].value, Math.ceil(Math.sqrt(characters.length)));
     let count = Math.pow(squareRoot, 2);
 
