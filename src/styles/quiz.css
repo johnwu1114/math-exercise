@@ -14,7 +14,11 @@
     font-size: calc(10px + 15vmin);
 }
 
-.filling .question {
+.answer-method {
+    width: 100vmin;
+}
+
+.answer-method.filling .question {
     width: 100%;
     position: absolute;
     top: 0;
@@ -24,19 +28,27 @@
 
 .choices {
     padding: 0;
+    max-width: 800px;
 }
 
 .choices li {
     cursor: pointer;
-    font-size: calc(10px + 5vmin);
+    font-size: calc(10px + 4vmin);
     display: inline-block;
-    padding: 30px;
-    width: 20%;
     border-radius: 10%;
     transition-duration: 0.4s;
     background-color: #ccc;
     color: black;
     border: 2px solid #048CBA;
+    width: 30%;
+    height: calc(50px + 5vmin);
+}
+
+.choices li span{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .choices li:hover {
