@@ -17,7 +17,7 @@
 .filling .question {
     width: 100%;
     position: absolute;
-    top: 60px;
+    top: 0;
     left: 0;
     font-size: calc(10px + 8vmin);
 }

@@ -47,7 +47,8 @@ export default class AdditionQuestionBank extends QuestionBankBase {
     ];
   }
 
-  generateQuestions = (sections) => {
+  initQuestions = () => {
+    let sections = this.getSetting("sections");
     let questions = [];
     (sections || this.getSections())
     .forEach(section => {
@@ -70,6 +71,6 @@ export default class AdditionQuestionBank extends QuestionBankBase {
         questions.push(value);
       });
     });
-    return questions;
+    this.setQuestions(questions);
   }
 }

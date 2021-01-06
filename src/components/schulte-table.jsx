@@ -56,7 +56,7 @@ export default class SchulteTable extends Component {
 
     this.setState({
       clicked: {
-        value: reply,
+        value: reply.value,
         sytle: sytle
       },
       cursor: cursor

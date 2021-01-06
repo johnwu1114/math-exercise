@@ -1,6 +1,7 @@
 import RandomUtil from "../utils/random.js";
+import QuestionBankBase from "./base.js";
 
-export default class SchulteTableQuestionBank {
+export default class SchulteTableQuestionBank extends QuestionBankBase {
 
   characterOptions = {
     zhuyin: "ㄅㄆㄇㄈㄉㄊㄋㄌㄍㄎㄏㄐㄑㄒㄓㄔㄕㄖㄗㄘㄙㄧㄨㄩㄚㄛㄜㄝㄞㄟㄠㄡㄢㄣㄤㄥㄦ",
@@ -21,7 +22,7 @@ export default class SchulteTableQuestionBank {
     return [
       {
         title: "請選擇",
-        name: "section",
+        name: "sections",
         type: "single-choice",
         selections: sections
       },
@@ -59,10 +60,6 @@ export default class SchulteTableQuestionBank {
     ];
   }
 
-  setSettings = (options) =>{
-    this.settings = options;
-  }
-
   getSections = () => {
     let sections = [];
     for (let i = 3; i <= 9; i++) {
@@ -74,8 +71,9 @@ export default class SchulteTableQuestionBank {
     return sections;
   }
 
-  generateQuestions = (sections) => {
-    let characterName = this.settings.filter(x => x.name === "character")[0].selections[0].value;
+  initQuestions = () => {
+    let sections = this.getSetting("sections");
+    let characterName = this.getSetting("character")[0].value;
     let characters = this.characters = this.getCharacters(characterName);
     let squareRoot = Math.min(sections[0].value, Math.ceil(Math.sqrt(characters.length)));
     let count = Math.pow(squareRoot, 2);
@@ -90,11 +88,7 @@ export default class SchulteTableQuestionBank {
       });
     }
 
-    return RandomUtil.pickRandomItems(questions, count);
-  }
-
-  setQuestions = (questions) => {
-    this.questions = questions || [];
+    this.setQuestions(RandomUtil.pickRandomItems(questions, count));
   }
 
   nextQuestion = () => {
@@ -104,10 +98,6 @@ export default class SchulteTableQuestionBank {
 
   checkAnswer = (reply) => {
     return reply != null && reply === this.cursor;
-  }
-
-  convertText = (value) => {
-    return value.toString();
   }
 
   getComponentName = () => {
@@ -121,10 +111,6 @@ export default class SchulteTableQuestionBank {
       text: this.characters[current],
       value: current
     };
-  }
-
-  getAnswerMethods = () => {
-    return [];
   }
 
   getCharacters = (name) => {

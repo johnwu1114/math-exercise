@@ -9,14 +9,15 @@ export default class QuizAttempt extends Component {
     super(props);
 
     this.questionBank = props.questionBank;
-    this.results = [];
+    let answerMethod = this.questionBank.getSetting("anwser-method");
 
+    this.results = [];
     this.state = {
       description: "",
       answer: {},
       choices: [],
       reply: "",
-      answerMethod: this.props.answerMethod
+      answerMethod: answerMethod == null ? "choice" : answerMethod[0].value
     };
     this.countdown = React.createRef();
     this.numericKeypad = React.createRef();

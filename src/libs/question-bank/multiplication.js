@@ -33,7 +33,8 @@ export default class MultiplicationQuestionBank extends QuestionBankBase {
     return sections;
   }
 
-  generateQuestions = (sections) => {
+  initQuestions = () => {
+    let sections = this.getSetting("sections");
     let questions = [];
     (sections || this.getSections())
     .forEach(section => {
@@ -47,6 +48,6 @@ export default class MultiplicationQuestionBank extends QuestionBankBase {
         });
       }
     });
-    return questions;
+    this.setQuestions(questions);
   }
 }

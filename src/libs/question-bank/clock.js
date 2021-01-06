@@ -17,7 +17,7 @@ export default class ClockQuestionBank extends QuestionBankBase {
     return [
       {
         title: "請選擇",
-        name: "section",
+        name: "sections",
         type: "multiple-choice",
         selections: sections
       }
@@ -53,7 +53,8 @@ export default class ClockQuestionBank extends QuestionBankBase {
     ];
   }
 
-  generateQuestions = (sections) => {
+  initQuestions = () => {
+    let sections = this.getSetting("sections");
     let questions = [];
     (sections || this.getSections())
     .forEach(section => {
@@ -78,7 +79,7 @@ export default class ClockQuestionBank extends QuestionBankBase {
         questions.push(value);
       });
     });
-    return questions;
+    this.setQuestions(questions);
   }
 
   generateChoices = (question) => {

@@ -3,6 +3,10 @@ import RandomUtil from "../utils/random.js";
 export default class QuestionBankBase {
   selectionCount = 6;
 
+  constructor() {
+    this.settings = {};
+  }
+
   generateChoices = (question) => {
     let answer = question.answer.value;
     let answerRange = question.answerRange || 20;
@@ -51,10 +55,9 @@ export default class QuestionBankBase {
     let sections = this.getSections();
     sections[0].selected = true;
 
-    return [
-      {
+    return [{
         title: "請選擇",
-        name: "section",
+        name: "sections",
         type: "multiple-choice",
         selections: sections
       },
@@ -76,7 +79,13 @@ export default class QuestionBankBase {
     ];
   }
 
-  setSettings = (options) =>{
-    this.settings = options;
+  setSettings = (options) => {
+    options.forEach(option => {
+      this.settings[option.name] = option.selections;
+    });
+  }
+
+  getSetting = (name) => {
+    return this.settings[name];
   }
 }
