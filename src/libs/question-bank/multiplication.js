@@ -6,27 +6,25 @@ export default class MultiplicationQuestionBank extends QuestionBankBase {
     super();
     switch (level || 1) {
       case 2:
-        this.multiplier = 11;
-        this.multiplicand = 19;
-        this.name = "19 x 19 乘法練習";
+        this.settings["multiplier"] = 11;
+        this.settings["multiplicand"] = 19;
+        this.settings["title"] = "19 x 19 乘法練習";
         break;
       default:
-        this.multiplier = 2;
-        this.multiplicand = 9;
-        this.name = "9 x 9 乘法練習";
+        this.settings["multiplier"] = 2;
+        this.settings["multiplicand"] = 9;
+        this.settings["title"] = "9 x 9 乘法練習";
         break;
     }
   }
 
-  getName = () => {
-    return this.name;
-  }
-
   getSections = () => {
     let sections = [];
-    for (let i = this.multiplier; i <= this.multiplicand; i++) {
+    let multiplier = this.getSetting("multiplier");
+    let multiplicand = this.getSetting("multiplicand");
+    for (let i = multiplier; i <= multiplicand; i++) {
       sections.push({
-        text: `${i} x ${this.multiplicand}`,
+        text: `${i} x ${multiplicand}`,
         value: i
       });
     }
@@ -35,10 +33,11 @@ export default class MultiplicationQuestionBank extends QuestionBankBase {
 
   initQuestions = () => {
     let sections = this.getSetting("sections");
+    let multiplicand = this.getSetting("multiplicand");
     let questions = [];
     (sections || this.getSections())
     .forEach(section => {
-      for (let i = 2; i <= this.multiplicand; i++) {
+      for (let i = 2; i <= multiplicand; i++) {
         questions.push({
           description: `${section.value} x ${i}`,
           answer: {

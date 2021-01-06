@@ -66,7 +66,8 @@ export default class QuizResult extends Component {
             </table>}
           <div className="modal-footer">
             <span className="btn" onClick={() => this.props.onClose()}>關閉</span>
-            {this.state.incorrect >= 3 && <span className="btn blue" onClick={() => this.props.onReview()}>複習</span>}
+            {this.props.enableReview && this.state.incorrect >= 3 &&
+              <span className="btn blue" onClick={() => this.props.onReview()}>複習</span>}
           </div>
         </div>
       </div>

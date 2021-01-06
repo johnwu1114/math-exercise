@@ -24,7 +24,8 @@ export default class Quiz extends Component {
     questionBank.initQuestions();
 
     this.setState({
-      componentName: questionBank.getComponentName()
+      componentName: questionBank.getSetting("component"),
+      enableReview: questionBank.getSetting("enableReview")
     });
   }
 
@@ -79,6 +80,7 @@ export default class Quiz extends Component {
         {this.renderSwitch(this.state.componentName)}
         {this.state.isShowResult &&
           <QuizResult
+            enableReview={this.state.enableReview}
             results={this.state.results}
             onReview={() => this.onReview()}
             onClose={() => this.onClose()} />}

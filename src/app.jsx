@@ -39,7 +39,7 @@ export default class App extends Component {
             <ul>
               {this.state.questionBanks.map((questionBank, i) =>
                 <li key={i} className="btn green" onClick={() => this.start(questionBank)}>
-                  {questionBank.getName()}
+                  {questionBank.getTitle()}
                 </li>)}
             </ul>
           </div>}

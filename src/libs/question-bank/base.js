@@ -1,10 +1,19 @@
 import RandomUtil from "../utils/random.js";
 
 export default class QuestionBankBase {
-  selectionCount = 6;
 
   constructor() {
-    this.settings = {};
+    this.settings = {
+      component: "QuizAttempt",
+      enableReview: true,
+      timeoutSeconds: 10,
+      choiceCount: 6
+    };
+  }
+
+
+  getTitle = () => {
+    return this.getSetting("title");
   }
 
   generateChoices = (question) => {
@@ -18,7 +27,7 @@ export default class QuestionBankBase {
       });
     }
 
-    let randomCount = this.selectionCount - 1;
+    let randomCount = this.getSetting("choiceCount") - 1;
     let choices = RandomUtil.pickRandomItems(seeds, randomCount);
     choices.splice(RandomUtil.getRandomInt(randomCount), 0, {
       text: this.convertText(answer),
@@ -45,10 +54,6 @@ export default class QuestionBankBase {
 
   convertText = (value) => {
     return value.toString();
-  }
-
-  getComponentName = () => {
-    return "QuizAttempt";
   }
 
   getOptions = () => {

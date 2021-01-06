@@ -2,10 +2,11 @@ import RandomUtil from "../utils/random.js";
 import QuestionBankBase from "./base.js";
 
 export default class AdditionQuestionBank extends QuestionBankBase {
-  questionCount = 10;
-  
-  getName = () => {
-    return "加法練習";
+
+  constructor() {
+    super();
+    this.settings["title"] = "加法練習";
+    this.settings["questionCount"] = 10;
   }
 
   getSections = () => {
@@ -49,11 +50,12 @@ export default class AdditionQuestionBank extends QuestionBankBase {
 
   initQuestions = () => {
     let sections = this.getSetting("sections");
+    let questionCount = this.getSetting("questionCount");
     let questions = [];
     (sections || this.getSections())
     .forEach(section => {
       let hashMap = new Map();
-      while (hashMap.size < this.questionCount) {
+      while (hashMap.size < questionCount) {
         let summation = RandomUtil.getRandomIntRange(section.minSummation, section.maxSummation);
         let x = RandomUtil.getRandomIntRange(section.minimum, summation - section.minimum);
         let y = summation - x;

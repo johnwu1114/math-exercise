@@ -3,11 +3,12 @@ import QuestionBankBase from "./base.js";
 import Clock from "../../components/clock.jsx";
 
 export default class ClockQuestionBank extends QuestionBankBase {
-  questionCount = 10;
   secondsInDay = 24 * 60 * 60;
 
-  getName = () => {
-    return "時鐘練習";
+  constructor() {
+    super();
+    this.settings["title"] = "時鐘練習";
+    this.settings["questionCount"] = 10;
   }
 
   getOptions = () => {
@@ -55,11 +56,12 @@ export default class ClockQuestionBank extends QuestionBankBase {
 
   initQuestions = () => {
     let sections = this.getSetting("sections");
+    let questionCount = this.getSetting("questionCount");
     let questions = [];
     (sections || this.getSections())
     .forEach(section => {
       let hashMap = new Map();
-      while (hashMap.size < this.questionCount) {
+      while (hashMap.size < questionCount) {
         let disableSecondhand = section.intervalSeconds !== 5;
         let random = RandomUtil.getRandomInt(this.secondsInDay / 2);
         random = random - random % section.intervalSeconds;
@@ -94,7 +96,7 @@ export default class ClockQuestionBank extends QuestionBankBase {
       });
     }
 
-    let randomCount = this.selectionCount - 1;
+    let randomCount = this.getSetting("choiceCount") - 1;
     let choices = RandomUtil.pickRandomItems(seeds, randomCount);
     choices.splice(RandomUtil.getRandomInt(randomCount), 0, {
       text: this.convertText(answer, question.disableSecondhand),
@@ -111,12 +113,5 @@ export default class ClockQuestionBank extends QuestionBankBase {
     if (!disableSeconds) result += `:${second.toString().padStart(2, "0")}`;
 
     return result;
-  }
-
-  getAnswerMethods = () => {
-    return [{
-      text: "選擇題",
-      value: "choice"
-    }];
   }
 }

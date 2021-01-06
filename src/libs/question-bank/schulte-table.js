@@ -3,16 +3,11 @@ import QuestionBankBase from "./base.js";
 
 export default class SchulteTableQuestionBank extends QuestionBankBase {
 
-  characterOptions = {
-    zhuyin: "ㄅㄆㄇㄈㄉㄊㄋㄌㄍㄎㄏㄐㄑㄒㄓㄔㄕㄖㄗㄘㄙㄧㄨㄩㄚㄛㄜㄝㄞㄟㄠㄡㄢㄣㄤㄥㄦ",
-    blockLetter: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-    smallLetter: "abcdefghijklmnopqrstuvwxyz",
-    hiragana: "あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをん",
-    katakana: "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン"
-  };
-
-  getName = () => {
-    return "舒爾特方格";
+  constructor() {
+    super();
+    this.settings["title"] = "舒爾特方格";
+    this.settings["component"] = "SchulteTable";
+    this.settings["enableReview"] = false;
   }
 
   getOptions = () => {
@@ -37,23 +32,23 @@ export default class SchulteTableQuestionBank extends QuestionBankBase {
           },
           {
             text: "ㄅㄆㄇ",
-            value: "zhuyin"
+            value: "ㄅㄆㄇㄈㄉㄊㄋㄌㄍㄎㄏㄐㄑㄒㄓㄔㄕㄖㄗㄘㄙㄧㄨㄩㄚㄛㄜㄝㄞㄟㄠㄡㄢㄣㄤㄥㄦ"
           },
           {
             text: "ABC",
-            value: "blockLetter"
+            value: "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
           },
           {
             text: "abc",
-            value: "smallLetter"
+            value: "abcdefghijklmnopqrstuvwxyz"
           },
           {
             text: "あいう",
-            value: "hiragana"
+            value: "あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをん"
           },
           {
             text: "アイウ",
-            value: "katakana"
+            value: "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン"
           }
         ]
       }
@@ -72,14 +67,12 @@ export default class SchulteTableQuestionBank extends QuestionBankBase {
   }
 
   initQuestions = () => {
-    let sections = this.getSetting("sections");
-    let characterName = this.getSetting("character")[0].value;
-    let characters = this.characters = this.getCharacters(characterName);
-    let squareRoot = Math.min(sections[0].value, Math.ceil(Math.sqrt(characters.length)));
+    let section = this.getSetting("sections")[0].value;
+    let characters = this.characters = this.getCharacters(this.getSetting("character")[0].value);
+    let squareRoot = Math.min(section, Math.ceil(Math.sqrt(characters.length)));
     let count = Math.pow(squareRoot, 2);
 
     let questions = [];
-
     for (let i = 1; i <= count; i++) {
       let char = characters[i - 1];
       questions.push(char == null ? null : {
@@ -100,10 +93,6 @@ export default class SchulteTableQuestionBank extends QuestionBankBase {
     return reply != null && reply === this.cursor;
   }
 
-  getComponentName = () => {
-    return "SchulteTable";
-  }
-
   nextCursor = () => {
     if (this.cursor >= this.questions.length) return null;
     let current = this.cursor++;
@@ -113,9 +102,8 @@ export default class SchulteTableQuestionBank extends QuestionBankBase {
     };
   }
 
-  getCharacters = (name) => {
-    let characters = this.characterOptions[name];
-    if (characters == null) return Array.from({length: Math.pow(9, 2)}, (x, i) => i + 1);;
-    return characters.split("");
+  getCharacters = (str) => {
+    if (str === "numeral") return Array.from({length: Math.pow(9, 2)}, (x, i) => i + 1);;
+    return str.split("");
   }
 }

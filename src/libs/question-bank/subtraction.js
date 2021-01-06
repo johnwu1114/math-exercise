@@ -2,12 +2,13 @@ import RandomUtil from "../utils/random.js";
 import QuestionBankBase from "./base.js";
 
 export default class SubtractionQuestionBank extends QuestionBankBase {
-  questionCount = 10;
-  
-  getName = () => {
-    return "減法練習";
-  }
 
+  constructor() {
+    super();
+    this.settings["title"] = "減法練習";
+    this.settings["questionCount"] = 10;
+  }
+  
   getSections = () => {
     return [{
         text: "10 以內減法",
@@ -49,11 +50,12 @@ export default class SubtractionQuestionBank extends QuestionBankBase {
 
   initQuestions = () => {
     let sections = this.getSetting("sections");
+    let questionCount = this.getSetting("questionCount");
     let questions = [];
     (sections || this.getSections())
     .forEach(section => {
       let hashMap = new Map();
-      while (hashMap.size < this.questionCount) {
+      while (hashMap.size < questionCount) {
         let x = RandomUtil.getRandomIntRange(section.minSummation, section.maxSummation);
         let y = RandomUtil.getRandomIntRange(section.minimum, x);
         let summation = x - y;

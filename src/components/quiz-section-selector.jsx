@@ -4,11 +4,11 @@ export default class QuizSectionSelector extends Component {
   constructor(props) {
     super(props);
     let questionBank = this.props.questionBank;
-    let name = questionBank.getName();
+    let title = questionBank.getTitle();
     let options = questionBank.getOptions();
 
     this.state = {
-      name: name,
+      title: title,
       options: options,
       ready: true
     };
@@ -65,7 +65,7 @@ export default class QuizSectionSelector extends Component {
   render() {
     return (
       <div>
-        <h2>{this.state.name}</h2>
+        <h2>{this.state.title}</h2>
         {this.state.options.map((option, i) =>
           <section key={i}>
             <h3>{option.title}</h3>

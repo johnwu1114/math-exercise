@@ -3,7 +3,6 @@ import Countdown from "./countdown.jsx";
 import NumericKeypad from "./numeric-keypad.jsx";
 
 export default class QuizAttempt extends Component {
-  countdownSeconds = 10;
 
   constructor(props) {
     super(props);
@@ -17,6 +16,7 @@ export default class QuizAttempt extends Component {
       answer: {},
       choices: [],
       reply: "",
+      timeoutSeconds: this.questionBank.getSetting("timeoutSeconds"),
       answerMethod: answerMethod == null ? "choice" : answerMethod[0].value
     };
     this.countdown = React.createRef();
@@ -87,7 +87,7 @@ export default class QuizAttempt extends Component {
       default:
         return <ul className="choices">
           {this.state.choices.map((choice, i) =>
-            <li key={i} onClick={() => this.checkAnswer(choice.value)} >{choice.text}</li>
+            <li key={i} onClick={() => this.checkAnswer(choice.value)} ><span>{choice.text}</span></li>
           )}
         </ul>
     }
@@ -95,7 +95,7 @@ export default class QuizAttempt extends Component {
 
   render() {
     return (
-      <div className={this.state.answerMethod}>
+      <div className={`answer-method ${this.state.answerMethod}`}>
         <div className={`question ${this.state.countdown < 3 && this.state.correct !== false && "blink"}`}>
           {this.state.description} {this.state.answerMethod === "filling" && <span>{`= ${this.state.reply}`}</span>}
         </div>
@@ -106,7 +106,7 @@ export default class QuizAttempt extends Component {
           </div>
           : this.renderSwitch()}
         <Countdown ref={this.countdown}
-          seconds={this.countdownSeconds}
+          seconds={this.state.timeoutSeconds}
           timeout={() => this.checkAnswer(this.state.reply)}
           onChanged={value => this.onCountdownChanged(value)} />
       </div>
