@@ -1,12 +1,12 @@
 import "../styles/quiz.css";
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import SchulteTable from "./schulte-table.jsx";
 import QuizAttempt from "./quiz-attempt.jsx";
 import QuizResult from "./quiz-result.jsx";
 import QuizSetting from "./quiz-setting.jsx";
 
-export default class Quiz extends Component {
-
+export class Quiz extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -51,7 +51,7 @@ export default class Quiz extends Component {
   }
 
   onClose = () => {
-    this.props.onClose();
+    this.props.history.push("/");
   }
 
   renderSwitch = (componentName) => {
@@ -75,7 +75,7 @@ export default class Quiz extends Component {
     return (
       <div>
         <div className="header">
-          {this.state.isShowResult || <span className="close" onClick={() => this.props.onClose()}>x</span>}
+          {this.state.isShowResult || <span className="close" onClick={() => this.onClose()}>x</span>}
         </div>
         {this.renderSwitch(this.state.componentName)}
         {this.state.isShowResult &&
@@ -88,3 +88,5 @@ export default class Quiz extends Component {
     );
   }
 }
+
+export default withRouter(Quiz)

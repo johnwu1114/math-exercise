@@ -6,6 +6,7 @@ export default class SubtractionQuestionBank extends QuestionBankBase {
   constructor() {
     super();
     this.settings["title"] = "減法練習";
+    this.settings["route"] = "subtraction";
     this.settings["questionCount"] = 10;
   }
   

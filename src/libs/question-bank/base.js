@@ -10,10 +10,8 @@ export default class QuestionBankBase {
     };
   }
 
-
-  getTitle = () => {
-    return this.getSetting("title");
-  }
+  getTitle = () => this.getSetting("title");
+  getRoute = () => this.getSetting("route");
 
   generateChoices = (question) => {
     let answer = question.answer.value;

@@ -6,6 +6,7 @@ export default class SchulteTableQuestionBank extends QuestionBankBase {
   constructor() {
     super();
     this.settings["title"] = "舒爾特方格";
+    this.settings["route"] = "schulte-table";
     this.settings["component"] = "SchulteTable";
     this.settings["enableReview"] = false;
   }

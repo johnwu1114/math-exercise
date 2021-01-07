@@ -53,6 +53,12 @@ nav {
   padding-bottom: 80px;
 }
 
+.menu .btn{
+  display: block;
+  color: white;
+  text-decoration: none;
+}
+
 .btn {
   cursor: pointer;
   font-size: calc(10px + 2vmin);

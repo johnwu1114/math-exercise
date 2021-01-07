@@ -7,6 +7,7 @@ export default class ClockQuestionBank extends QuestionBankBase {
 
   constructor() {
     super();
+    this.settings["route"] = "clock";
     this.settings["title"] = "時鐘練習";
     this.settings["questionCount"] = 10;
   }

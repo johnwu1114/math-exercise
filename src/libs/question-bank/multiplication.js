@@ -9,11 +9,13 @@ export default class MultiplicationQuestionBank extends QuestionBankBase {
         this.settings["multiplier"] = 11;
         this.settings["multiplicand"] = 19;
         this.settings["title"] = "19 x 19 乘法練習";
+        this.settings["route"] = "multiplication-9x9";
         break;
       default:
         this.settings["multiplier"] = 2;
         this.settings["multiplicand"] = 9;
         this.settings["title"] = "9 x 9 乘法練習";
+        this.settings["route"] = "multiplication-19x19";
         break;
     }
   }

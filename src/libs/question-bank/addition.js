@@ -5,6 +5,7 @@ export default class AdditionQuestionBank extends QuestionBankBase {
 
   constructor() {
     super();
+    this.settings["route"] = "addition";
     this.settings["title"] = "加法練習";
     this.settings["questionCount"] = 10;
   }
