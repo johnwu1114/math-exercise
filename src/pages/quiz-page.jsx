@@ -1,12 +1,12 @@
 import "../styles/quiz.css";
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import SchulteTable from "./schulte-table.jsx";
-import QuizAttempt from "./quiz-attempt.jsx";
-import QuizResult from "./quiz-result.jsx";
-import QuizSetting from "./quiz-setting.jsx";
+import SchulteTable from "../components/schulte-table.jsx";
+import QuizAttempt from "../components/quiz-attempt.jsx";
+import QuizResult from "../components/quiz-result.jsx";
+import QuizSetting from "../components/quiz-setting.jsx";
 
-export class Quiz extends Component {
+export class QuizPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -89,4 +89,4 @@ export class Quiz extends Component {
   }
 }
 
-export default withRouter(Quiz)
+export default withRouter(QuizPage);
