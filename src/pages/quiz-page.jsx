@@ -1,12 +1,13 @@
 import "../styles/quiz.css";
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
+import { Config } from "../config.js";
 import SchulteTable from "../components/schulte-table.jsx";
 import QuizAttempt from "../components/quiz-attempt.jsx";
 import QuizResult from "../components/quiz-result.jsx";
 import QuizSetting from "../components/quiz-setting.jsx";
 
-export class QuizPage extends Component {
+class QuizPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,6 +17,10 @@ export class QuizPage extends Component {
       results: []
     };
     this.quizAttempt = React.createRef();
+  }
+
+  componentDidMount(){
+    document.title = `${this.props.questionBank.getTitle()} | ${Config.AppName}`;
   }
 
   onStart = (options) => {
