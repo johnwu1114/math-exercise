@@ -15,8 +15,7 @@ export default class SchulteTableQuestionBank extends QuestionBankBase {
     let sections = this.getSections();
     sections[0].selected = true;
 
-    return [
-      {
+    return [{
         title: "請選擇",
         name: "sections",
         type: "single-choice",
@@ -97,14 +96,17 @@ export default class SchulteTableQuestionBank extends QuestionBankBase {
   nextCursor = () => {
     if (this.cursor >= this.questions.length) return null;
     let current = this.cursor++;
-    return {
-      text: this.characters[current],
+    let character = this.characters[current];
+    return (character == null) ? null : {
+      text: character,
       value: current
     };
   }
 
   getCharacters = (str) => {
-    if (str === "numeral") return Array.from({length: Math.pow(9, 2)}, (x, i) => i + 1);;
+    if (str === "numeral") return Array.from({
+      length: Math.pow(9, 2)
+    }, (x, i) => i + 1);
     return str.split("");
   }
 }
