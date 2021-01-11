@@ -12,6 +12,10 @@ export default class QuestionBankBase {
 
   getTitle = () => this.getSetting("title");
 
+  getCount = () => this.count;
+
+  getCursor = () => this.cursor;
+
   generateChoices = (question) => {
     let answer = question.answer.value;
     let answerRange = question.answerRange || 20;
@@ -34,10 +38,13 @@ export default class QuestionBankBase {
 
   setQuestions = (questions) => {
     this.questions = questions || [];
+    this.count = this.questions.length;
+    this.cursor = 0;
   }
 
   nextQuestion = () => {
     if (this.questions.length === 0) return null;
+    this.cursor++;
     let index = RandomUtil.getRandomInt(this.questions.length);
     let question = this.questions.splice(index, 1)[0];
     question.choices = this.generateChoices(question);

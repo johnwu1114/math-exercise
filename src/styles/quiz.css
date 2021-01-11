@@ -9,6 +9,15 @@
     margin: 35px 15px;
 }
 
+.questionNumber {
+    position: absolute;
+    top: 32px;
+    left: 18px;
+    padding: 6px;
+    background-color: #048CBA;
+    border-radius: 50%;
+}
+
 .question {
     margin-top: 80px;
     font-size: calc(10px + 15vmin);

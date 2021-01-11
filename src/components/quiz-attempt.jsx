@@ -18,7 +18,9 @@ export default class QuizAttempt extends Component {
       choices: [],
       reply: "",
       timeoutSeconds: timeoutSeconds,
-      answerMethod: answerMethod == null ? "choice" : answerMethod[0].value
+      answerMethod: answerMethod == null ? "choice" : answerMethod[0].value,
+      count: this.questionBank.getCount(),
+      cursor: this.questionBank.getCursor()
     };
     this.countdown = React.createRef();
     this.numericKeypad = React.createRef();
@@ -33,9 +35,7 @@ export default class QuizAttempt extends Component {
   }
 
   nextQuestion = () => {
-    this.setState({
-      correct: null
-    });
+    this.setState({ correct: null });
 
     let question = this.questionBank.nextQuestion();
     if (question === null) {
@@ -46,6 +46,7 @@ export default class QuizAttempt extends Component {
 
     this.state.choices.splice(0, this.state.choices.length);
     question.reply = "";
+    question.cursor = this.questionBank.getCursor()
     this.setState(question);
     this.countdown.current.reset();
     if (this.numericKeypad.current)
@@ -97,6 +98,7 @@ export default class QuizAttempt extends Component {
   render() {
     return (
       <div className={`answer-method ${this.state.answerMethod}`}>
+        <span className="questionNumber">{`${this.state.cursor}/${this.state.count}`}</span>
         <div className={`question ${this.state.countdown < 3 && this.state.correct !== false && "blink"}`}>
           {this.state.description} {this.state.answerMethod === "filling" && <span>{`= ${this.state.reply}`}</span>}
         </div>

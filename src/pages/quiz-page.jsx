@@ -11,15 +11,12 @@ class QuizPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      description: "",
-      answer: {},
-      choices: [],
       results: []
     };
     this.quizAttempt = React.createRef();
   }
 
-  componentDidMount(){
+  componentDidMount() {
     document.title = `${this.props.questionBank.getTitle()} | ${Config.AppName}`;
   }
 
