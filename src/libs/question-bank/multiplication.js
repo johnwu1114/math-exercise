@@ -18,6 +18,7 @@ export default class MultiplicationQuestionBank extends QuestionBankBase {
         this.settings["route"] = "multiplication-19x19";
         break;
     }
+    this.settings["options"] = this.settings["options"].filter(x => x.name !== "questionCount");
   }
 
   getSections = () => {

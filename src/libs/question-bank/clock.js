@@ -9,7 +9,6 @@ export default class ClockQuestionBank extends QuestionBankBase {
     super();
     this.settings["route"] = "clock";
     this.settings["title"] = "時鐘練習";
-    this.settings["questionCount"] = 10;
   }
 
   getOptions = () => {
@@ -19,14 +18,28 @@ export default class ClockQuestionBank extends QuestionBankBase {
     return [{
         title: "請選擇",
         name: "sections",
-        type: "multiple-choice",
+        type: "single-choice",
         selections: sections
       },
       {
         title: "答題限時",
         name: "timeoutSeconds",
         type: "range-slider",
-        value: 10
+        value: 10,
+        unit: "秒",
+        min: 3,
+        max: 60,
+        step: 1
+      },
+      {
+        title: "題目數量",
+        name: "questionCount",
+        type: "range-slider",
+        value: 20,
+        unit: "題",
+        min: 10,
+        max: 100,
+        step: 5
       }
     ];
   }
@@ -35,12 +48,14 @@ export default class ClockQuestionBank extends QuestionBankBase {
     return [{
         text: "整點鐘",
         intervalSeconds: 60 * 60,
-        answerRange: 10
+        answerRange: 10,
+        maxCount: 12
       },
       {
         text: "半點鐘",
         intervalSeconds: 30 * 60,
-        answerRange: 10
+        answerRange: 10,
+        maxCount: 24
       },
       {
         text: "5分鐘",
@@ -61,13 +76,13 @@ export default class ClockQuestionBank extends QuestionBankBase {
   }
 
   initQuestions = () => {
-    let sections = this.getSetting("sections");
+    let sections = this.getSetting("sections") || this.getSections();
     let questionCount = this.getSetting("questionCount");
+    let questionCountOfSection = Math.ceil(questionCount / sections.length);
     let questions = [];
-    (sections || this.getSections())
-    .forEach(section => {
+    sections.forEach(section => {
       let hashMap = new Map();
-      while (hashMap.size < questionCount) {
+      while (hashMap.size < Math.min(questionCountOfSection, section.maxCount || questionCount)) {
         let disableSecondhand = section.intervalSeconds !== 5;
         let random = RandomUtil.getRandomInt(this.secondsInDay / 2);
         random = random - random % section.intervalSeconds;
@@ -87,6 +102,11 @@ export default class ClockQuestionBank extends QuestionBankBase {
         questions.push(value);
       });
     });
+    questions = RandomUtil.pickRandomItems(questions, Math.min(questionCount, questions.length));
+    for (let i = 0; questions.length < questionCount; i++) {
+      if (i >= questions.length) i = 0;
+      questions.push(questions[i]);
+    }
     this.setQuestions(questions);
   }
 

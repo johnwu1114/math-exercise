@@ -7,16 +7,16 @@ export default class SubtractionQuestionBank extends QuestionBankBase {
     super();
     this.settings["title"] = "減法練習";
     this.settings["route"] = "subtraction";
-    this.settings["questionCount"] = 10;
   }
-  
+
   getSections = () => {
     return [{
         text: "10 以內減法",
         minimum: 0,
         minSummation: 1,
         maxSummation: 10,
-        answerRange: 10
+        answerRange: 10,
+        maxCount: 45
       },
       {
         text: "20 以內減法",
@@ -50,13 +50,13 @@ export default class SubtractionQuestionBank extends QuestionBankBase {
   }
 
   initQuestions = () => {
-    let sections = this.getSetting("sections");
+    let sections = this.getSetting("sections") || this.getSections();
     let questionCount = this.getSetting("questionCount");
+    let questionCountOfSection = Math.ceil(questionCount / sections.length);
     let questions = [];
-    (sections || this.getSections())
-    .forEach(section => {
+    sections.forEach(section => {
       let hashMap = new Map();
-      while (hashMap.size < questionCount) {
+      while (hashMap.size < Math.min(questionCountOfSection, section.maxCount || questionCount)) {
         let x = RandomUtil.getRandomIntRange(section.minSummation, section.maxSummation);
         let y = RandomUtil.getRandomIntRange(section.minimum, x);
         let summation = x - y;
@@ -74,6 +74,11 @@ export default class SubtractionQuestionBank extends QuestionBankBase {
         questions.push(value);
       });
     });
+    questions = RandomUtil.pickRandomItems(questions, Math.min(questionCount, questions.length));
+    for (let i = 0; questions.length < questionCount; i++) {
+      if (i >= questions.length) i = 0;
+      questions.push(questions[i]);
+    }
     this.setQuestions(questions);
   }
 }

@@ -6,7 +6,48 @@ export default class QuestionBankBase {
     this.settings = {
       component: "QuizAttempt",
       enableReview: true,
-      choiceCount: 6
+      choiceCount: 6,
+      options: [{
+          title: "請選擇",
+          name: "sections",
+          type: "multiple-choice"
+        },
+        {
+          title: "答題方式",
+          name: "anwser-method",
+          type: "single-choice",
+          selections: [{
+              text: "選擇題",
+              value: "choice",
+              selected: true
+            },
+            {
+              text: "填充題",
+              value: "filling"
+            }
+          ]
+        },
+        {
+          title: "答題限時",
+          name: "timeoutSeconds",
+          type: "range-slider",
+          value: 10,
+          unit: "秒",
+          min: 3,
+          max: 60,
+          step: 1
+        },
+        {
+          title: "題目數量",
+          name: "questionCount",
+          type: "range-slider",
+          value: 20,
+          unit: "題",
+          min: 10,
+          max: 100,
+          step: 5
+        }
+      ]
     };
   }
 
@@ -63,34 +104,14 @@ export default class QuestionBankBase {
     let sections = this.getSections();
     sections[0].selected = true;
 
-    return [{
-        title: "請選擇",
-        name: "sections",
-        type: "multiple-choice",
-        selections: sections
-      },
-      {
-        title: "答題方式",
-        name: "anwser-method",
-        type: "single-choice",
-        selections: [{
-            text: "選擇題",
-            value: "choice",
-            selected: true
-          },
-          {
-            text: "填充題",
-            value: "filling"
-          }
-        ]
-      },
-      {
-        title: "答題限時",
-        name: "timeoutSeconds",
-        type: "range-slider",
-        value: 10
-      }
-    ];
+    let options = this.getSetting("options");
+
+    return options.map(x => {
+      if (x.name === "sections") x.selections = sections;
+      else if (x.name === "timeoutSeconds") x.value = 10;
+      else if (x.name === "questionCount") x.value = 20;
+      return x;
+    });
   }
 
   setSettings = (options) => {

@@ -7,7 +7,6 @@ export default class AdditionQuestionBank extends QuestionBankBase {
     super();
     this.settings["route"] = "addition";
     this.settings["title"] = "加法練習";
-    this.settings["questionCount"] = 10;
   }
 
   getSections = () => {
@@ -16,7 +15,8 @@ export default class AdditionQuestionBank extends QuestionBankBase {
         minimum: 0,
         minSummation: 1,
         maxSummation: 10,
-        answerRange: 10
+        answerRange: 10, 
+        maxCount: 45
       },
       {
         text: "20 以內加法",
@@ -50,13 +50,13 @@ export default class AdditionQuestionBank extends QuestionBankBase {
   }
 
   initQuestions = () => {
-    let sections = this.getSetting("sections");
+    let sections = this.getSetting("sections") || this.getSections();
     let questionCount = this.getSetting("questionCount");
+    let questionCountOfSection = Math.ceil(questionCount / sections.length);
     let questions = [];
-    (sections || this.getSections())
-    .forEach(section => {
+    sections.forEach(section => {
       let hashMap = new Map();
-      while (hashMap.size < questionCount) {
+      while (hashMap.size < Math.min(questionCountOfSection, section.maxCount || questionCount)) {
         let summation = RandomUtil.getRandomIntRange(section.minSummation, section.maxSummation);
         let x = RandomUtil.getRandomIntRange(section.minimum, summation - section.minimum);
         let y = summation - x;
@@ -74,6 +74,11 @@ export default class AdditionQuestionBank extends QuestionBankBase {
         questions.push(value);
       });
     });
+    questions = RandomUtil.pickRandomItems(questions, Math.min(questionCount, questions.length));
+    for (let i = 0; questions.length < questionCount; i++) {
+      if (i >= questions.length) i = 0;
+      questions.push(questions[i]);
+    }
     this.setQuestions(questions);
   }
 }

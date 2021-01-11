@@ -98,9 +98,9 @@ export default class QuizSetting extends Component {
         </ul>;
       case "range-slider":
         return <div className="sections">
-          <input className="slider" type="range" min="3" max="60"
+          <input className="slider" type="range" min={option.min} max={option.max} step={option.step}
             value={option.value} onChange={e => this.onSlide(e, option)} />
-            {option.value} 秒
+            {option.value} {option.unit}
         </div>;
       default:
         return <div></div>;
