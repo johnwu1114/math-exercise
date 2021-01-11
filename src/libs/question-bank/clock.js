@@ -16,8 +16,7 @@ export default class ClockQuestionBank extends QuestionBankBase {
     let sections = this.getSections();
     sections[0].selected = true;
 
-    return [
-      {
+    return [{
         title: "請選擇",
         name: "sections",
         type: "multiple-choice",
@@ -113,9 +112,11 @@ export default class ClockQuestionBank extends QuestionBankBase {
   }
 
   convertText = (value, disableSeconds) => {
-    let hour = Math.floor(value / (60 * 60)) + 1;
+    let hour = Math.floor(value / (60 * 60));
     let minute = Math.floor(value % (60 * 60) / 60);
     let second = value % 60;
+
+    hour = hour === 0 ? 12 : hour;
     let result = `${hour.toString().padStart(2, "0")}:${minute.toString().padStart(2, "0")}`;
     if (!disableSeconds) result += `:${second.toString().padStart(2, "0")}`;
 

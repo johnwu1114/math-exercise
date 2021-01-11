@@ -53,7 +53,7 @@ export default class QuizAttempt extends Component {
   }
 
   checkAnswer = (reply) => {
-    reply = reply || "";
+    reply = reply == null ? "" : reply;
     this.countdown.current.pause();
     let correct = this.questionBank.checkAnswer(reply);
     this.logAnswer(reply);
