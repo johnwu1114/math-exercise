@@ -46,7 +46,8 @@ export default class QuizAttempt extends Component {
 
     this.state.choices.splice(0, this.state.choices.length);
     question.reply = "";
-    question.cursor = this.questionBank.getCursor()
+    question.count = this.questionBank.getCount();
+    question.cursor = this.questionBank.getCursor();
     this.setState(question);
     this.countdown.current.reset();
     if (this.numericKeypad.current)
