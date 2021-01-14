@@ -6,8 +6,9 @@ import {
 } from "react-router-dom";
 import { AppRoutes } from "./app-routes.js";
 import MenuPage from "./pages/menu-page.jsx";
+import { withNamespaces } from "react-i18next";
 
-export default class App extends Component {
+class App extends Component {
   render() {
     return (
       <Router>
@@ -23,3 +24,5 @@ export default class App extends Component {
     );
   }
 }
+
+export default withNamespaces()(App);
