@@ -14,10 +14,23 @@ class QuizPage extends Component {
       results: []
     };
     this.quizAttempt = React.createRef();
+    this.handleUnload = this.handleUnload.bind(this);
   }
 
   componentDidMount() {
     document.title = `${this.props.questionBank.getTitle()} | ${Config.AppName}`;
+    window.addEventListener('beforeunload', this.handleUnload);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('beforeunload', this.handleUnload);
+  }
+
+  handleUnload(e) {
+    var message = "";
+
+    (e || window.event).returnValue = message; //Gecko + IE
+    return message;
   }
 
   onStart = (options) => {
