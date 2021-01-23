@@ -15,32 +15,31 @@ class QuizPage extends Component {
     };
     this.quizAttempt = React.createRef();
     this.handleUnload = this.handleUnload.bind(this);
+    this.questionBank = this.props.questionBank();
   }
 
   componentDidMount() {
-    document.title = `${this.props.questionBank.getTitle()} | ${Config.AppName}`;
-    window.addEventListener('beforeunload', this.handleUnload);
+    document.title = `${this.questionBank.getTitle()} | ${Config.AppName}`;
+    window.addEventListener("beforeunload", this.handleUnload);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('beforeunload', this.handleUnload);
+    window.removeEventListener("beforeunload", this.handleUnload);
   }
 
   handleUnload(e) {
     var message = "";
 
-    (e || window.event).returnValue = message; //Gecko + IE
+    (e || window.event).returnValue = message; // Gecko + IE
     return message;
   }
 
   onStart = (options) => {
-    let questionBank = this.props.questionBank;
-    questionBank.setSettings(options);
-    questionBank.initQuestions();
-
+    this.questionBank.setSettings(options);
+    this.questionBank.initQuestions();
     this.setState({
-      componentName: questionBank.getSetting("component"),
-      enableReview: questionBank.getSetting("enableReview")
+      componentName: this.questionBank.getSetting("component"),
+      enableReview: this.questionBank.getSetting("enableReview")
     });
   }
 
@@ -59,7 +58,7 @@ class QuizPage extends Component {
       .map(x => x.question);
     for (let i = 0; i < 3; i++)
       questions = questions.concat(incorrectQuestions);
-    this.props.questionBank.setQuestions(questions);
+    this.questionBank.setQuestions(questions);
 
     this.quizAttempt.current.nextQuestion();
     this.setState({ isShowResult: false });
@@ -73,15 +72,15 @@ class QuizPage extends Component {
     switch (componentName) {
       case "QuizAttempt":
         return <QuizAttempt ref={this.quizAttempt}
-          questionBank={this.props.questionBank}
+          questionBank={this.questionBank}
           onFinish={results => this.showResult(results)} />;
       case "SchulteTable":
         return <SchulteTable
-          questionBank={this.props.questionBank}
+          questionBank={this.questionBank}
           onFinish={results => this.showResult(results)} />;
       default:
         return <QuizSetting
-          questionBank={this.props.questionBank}
+          questionBank={this.questionBank}
           onStart={option => this.onStart(option)} />;
     }
   }
