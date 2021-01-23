@@ -130,6 +130,10 @@ progress.danger::-webkit-progress-value {
     content: "O";
 }
 
+tr.correct {
+    background-color: forestgreen;
+}
+
 tr.incorrect {
     background-color: rosybrown;
 }
