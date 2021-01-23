@@ -1,3 +1,4 @@
+import i18n from "i18next";
 import QuizPage from "./pages/quiz-page.jsx";
 
 import SchulteTableQuestionBank from "./libs/question-bank/schulte-table.js";
@@ -8,31 +9,31 @@ import ClockQuestionBank from "./libs/question-bank/clock.js";
 
 export const AppRoutes = [{
     path: "/schulte-table",
-    title: "舒爾特方格",
+    title: i18n.t("schulte-table"),
     component: <QuizPage questionBank={() => new SchulteTableQuestionBank()}/>
 },
 {
     path: "/addition",
-    title: "加法練習",
+    title: i18n.t("addition"),
     component: <QuizPage questionBank={() => new AdditionQuestionBank()}/>
 },
 {
     path: "/subtraction",
-    title: "減法練習",
+    title: i18n.t("subtraction"),
     component: <QuizPage questionBank={() => new SubtractionQuestionBank()}/>
 },
 {
     path: "/multiplication-9x9",
-    title: "9 x 9 乘法練習",
+    title: i18n.t("multiplication-9x9"),
     component: <QuizPage questionBank={() => new MultiplicationQuestionBank()}/>
 },
 {
     path: "/multiplication-19x19",
-    title: "19 x 19 乘法練習",
+    title: i18n.t("multiplication-19x19"),
     component: <QuizPage questionBank={() => new MultiplicationQuestionBank(2)}/>
 },
 {
     path: "/clock",
-    title: "時鐘練習",
+    title: i18n.t("clock"),
     component: <QuizPage questionBank={() => new ClockQuestionBank()}/>
 }];

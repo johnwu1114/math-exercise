@@ -1,3 +1,4 @@
+import i18n from "i18next";
 import QuestionBankBase from "./base.js";
 
 export default class MultiplicationQuestionBank extends QuestionBankBase {
@@ -8,16 +9,15 @@ export default class MultiplicationQuestionBank extends QuestionBankBase {
       case 2:
         this.settings["multiplier"] = 11;
         this.settings["multiplicand"] = 19;
-        this.settings["title"] = "19 x 19 乘法練習";
-        this.settings["route"] = "multiplication-9x9";
+        this.settings["route"] = "multiplication-19x19";
         break;
       default:
         this.settings["multiplier"] = 2;
         this.settings["multiplicand"] = 9;
-        this.settings["title"] = "9 x 9 乘法練習";
-        this.settings["route"] = "multiplication-19x19";
+        this.settings["route"] = "multiplication-9x9";
         break;
     }
+    this.settings["title"] = i18n.t(this.settings["route"]);
     this.settings["options"] = this.settings["options"].filter(x => x.name !== "questionCount");
   }
 

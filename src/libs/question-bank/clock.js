@@ -1,3 +1,4 @@
+import i18n from "i18next";
 import RandomUtil from "../utils/random.js";
 import QuestionBankBase from "./base.js";
 import Clock from "../../components/clock.jsx";
@@ -8,7 +9,7 @@ export default class ClockQuestionBank extends QuestionBankBase {
   constructor() {
     super();
     this.settings["route"] = "clock";
-    this.settings["title"] = "時鐘練習";
+    this.settings["title"] = i18n.t(this.settings["route"]);
   }
 
   getOptions = () => {
@@ -16,27 +17,27 @@ export default class ClockQuestionBank extends QuestionBankBase {
     sections[0].selected = true;
 
     return [{
-        title: "請選擇",
+        title: i18n.t("sections"),
         name: "sections",
         type: "single-choice",
         selections: sections
       },
       {
-        title: "答題限時",
+        title: i18n.t("time-limit"),
         name: "timeoutSeconds",
         type: "range-slider",
         value: 10,
-        unit: "秒",
+        unit: i18n.t("seconds"),
         min: 3,
         max: 60,
         step: 1
       },
       {
-        title: "題目數量",
+        title: i18n.t("number-of-questions"),
         name: "questionCount",
         type: "range-slider",
         value: 20,
-        unit: "題",
+        unit: i18n.t("questions"),
         min: 10,
         max: 100,
         step: 5
@@ -46,29 +47,29 @@ export default class ClockQuestionBank extends QuestionBankBase {
 
   getSections = () => {
     return [{
-        text: "整點鐘",
+        text: i18n.t("o-clock"),
         intervalSeconds: 60 * 60,
         answerRange: 10,
         maxCount: 12
       },
       {
-        text: "半點鐘",
+        text: i18n.t("half-an-hour"),
         intervalSeconds: 30 * 60,
         answerRange: 10,
         maxCount: 24
       },
       {
-        text: "5分鐘",
+        text: i18n.t("five-minutes"),
         intervalSeconds: 5 * 60,
         answerRange: 10
       },
       {
-        text: "1分鐘",
+        text: i18n.t("one-minute"),
         intervalSeconds: 1 * 60,
         answerRange: 10
       },
       {
-        text: "時分秒",
+        text: i18n.t("one-second"),
         intervalSeconds: 5,
         answerRange: 120
       }

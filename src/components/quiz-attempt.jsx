@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import i18n from "i18next";
 import Countdown from "./countdown.jsx";
 import NumericKeypad from "./numeric-keypad.jsx";
 
@@ -105,8 +106,8 @@ export default class QuizAttempt extends Component {
         </div>
         {this.state.correct === false
           ? <div>
-            <p>{this.state.reply === "" ? "時間到！" : "答錯了！"} 答案是 {this.state.answer.text}</p>
-            <span className="btn large blue" onClick={() => this.nextQuestion()}>下一題</span>
+            <p>{this.state.reply === "" ? i18n.t("timeout") : i18n.t("wrong-answer") } {i18n.t("answer")}：{this.state.answer.text}</p>
+            <span className="btn large blue" onClick={() => this.nextQuestion()}>{i18n.t("next")}</span>
           </div>
           : this.renderSwitch()}
         <Countdown ref={this.countdown}

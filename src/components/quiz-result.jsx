@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import i18n from "i18next";
 
 export default class QuizResult extends Component {
   constructor(props) {
@@ -33,11 +34,11 @@ export default class QuizResult extends Component {
           <span className="close" onClick={() => this.props.onClose()}>x</span>
           <table>
             <tbody>
-              <tr className="correct"><td>答對次數：</td><td>{this.state.correct}</td></tr>
-              <tr className={this.state.incorrect > 0 ? "incorrect" : ""}><td>答錯次數：</td><td>{this.state.incorrect}</td></tr>
-              {this.state.timeout > 0 && <tr className="incorrect"><td>逾時次數：</td><td>{this.state.timeout}</td></tr>}
-              <tr><td>平均耗時：</td><td>{this.state.avgDuration.toFixed(1)} 秒</td></tr>
-              <tr><td>全部耗時：</td><td>{this.state.duration.toFixed(1)} 秒</td></tr>
+              <tr className="correct"><td>{i18n.t("number-of-correct")}：</td><td>{this.state.correct}</td></tr>
+              <tr className={this.state.incorrect > 0 ? "incorrect" : ""}><td>{i18n.t("number-of-wrong")}：</td><td>{this.state.incorrect}</td></tr>
+              {this.state.timeout > 0 && <tr className="incorrect"><td>{i18n.t("number-of-timeout")}：</td><td>{this.state.timeout}</td></tr>}
+              <tr><td>{i18n.t("avg-duration")}：</td><td>{this.state.avgDuration.toFixed(1)} {i18n.t("seconds")}</td></tr>
+              <tr><td>{i18n.t("total-duration")}：</td><td>{this.state.duration.toFixed(1)} {i18n.t("seconds")}</td></tr>
             </tbody>
           </table>
           <hr />
@@ -46,10 +47,10 @@ export default class QuizResult extends Component {
               <thead>
                 <tr>
                   <th style={{ width: "5%" }}></th>
-                  <th>題目</th>
-                  <th style={{ width: "20%" }}>解答</th>
-                  <th style={{ width: "20%" }}>作答</th>
-                  <th style={{ width: "25%" }}>耗時(秒)</th>
+                  <th>{i18n.t("question")}</th>
+                  <th style={{ width: "20%" }}>{i18n.t("answer")}</th>
+                  <th style={{ width: "20%" }}>{i18n.t("reply")}</th>
+                  <th style={{ width: "25%" }}>{i18n.t("duration")}</th>
                 </tr>
               </thead>
               <tbody>
@@ -65,9 +66,9 @@ export default class QuizResult extends Component {
               </tbody>
             </table>}
           <div className="modal-footer">
-            <span className="btn" onClick={() => this.props.onClose()}>關閉</span>
+            <span className="btn" onClick={() => this.props.onClose()}>{i18n.t("close")}</span>
             {this.props.enableReview && this.state.incorrect >= 3 &&
-              <span className="btn blue" onClick={() => this.props.onReview()}>複習</span>}
+              <span className="btn blue" onClick={() => this.props.onReview()}>{i18n.t("review")}</span>}
           </div>
         </div>
       </div>

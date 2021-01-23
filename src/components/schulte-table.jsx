@@ -1,5 +1,6 @@
 import "../styles/schulte-table.css";
 import React, { Component } from "react";
+import i18n from "i18next";
 import Timer from "../libs/utils/timer";
 
 export default class SchulteTable extends Component {
@@ -71,9 +72,9 @@ export default class SchulteTable extends Component {
     let squareRoot = Math.sqrt(this.state.characters.length);
     let result = {
       question: {
-        description: `${squareRoot} x ${squareRoot} 格`,
+        description: `${squareRoot} x ${squareRoot} ${i18n.t("grid")}`,
         answer: {
-          text: `順序 ${this.state.cursor.text}`
+          text: `${i18n.t("click")} ${this.state.cursor.text}`
         }
       },
       reply: reply.text,
@@ -88,7 +89,7 @@ export default class SchulteTable extends Component {
     return (
       <div>
         <div className="schulte-table">
-          <div className="cursor">按下：<b>{this.state.cursor.text}</b></div>
+          <div className="cursor">{i18n.t("click")}：<b>{this.state.cursor.text}</b></div>
           <div className="time">{this.state.time}</div>
           <div className={`characters size-${this.state.characters.length}`}>
             {this.state.characters.map((character) =>

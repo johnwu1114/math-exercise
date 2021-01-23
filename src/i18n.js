@@ -12,7 +12,7 @@ const resources = {
   "en": {
     translation: en
   },
-  "zhtw": {
+  "zh-TW": {
     translation: zhtw
   }
 };
@@ -23,11 +23,13 @@ i18n
   .init({
     resources,
     // lng: "zhtw",
-    fallbackLng: "zhtw",
+    fallbackLng: "zh-TW",
     keySeparator: false,
     interpolation: {
       escapeValue: false
     }
   });
 
+
+document.documentElement.lang = i18n.language;
 export default i18n;

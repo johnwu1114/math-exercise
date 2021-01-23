@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import i18n from "i18next";
 
 export default class QuizSetting extends Component {
   constructor(props) {
@@ -92,7 +93,7 @@ export default class QuizSetting extends Component {
           {option.type === "multiple-choice" && <li>
             <label>
               <input type="checkbox" onChange={() => this.toggleAll(option.name)} checked={option.selectedAll || false} />
-              <span>全選</span>
+              <span>{i18n.t("select-all")}</span>
             </label>
           </li>}
         </ul>;
@@ -119,7 +120,7 @@ export default class QuizSetting extends Component {
           </section>
         )}
         <nav>
-          <span className={`btn large ${this.state.ready ? "green" : "disable"}`} onClick={() => this.onStart()}>開始</span>
+          <span className={`btn large ${this.state.ready ? "green" : "disable"}`} onClick={() => this.onStart()}>{i18n.t("start")}</span>
         </nav>
       </div>
     );

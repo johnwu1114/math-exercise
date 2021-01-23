@@ -1,3 +1,4 @@
+import i18n from "i18next";
 import RandomUtil from "../utils/random.js";
 
 export default class QuestionBankBase {
@@ -8,41 +9,41 @@ export default class QuestionBankBase {
       enableReview: true,
       choiceCount: 6,
       options: [{
-          title: "請選擇",
+          title: i18n.t("sections"),
           name: "sections",
           type: "multiple-choice"
         },
         {
-          title: "答題方式",
+          title: i18n.t("answering-method"),
           name: "anwser-method",
           type: "single-choice",
           selections: [{
-              text: "選擇題",
+              text: i18n.t("choice"),
               value: "choice",
               selected: true
             },
             {
-              text: "填充題",
+              text: i18n.t("filling"),
               value: "filling"
             }
           ]
         },
         {
-          title: "答題限時",
+          title: i18n.t("time-limit"),
           name: "timeoutSeconds",
           type: "range-slider",
           value: 10,
-          unit: "秒",
+          unit: i18n.t("seconds"),
           min: 3,
           max: 60,
           step: 1
         },
         {
-          title: "題目數量",
+          title: i18n.t("number-of-questions"),
           name: "questionCount",
           type: "range-slider",
           value: 20,
-          unit: "題",
+          unit: i18n.t("questions"),
           min: 10,
           max: 100,
           step: 5

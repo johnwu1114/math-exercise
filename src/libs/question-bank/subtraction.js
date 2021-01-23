@@ -1,3 +1,4 @@
+import i18n from "i18next";
 import RandomUtil from "../utils/random.js";
 import QuestionBankBase from "./base.js";
 
@@ -5,13 +6,13 @@ export default class SubtractionQuestionBank extends QuestionBankBase {
 
   constructor() {
     super();
-    this.settings["title"] = "減法練習";
     this.settings["route"] = "subtraction";
+    this.settings["title"] = i18n.t(this.settings["route"]);
   }
 
   getSections = () => {
     return [{
-        text: "10 以內減法",
+        text: i18n.t("subtract-within-10"),
         minimum: 0,
         minSummation: 1,
         maxSummation: 10,
@@ -19,28 +20,28 @@ export default class SubtractionQuestionBank extends QuestionBankBase {
         maxCount: 45
       },
       {
-        text: "20 以內減法",
+        text: i18n.t("subtract-within-20"),
         minimum: 0,
         minSummation: 10,
         maxSummation: 20,
         answerRange: 10
       },
       {
-        text: "兩位數減法",
+        text: i18n.t("two-digit-subtraction"),
         minimum: 10,
         minSummation: 20,
         maxSummation: 99,
         answerRange: 20
       },
       {
-        text: "三位數減法",
+        text: i18n.t("three-digit-subtraction"),
         minimum: 100,
         minSummation: 200,
         maxSummation: 999,
         answerRange: 50
       },
       {
-        text: "四位數減法",
+        text: i18n.t("four-digit-subtraction"),
         minimum: 1000,
         minSummation: 2000,
         maxSummation: 9909,

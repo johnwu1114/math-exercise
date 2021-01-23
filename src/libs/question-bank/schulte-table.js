@@ -1,3 +1,4 @@
+import i18n from "i18next";
 import RandomUtil from "../utils/random.js";
 import QuestionBankBase from "./base.js";
 
@@ -5,8 +6,8 @@ export default class SchulteTableQuestionBank extends QuestionBankBase {
 
   constructor() {
     super();
-    this.settings["title"] = "舒爾特方格";
     this.settings["route"] = "schulte-table";
+    this.settings["title"] = i18n.t(this.settings["route"]);
     this.settings["component"] = "SchulteTable";
     this.settings["enableReview"] = false;
   }
@@ -16,13 +17,13 @@ export default class SchulteTableQuestionBank extends QuestionBankBase {
     sections[0].selected = true;
 
     return [{
-        title: "請選擇",
+        title: i18n.t("sections"),
         name: "sections",
         type: "single-choice",
         selections: sections
       },
       {
-        title: "文字",
+        title: i18n.t("character"),
         name: "character",
         type: "single-choice",
         selections: [{
@@ -59,7 +60,7 @@ export default class SchulteTableQuestionBank extends QuestionBankBase {
     let sections = [];
     for (let i = 3; i <= 9; i++) {
       sections.push({
-        text: `${i} x ${i} 格`,
+        text: `${i} x ${i} ${i18n.t("grid")}`,
         value: i
       });
     }

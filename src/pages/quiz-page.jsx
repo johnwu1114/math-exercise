@@ -1,7 +1,7 @@
 import "../styles/quiz.css";
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import { Config } from "../config.js";
+import i18n from "i18next";
 import SchulteTable from "../components/schulte-table.jsx";
 import QuizAttempt from "../components/quiz-attempt.jsx";
 import QuizResult from "../components/quiz-result.jsx";
@@ -19,7 +19,7 @@ class QuizPage extends Component {
   }
 
   componentDidMount() {
-    document.title = `${this.questionBank.getTitle()} | ${Config.AppName}`;
+    document.title = `${this.questionBank.getTitle()} | ${i18n.t("app-name")}`;
     window.addEventListener("beforeunload", this.handleUnload);
   }
 
