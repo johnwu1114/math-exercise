@@ -1,10 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import i18n from "i18next";
+import PageBase from "./page-base.js";
 import { AppRoutes } from "../app-routes.js";
 import { Translations } from "../i18n.js";
 
-export default class MenuPage extends Component {
+export default class MenuPage extends PageBase {
 
   constructor(props) {
     super(props);
@@ -19,6 +20,7 @@ export default class MenuPage extends Component {
   }
 
   componentDidMount() {
+    super.componentDidMount();
     document.title = this.title;
   }
 

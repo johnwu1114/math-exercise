@@ -14,12 +14,12 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    
+
     let langCode = window.location.pathname.split("/")[1];
-    if(!Translations[langCode]) {
+    if (!Translations[langCode]) {
       langCode = i18n.language;
     }
-    if(langCode !== i18n.language) {
+    if (langCode !== i18n.language) {
       i18n.changeLanguage(langCode);
     }
   }
@@ -30,7 +30,7 @@ class App extends Component {
   }
 
   setMeta = (key, content) => {
-    const el = document.querySelector(`meta[name='${key}']`);
+    const el = document.querySelector(`head meta[name='${key}']`);
     el.setAttribute("content", content)
   }
 

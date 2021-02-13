@@ -1,13 +1,14 @@
 import "../styles/quiz.css";
-import React, { Component } from "react";
+import React from "react";
 import { withRouter } from "react-router-dom";
 import i18n from "i18next";
+import PageBase from "./page-base.js";
 import SchulteTable from "../components/schulte-table.jsx";
 import QuizAttempt from "../components/quiz-attempt.jsx";
 import QuizResult from "../components/quiz-result.jsx";
 import QuizSetting from "../components/quiz-setting.jsx";
 
-class QuizPage extends Component {
+class QuizPage extends PageBase {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,6 +20,7 @@ class QuizPage extends Component {
   }
 
   componentDidMount() {
+    super.componentDidMount();
     document.title = `${this.questionBank.getTitle()} | ${i18n.t("app-name")}`;
     window.addEventListener("beforeunload", this.handleUnload);
   }
