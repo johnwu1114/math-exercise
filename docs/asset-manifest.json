@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/static/css/main.de21993b.chunk.css",
-    "main.js": "/static/js/main.9b3afefe.chunk.js",
-    "main.js.map": "/static/js/main.9b3afefe.chunk.js.map",
+    "main.css": "/static/css/main.9cec996f.chunk.css",
+    "main.js": "/static/js/main.0393c3ce.chunk.js",
+    "main.js.map": "/static/js/main.0393c3ce.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.ea498a9c.js",
     "runtime-main.js.map": "/static/js/runtime-main.ea498a9c.js.map",
-    "static/js/2.dd1e100b.chunk.js": "/static/js/2.dd1e100b.chunk.js",
-    "static/js/2.dd1e100b.chunk.js.map": "/static/js/2.dd1e100b.chunk.js.map",
+    "static/js/2.54bf05b9.chunk.js": "/static/js/2.54bf05b9.chunk.js",
+    "static/js/2.54bf05b9.chunk.js.map": "/static/js/2.54bf05b9.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/main.de21993b.chunk.css.map": "/static/css/main.de21993b.chunk.css.map",
-    "static/js/2.dd1e100b.chunk.js.LICENSE.txt": "/static/js/2.dd1e100b.chunk.js.LICENSE.txt",
-    "static/media/main.css": "/static/media/github-brands.8bce9409.svg"
+    "static/css/main.9cec996f.chunk.css.map": "/static/css/main.9cec996f.chunk.css.map",
+    "static/js/2.54bf05b9.chunk.js.LICENSE.txt": "/static/js/2.54bf05b9.chunk.js.LICENSE.txt",
+    "static/media/main.css": "/static/media/language-translator.5fc92d05.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.ea498a9c.js",
-    "static/js/2.dd1e100b.chunk.js",
-    "static/css/main.de21993b.chunk.css",
-    "static/js/main.9b3afefe.chunk.js"
+    "static/js/2.54bf05b9.chunk.js",
+    "static/css/main.9cec996f.chunk.css",
+    "static/js/main.0393c3ce.chunk.js"
   ]
 }
