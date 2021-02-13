@@ -21,7 +21,7 @@ export default class MenuPage extends Component {
         <ul>
           {AppRoutes.map((route, i) =>
             <li key={i}>
-              <Link className="btn green" to={route.path}>{route.title}</Link>
+              <Link className="btn green" to={`/${i18n.language}/${route.path}`}>{i18n.t(route.path)}</Link>
             </li>)}
         </ul>
       </nav>

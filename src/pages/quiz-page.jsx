@@ -65,7 +65,7 @@ class QuizPage extends Component {
   }
 
   onClose = () => {
-    this.props.history.push("/");
+    this.props.history.push(`/${i18n.language}/`);
   }
 
   renderSwitch = (componentName) => {

@@ -1,4 +1,3 @@
-import i18n from "i18next";
 import QuizPage from "./pages/quiz-page.jsx";
 
 import SchulteTableQuestionBank from "./libs/question-bank/schulte-table.js";
@@ -8,32 +7,26 @@ import MultiplicationQuestionBank from "./libs/question-bank/multiplication.js";
 import ClockQuestionBank from "./libs/question-bank/clock.js";
 
 export const AppRoutes = [{
-    path: "/schulte-table",
-    title: i18n.t("schulte-table"),
+    path: "schulte-table",
     component: <QuizPage questionBank={() => new SchulteTableQuestionBank()}/>
 },
 {
-    path: "/addition",
-    title: i18n.t("addition"),
+    path: "addition",
     component: <QuizPage questionBank={() => new AdditionQuestionBank()}/>
 },
 {
-    path: "/subtraction",
-    title: i18n.t("subtraction"),
+    path: "subtraction",
     component: <QuizPage questionBank={() => new SubtractionQuestionBank()}/>
 },
 {
-    path: "/multiplication-9x9",
-    title: i18n.t("multiplication-9x9"),
+    path: "multiplication-9x9",
     component: <QuizPage questionBank={() => new MultiplicationQuestionBank()}/>
 },
 {
-    path: "/multiplication-19x19",
-    title: i18n.t("multiplication-19x19"),
+    path: "multiplication-19x19",
     component: <QuizPage questionBank={() => new MultiplicationQuestionBank(2)}/>
 },
 {
-    path: "/clock",
-    title: i18n.t("clock"),
+    path: "clock",
     component: <QuizPage questionBank={() => new ClockQuestionBank()}/>
 }];
