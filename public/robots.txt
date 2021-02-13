@@ -1,3 +1,5 @@
+Sitemap: https://math-exercise.johnwu.cc/sitemap.xml
+
 User-Agent: Googlebot
 Allow: *.js
 Allow: *.css
