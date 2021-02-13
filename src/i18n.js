@@ -10,19 +10,28 @@ import ja from "./locales/ja.json";
 
 // ref: https://react.i18next.com/legacy-v9/step-by-step-guide
 
-export const Translations = {
-  "en": { translation: en },
-  "zh-tw": { translation: zhtw },
-  "zh-cn": { translation: zhcn },
-  "ja": { translation: ja },
-};
+export const Translations = {};
+const whitelist = [];
+
+let addTranslation = function(translation) {
+  Translations[translation.path] = {
+    name: translation.language,
+    translation: translation
+  };
+  whitelist.push(translation.path);
+}
+
+addTranslation(en);
+addTranslation(zhtw);
+addTranslation(zhcn);
+addTranslation(ja);
 
 i18n
   .use(LanguageDetector)
   .use(reactI18nextModule)
   .init({
     lowerCaseLng: true,
-    whitelist: ["en", "zh-tw", "zh-cn", "ja"],
+    whitelist: whitelist,
     resources: Translations,
     fallbackLng: "en",
     keySeparator: false,
