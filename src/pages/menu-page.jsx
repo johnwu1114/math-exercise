@@ -28,7 +28,7 @@ export default class MenuPage extends Component {
             <button className="dropbtn">{i18n.t("language")}</button>
             <div className="dropdown-content">
               {this.translations.map((translation, i) =>
-                <a key={i} hrefLang={translation.path} href={`${window.location.origin}/${translation.path}/`}>{translation.name}</a>
+                <a key={i} hrefLang={translation.path} href={`/${translation.path}/`}>{translation.name}</a>
               )}
             </div>
           </div>

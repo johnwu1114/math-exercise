@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Helmet } from "react-helmet";
 import i18n from "i18next";
+import { Config } from "../config.js";
 import { Translations } from "../i18n.js";
 
 export default class SEO extends Component {
@@ -44,7 +45,7 @@ export default class SEO extends Component {
       },
       {
         property: "og:url",
-        content: window.location.href,
+        content: `${Config.baseUrl}${window.location.pathname}`,
       },
       {
         name: "twitter:card",
@@ -62,7 +63,7 @@ export default class SEO extends Component {
 
     this.link = [];
     for (let langCode in Translations) {
-      let href = window.location.href.replace(this.lang, langCode);
+      let href = `${Config.baseUrl}${window.location.pathname.replace(this.lang, langCode)}`;
       this.link.push({
         rel: "alternate",
         hreflang: langCode,
