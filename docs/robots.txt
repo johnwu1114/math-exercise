@@ -10,4 +10,3 @@ Allow: *.css
 
 User-agent: *
 Allow: /
-Disallow: /static/
