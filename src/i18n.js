@@ -13,7 +13,7 @@ import ja from "./locales/ja.json";
 export const Translations = {};
 const whitelist = [];
 
-let addTranslation = function(translation) {
+let addTranslation = function (translation) {
   Translations[translation.path] = {
     name: translation.language,
     translation: translation
@@ -40,6 +40,4 @@ i18n
     }
   });
 
-
-document.documentElement.lang = i18n.language;
 export default i18n;

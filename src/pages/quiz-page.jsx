@@ -1,14 +1,14 @@
 import "../styles/quiz.css";
-import React from "react";
+import React, { Component }  from "react";
 import { withRouter } from "react-router-dom";
 import i18n from "i18next";
-import PageBase from "./page-base.js";
 import SchulteTable from "../components/schulte-table.jsx";
 import QuizAttempt from "../components/quiz-attempt.jsx";
 import QuizResult from "../components/quiz-result.jsx";
 import QuizSetting from "../components/quiz-setting.jsx";
+import SEO from "../components/seo.jsx";
 
-class QuizPage extends PageBase {
+class QuizPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,8 +20,6 @@ class QuizPage extends PageBase {
   }
 
   componentDidMount() {
-    super.componentDidMount();
-    document.title = `${this.questionBank.getTitle()} | ${i18n.t("app-name")}`;
     window.addEventListener("beforeunload", this.handleUnload);
   }
 
@@ -90,6 +88,7 @@ class QuizPage extends PageBase {
   render() {
     return (
       <div>
+        <SEO title={`${this.questionBank.getTitle()} | ${i18n.t("app-name")}`} />
         <div className="header">
           {this.state.isShowResult || <span className="close" onClick={() => this.onClose()}>x</span>}
         </div>

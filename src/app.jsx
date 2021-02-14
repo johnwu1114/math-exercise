@@ -24,28 +24,18 @@ class App extends Component {
     }
   }
 
-  componentDidMount() {
-    this.setMeta("description", i18n.t("app-description"));
-    this.setMeta("keywords", i18n.t("app-keywords"));
-  }
-
-  setMeta = (key, content) => {
-    const el = document.querySelector(`head meta[name='${key}']`);
-    el.setAttribute("content", content)
-  }
-
   render() {
     return (
-      <BrowserRouter>
-        <div className="app">
+      <div className="app">
+        <BrowserRouter>
           <Switch>
             {AppRoutes.map((route, i) =>
               <Route key={i} path={`/:lang/${route.path}`} component={() => route.component} />
             )}
             <Route exact component={MenuPage} />
           </Switch>
-        </div>
-      </BrowserRouter>
+        </BrowserRouter>
+      </div>
     );
   }
 }

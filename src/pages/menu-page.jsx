@@ -1,11 +1,11 @@
-import React from "react";
+import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import i18n from "i18next";
-import PageBase from "./page-base.js";
 import { AppRoutes } from "../app-routes.js";
 import { Translations } from "../i18n.js";
+import SEO from "../components/seo.jsx";
 
-export default class MenuPage extends PageBase {
+export default class MenuPage extends Component {
 
   constructor(props) {
     super(props);
@@ -19,14 +19,10 @@ export default class MenuPage extends PageBase {
     }
   }
 
-  componentDidMount() {
-    super.componentDidMount();
-    document.title = this.title;
-  }
-
   render() {
     return (
       <div>
+        <SEO />
         <div className="header">
           <div className="dropdown">
             <button className="dropbtn">{i18n.t("language")}</button>
