@@ -48,6 +48,10 @@ export default class SEO extends Component {
         content: `${Config.baseUrl}${window.location.pathname}`,
       },
       {
+        property: "fb:app_id",
+        content: Config.fbAppId,
+      },
+      {
         name: "twitter:card",
         content: "summary",
       },
